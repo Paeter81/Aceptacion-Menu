@@ -148,10 +148,13 @@
       <div class="md:col-span-2 relative">
         <label for="q1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
-          <input id="q1" type="text" placeholder="Escribe para buscar (ej. arroz, lentejas, crema...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <input id="q1" type="text" placeholder="Escribe para buscar (ej. arroz, lentejas, crema...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
             <i class="fa-solid fa-magnifying-glass text-sm"></i>
           </div>
+          <button id="clr1" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition">
+            <i class="fa-solid fa-circle-xmark text-sm"></i>
+          </button>
         </div>
         <div id="drop1" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
@@ -179,10 +182,13 @@
       <div class="md:col-span-2 relative">
         <label for="q2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
-          <input id="q2" type="text" placeholder="Escribe para buscar (ej. pollo, merluza, tortilla...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <input id="q2" type="text" placeholder="Escribe para buscar (ej. pollo, merluza, tortilla...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
             <i class="fa-solid fa-magnifying-glass text-sm"></i>
           </div>
+          <button id="clr2" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition">
+            <i class="fa-solid fa-circle-xmark text-sm"></i>
+          </button>
         </div>
         <div id="drop2" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
@@ -210,10 +216,13 @@
       <div class="md:col-span-2 relative">
         <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Guarnición</label>
         <div class="relative">
-          <input id="q3" type="text" placeholder="Escribe para buscar (ej. patatas, arroz, ensalada...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <input id="q3" type="text" placeholder="Escribe para buscar (ej. patatas, arroz, ensalada...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
             <i class="fa-solid fa-magnifying-glass text-sm"></i>
           </div>
+          <button id="clr3" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition">
+            <i class="fa-solid fa-circle-xmark text-sm"></i>
+          </button>
         </div>
         <div id="drop3" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
@@ -329,22 +338,35 @@ function selectDish(idx, inputId, dropId, dataList, itemIndex){
   $(inputId).value = dataList[itemIndex][0];
   $(dropId).classList.add('hidden');
   grams();
+  updateClearBtn(idx);
 }
 
 const configs = [
-  { idx: 0, inputId: 'q1', dropId: 'drop1', data: first },
-  { idx: 1, inputId: 'q2', dropId: 'drop2', data: second },
-  { idx: 2, inputId: 'q3', dropId: 'drop3', data: side }
+  { idx: 0, inputId: 'q1', dropId: 'drop1', clrId: 'clr1', data: first },
+  { idx: 1, inputId: 'q2', dropId: 'drop2', clrId: 'clr2', data: second },
+  { idx: 2, inputId: 'q3', dropId: 'drop3', clrId: 'clr3', data: side }
 ];
+
+function updateClearBtn(idx) {
+  const cfg = configs[idx];
+  const clr = $(cfg.clrId);
+  if ($(cfg.inputId).value.trim() !== '') {
+    clr.classList.remove('hidden');
+  } else {
+    clr.classList.add('hidden');
+  }
+}
 
 configs.forEach(cfg => {
   const inp = $(cfg.inputId);
   const drop = $(cfg.dropId);
+  const clr = $(cfg.clrId);
 
   inp.addEventListener('input', () => {
     selectedDishes[cfg.idx] = null;
     grams();
     renderSuggestions(cfg.idx, cfg.inputId, cfg.dropId, cfg.data);
+    updateClearBtn(cfg.idx);
   });
 
   inp.addEventListener('focus', () => {
@@ -353,6 +375,16 @@ configs.forEach(cfg => {
 
   inp.addEventListener('blur', () => {
     setTimeout(() => { drop.classList.add('hidden'); }, 180);
+  });
+
+  clr.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    inp.value = '';
+    selectedDishes[cfg.idx] = null;
+    grams();
+    drop.classList.add('hidden');
+    updateClearBtn(cfg.idx);
+    inp.focus();
   });
 });
 
@@ -452,6 +484,7 @@ $('clear').onclick = () => {
   ['as','na','s1','s2','s3','q1','q2','q3'].forEach(x => $(x).value = '');
   selectedDishes = [null, null, null];
   ['drop1','drop2','drop3'].forEach(id => $(id).classList.add('hidden'));
+  [0, 1, 2].forEach(updateClearBtn);
   $('out').classList.add('hidden');
   $('err').classList.add('hidden');
   grams();
