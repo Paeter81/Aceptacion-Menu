@@ -121,9 +121,9 @@
         <div>
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
             Calculadora de Aceptación de Menús
-            <span class="text-xs bg-amber-400/20 text-amber-200 border border-amber-400/30 font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">v2.6</span>
+            <span class="text-xs bg-amber-400/20 text-amber-200 border border-amber-400/30 font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">v3.0 Dual</span>
           </h1>
-          <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro de aceptabilidad e informe oficial según norma IT6.5-23</p>
+          <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro unificado de aceptabilidad (Infantil + Primaria) según norma IT6.5-23</p>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
     <summary class="flex items-center justify-between p-5 font-semibold text-slate-800 cursor-pointer hover:bg-slate-50/80 select-none">
       <span class="flex items-center gap-2 text-brand-700">
         <i class="fa-solid fa-circle-info text-brand-500 text-lg"></i>
-        <span>Instrucciones de Uso y Baremos Oficiales</span>
+        <span>Instrucciones de Uso Unificado y Baremos Oficiales</span>
       </span>
       <span class="transition group-open:rotate-180 text-slate-400">
         <i class="fa-solid fa-chevron-down"></i>
@@ -148,13 +148,13 @@
       <div class="space-y-2">
         <p class="font-semibold text-slate-800 flex items-center gap-2">
           <i class="fa-solid fa-list-check text-brand-600"></i>
-          <span>Pasos para registrar la jornada:</span>
+          <span>Pasos para registrar la jornada (Infantil + Primaria):</span>
         </p>
         <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-700 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 font-medium">
-          <li><strong>Comensales:</strong> Selecciona el grupo (Infantil o Primaria), introduce los asistentes y opcionalmente los faltantes.</li>
-          <li><strong>Cargar Menú:</strong> Elige la fecha en el desplegable de menús predefinidos o busca cada plato manualmente.</li>
-          <li><strong>Barquetas y Sobras:</strong> Introduce las barquetas recibidas y el peso en kg de las sobras de plato (SP).</li>
-          <li><strong>Calcular:</strong> Pulsa el botón verde para generar el desglose de raciones, % de residuo y su clasificación oficial.</li>
+          <li><strong>Comensales:</strong> Anota los asistentes y faltantes de Infantil y Primaria al mismo tiempo.</li>
+          <li><strong>Menú del día:</strong> Elige la fecha predefinida o busca los platos individualmente.</li>
+          <li><strong>Barquetas y Sobras:</strong> Introduce el número total de barquetas y separa el peso en kg de las sobras de Infantil y Primaria para cada plato.</li>
+          <li><strong>Calcular:</strong> Pulsa el botón verde para obtener los resultados desglosados por ciclo y el consolidado global.</li>
         </ol>
       </div>
 
@@ -166,7 +166,7 @@
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-xs">
           <div class="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-800">
-            <strong>MB (Muy Bajo)</strong><br>> 75% residuo (plato intacto)
+            <strong>MB (Muy Bajo)</strong><br>&gt; 75% residuo (plato intacto)
           </div>
           <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
             <strong>B (Bajo)</strong><br>50% - 75% residuo
@@ -178,7 +178,7 @@
             <strong>A (Alto)</strong><br>25% - 50% residuo
           </div>
           <div class="p-2.5 rounded-lg bg-emerald-100 border border-emerald-300 text-emerald-900">
-            <strong>MA (Muy Alto)</strong><br>< 25% residuo (plato vacío)
+            <strong>MA (Muy Alto)</strong><br>&lt; 25% residuo (plato vacío)
           </div>
         </div>
       </div>
@@ -190,34 +190,55 @@
     </div>
   </details>
 
+  <!-- Sección 1: Comensales (Infantil y Primaria) -->
   <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
       <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 font-bold flex items-center justify-center text-sm">1</div>
-      <h2 class="text-base font-bold text-slate-900">Comensales y Menú Diario</h2>
+      <div>
+        <h2 class="text-base font-bold text-slate-900">Comensales de la Jornada</h2>
+        <p class="text-xs text-slate-500">Introduce los datos de ambos ciclos educativos</p>
+      </div>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <div>
-        <label for="gr" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Grupo Educativo</label>
-        <div class="relative">
-          <select id="gr" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-8 appearance-none transition shadow-sm font-medium">
-            <option value="0">Infantil (Segundo Ciclo)</option>
-            <option value="1" selected>Primaria</option>
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
-            <i class="fa-solid fa-chevron-down text-xs"></i>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Infantil -->
+      <div class="bg-sky-50/50 p-4 rounded-xl border border-sky-100 space-y-3">
+        <div class="flex items-center justify-between border-b border-sky-200/60 pb-2">
+          <span class="text-xs font-bold text-sky-800 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-child text-sky-600"></i> Infantil (2º Ciclo)
+          </span>
+          <span class="text-[11px] text-sky-600 bg-sky-100 px-2 py-0.5 rounded-full font-semibold">3-5 años</span>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="as_i" class="block text-xs font-semibold text-slate-700 mb-1">Asistentes</label>
+            <input id="as_i" type="text" placeholder="Ej.: 35" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-2.5 transition font-medium placeholder:text-slate-400">
+          </div>
+          <div>
+            <label for="na_i" class="block text-xs font-semibold text-slate-700 mb-1">Faltantes <span class="text-slate-400 font-normal">(opc.)</span></label>
+            <input id="na_i" type="text" placeholder="Ej.: 2" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-2.5 transition font-medium placeholder:text-slate-400">
           </div>
         </div>
       </div>
 
-      <div>
-        <label for="as" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Comensales Asistentes</label>
-        <input id="as" type="text" placeholder="Ej.: 77" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 transition shadow-sm font-medium placeholder:text-slate-400">
-      </div>
-
-      <div>
-        <label for="na" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Comensales No Asistentes <span class="text-slate-400 font-normal lowercase">(opcional)</span></label>
-        <input id="na" type="text" placeholder="Ej.: 3" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 transition shadow-sm font-medium placeholder:text-slate-400">
+      <!-- Primaria -->
+      <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100 space-y-3">
+        <div class="flex items-center justify-between border-b border-indigo-200/60 pb-2">
+          <span class="text-xs font-bold text-indigo-800 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Primaria
+          </span>
+          <span class="text-[11px] text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded-full font-semibold">6-12 años</span>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="as_p" class="block text-xs font-semibold text-slate-700 mb-1">Asistentes</label>
+            <input id="as_p" type="text" placeholder="Ej.: 77" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 transition font-medium placeholder:text-slate-400">
+          </div>
+          <div>
+            <label for="na_p" class="block text-xs font-semibold text-slate-700 mb-1">Faltantes <span class="text-slate-400 font-normal">(opc.)</span></label>
+            <input id="na_p" type="text" placeholder="Ej.: 3" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 transition font-medium placeholder:text-slate-400">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -262,12 +283,12 @@
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span id="g1" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
-        <span id="bq-info1" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta Primaria: —</span>
+        <span id="bq-info1" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barquet: —</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div class="md:col-span-2 relative">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <div class="md:col-span-6 relative">
         <label for="q1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
           <input id="q1" type="text" placeholder="Escribe para buscar (ej. arroz, lentejas, crema...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -281,7 +302,7 @@
         <div id="drop1" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div>
+      <div class="md:col-span-2">
         <label for="b1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
           <input id="b1" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -289,11 +310,19 @@
         </div>
       </div>
 
-      <div>
-        <label for="s1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras (SP)</label>
+      <div class="md:col-span-2">
+        <label for="s1_i" class="block text-xs font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
         <div class="relative">
-          <input id="s1" type="text" placeholder="Ej.: 1,2" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">KG</span>
+          <input id="s1_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-500 font-semibold">KG</span>
+        </div>
+      </div>
+
+      <div class="md:col-span-2">
+        <label for="s1_p" class="block text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
+        <div class="relative">
+          <input id="s1_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-500 font-semibold">KG</span>
         </div>
       </div>
     </div>
@@ -308,12 +337,12 @@
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span id="g2" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
-        <span id="bq-info2" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta Primaria: —</span>
+        <span id="bq-info2" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barquet: —</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div class="md:col-span-2 relative">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <div class="md:col-span-6 relative">
         <label for="q2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
           <input id="q2" type="text" placeholder="Escribe para buscar (ej. pollo, merluza, tortilla...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -327,7 +356,7 @@
         <div id="drop2" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div>
+      <div class="md:col-span-2">
         <label for="b2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
           <input id="b2" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -335,11 +364,19 @@
         </div>
       </div>
 
-      <div>
-        <label for="s2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras (SP)</label>
+      <div class="md:col-span-2">
+        <label for="s2_i" class="block text-xs font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
         <div class="relative">
-          <input id="s2" type="text" placeholder="Ej.: 0,8" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">KG</span>
+          <input id="s2_i" type="text" placeholder="Ej.: 0,3" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-500 font-semibold">KG</span>
+        </div>
+      </div>
+
+      <div class="md:col-span-2">
+        <label for="s2_p" class="block text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
+        <div class="relative">
+          <input id="s2_p" type="text" placeholder="Ej.: 0,5" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-500 font-semibold">KG</span>
         </div>
       </div>
     </div>
@@ -354,12 +391,12 @@
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span id="g3" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
-        <span id="bq-info3" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta Primaria: —</span>
+        <span id="bq-info3" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barquet: —</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div class="md:col-span-2 relative">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <div class="md:col-span-6 relative">
         <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Guarnición</label>
         <div class="relative">
           <input id="q3" type="text" placeholder="Escribe para buscar (ej. patatas, arroz, ensalada...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -373,7 +410,7 @@
         <div id="drop3" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div>
+      <div class="md:col-span-2">
         <label for="b3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
           <input id="b3" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -381,11 +418,19 @@
         </div>
       </div>
 
-      <div>
-        <label for="s3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras (SP)</label>
+      <div class="md:col-span-2">
+        <label for="s3_i" class="block text-xs font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
         <div class="relative">
-          <input id="s3" type="text" placeholder="Ej.: 0,4" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">KG</span>
+          <input id="s3_i" type="text" placeholder="Ej.: 0,2" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-500 font-semibold">KG</span>
+        </div>
+      </div>
+
+      <div class="md:col-span-2">
+        <label for="s3_p" class="block text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
+        <div class="relative">
+          <input id="s3_p" type="text" placeholder="Ej.: 0,4" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-500 font-semibold">KG</span>
         </div>
       </div>
     </div>
@@ -418,7 +463,7 @@
 
 <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
-    <p>Calculadora de Aceptabilidad de Menús Escolares • Cumple con la hoja de registro oficial IT6.5-23</p>
+    <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
   </div>
 </footer>
 
@@ -431,7 +476,7 @@ const P=x=>x.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigi
 
 const A=s=>s.split('|').map(x=>{let[a,b,c,d]=x.split(';');return[a,+b,+c,d?+d:12]});
 
-// Platos oficial Línea Fría Andalucía con raciones/barqueta específicas para Primaria
+// Platos oficial Línea Fría Andalucía [nombre, g_infantil, g_primaria, rac_barqueta]
 let first=A('Arroz integral a la campesina;179;214;11|Arroz con pisto;173;207;11|Arroz hervido con tomate frito;165;198;12|Coditos con tomate y orégano;150;180;13|Crema de calabacín;210;210;10|Crema de calabaza;210;210;10|Crema de verduras;208;208;10|Crema de zanahoria;210;210;10|Crema hortelana;210;210;10|Espirales integrales con tomate;155;186;12|Garbanzos encebollados;118;235;12|Lacitos con tomate ECO;133;160;14|Lentejas con verduras cocidas;125;231;12|Macarrones integrales con tomate;155;186;12|Potaje de alubias blancas;150;274;8|Potaje de alubias blancas con calabacín;163;299;7|Potaje de lentejas con calabaza;158;289;8|Puchero;151;283;8|Ensalada Lechuga, tomate y maíz;125;125;15|Ensalada Lechuga, tomate y huevo cocido;140;140;15|Ensalada Tomate y queso fresco;130;130;15');
 
 let second=A('Abadejo al horno a las finas hierbas;66;94;15|Albóndigas de cerdo con tomate;85;125;14|Albóndigas de pollo a la jardinera;67;108;15|Alubias pintas guisadas con arroz;202;257;11|Chuleta de pavo adobada;62;119;15|Estofado de pavo en salsa con verduras;125;162;15|Filete de lomo de cerdo;48;77;15|Garbanzos encebollados;118;235;12|Hamburguesa de pavo con salsa rondeña;78;96;15|Huevo cocido con arroz integral y tomate;151;151;15|Huevo cocido con patatas a lo pobre;123;141;15|Huevo cocido con pisto de verduras;141;141;15|Jamoncito de pollo al horno en salsa;81;130;15|Jureles al horno encebollados;88;126;15|Lentejas con verduras cocidas;125;231;12|Lentejas guisadas con arroz;158;289;10|Merluza a la plancha al ajo y perejil;67;96;15|Merluza a la plancha en salsa verde;72;103;15|Muslito de pollo al horno al ajillo;80;128;15|Salmón al vapor en salsa de cebolla y eneldo;67;96;15|Solomillo de pollo rustido;78;125;15|Tortilla de patatas con calabacín;100;100;18|Tortilla de patatas con cebolla;116;116;18');
@@ -445,26 +490,21 @@ function norm(s){
   return s.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 }
 
-// Clasificación de aceptabilidad oficial basada en la tabla del registro oficial (IT6.5-23):
-// MB: Consumo MUY BAJO - Plato intacto o > 75% residuo
-// B:  Consumo BAJO - Plato entre 50 - 75% residuo
-// M:  Consumo MODERADO - Plato ~ 50% residuo
-// A:  Consumo ALTO - Plato entre 25 - 50% residuo
-// MA: Consumo MUY ALTO - Plato vacío o < 25% residuo
+// Baremos oficiales de clasificación IT6.5-23:
 function catInfo(x){
   if (x > 75) {
-    return { text: 'MB — Consumo MUY BAJO (> 75% residuo)', bg: 'bg-rose-50', border: 'border-rose-200', badge: 'bg-rose-600 text-white', icon: 'fa-face-frown' };
+    return { tag: 'MB', text: 'MB — Consumo MUY BAJO (> 75% residuo)', bg: 'bg-rose-50', border: 'border-rose-200', textCol: 'text-rose-700', badge: 'bg-rose-600 text-white', icon: 'fa-face-frown' };
   }
   if (x > 50) {
-    return { text: 'B — Consumo BAJO (50 - 75% residuo)', bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-500 text-white', icon: 'fa-face-meh' };
+    return { tag: 'B', text: 'B — Consumo BAJO (50 - 75% residuo)', bg: 'bg-amber-50', border: 'border-amber-200', textCol: 'text-amber-700', badge: 'bg-amber-500 text-white', icon: 'fa-face-meh' };
   }
   if (Math.abs(x - 50) < 0.01) {
-    return { text: 'M — Consumo MODERADO (~ 50% residuo)', bg: 'bg-sky-50', border: 'border-sky-200', badge: 'bg-sky-600 text-white', icon: 'fa-face-smile' };
+    return { tag: 'M', text: 'M — Consumo MODERADO (~ 50% residuo)', bg: 'bg-sky-50', border: 'border-sky-200', textCol: 'text-sky-700', badge: 'bg-sky-600 text-white', icon: 'fa-face-smile' };
   }
   if (x >= 25) {
-    return { text: 'A — Consumo ALTO (25 - 50% residuo)', bg: 'bg-emerald-50', border: 'border-emerald-200', badge: 'bg-emerald-600 text-white', icon: 'fa-face-laugh-beam' };
+    return { tag: 'A', text: 'A — Consumo ALTO (25 - 50% residuo)', bg: 'bg-emerald-50', border: 'border-emerald-200', textCol: 'text-emerald-700', badge: 'bg-emerald-600 text-white', icon: 'fa-face-laugh-beam' };
   }
-  return { text: 'MA — Consumo MUY ALTO (< 25% residuo)', bg: 'bg-emerald-100', border: 'border-emerald-300', badge: 'bg-emerald-700 text-white', icon: 'fa-face-grin-stars' };
+  return { tag: 'MA', text: 'MA — Consumo MUY ALTO (< 25% residuo)', bg: 'bg-emerald-100', border: 'border-emerald-300', textCol: 'text-emerald-800', badge: 'bg-emerald-700 text-white', icon: 'fa-face-grin-stars' };
 }
 
 function buildEmptyCardHtml(title){
@@ -490,14 +530,10 @@ function updateClearBtn(idx){
   }
 }
 
-function gram(idx, arr){
+function getGrams(idx, arr){
   let i = selectedDishes[idx];
-  return (i === null || i === undefined || !arr[i]) ? NaN : arr[i][+$('gr').value + 1];
-}
-
-function barqPortions(idx, arr){
-  let i = selectedDishes[idx];
-  return (i === null || i === undefined || !arr[i]) ? NaN : arr[i][3];
+  if (i === null || i === undefined || !arr[i]) return null;
+  return { inf: arr[i][1], prim: arr[i][2], barqRac: arr[i][3] };
 }
 
 function grams(){
@@ -505,20 +541,20 @@ function grams(){
   ['g1', 'g2', 'g3'].forEach((gid, idx) => {
     let el = $(gid);
     if (!el) return;
-    let g = gram(idx, lists[idx]);
-    el.textContent = Number.isFinite(g) ? 'Gramaje: ' + g + ' g / ración' : 'Gramaje: —';
+    let g = getGrams(idx, lists[idx]);
+    el.textContent = g ? `Inf: ${g.inf}g | Prim: ${g.prim}g` : 'Gramaje: —';
   });
 
   ['bq-info1', 'bq-info2', 'bq-info3'].forEach((bqid, idx) => {
     let el = $(bqid);
     if (!el) return;
-    let r = barqPortions(idx, lists[idx]);
+    let g = getGrams(idx, lists[idx]);
     let numBarq = Z(['b1','b2','b3'][idx]);
-    if (Number.isFinite(r)) {
-      let totalRac = numBarq > 0 ? (numBarq * r) : null;
-      el.textContent = `Barqueta Primaria: ${r} rac. ${totalRac !== null ? `(Total: ${totalRac} rac.)` : ''}`;
+    if (g) {
+      let totalRac = numBarq > 0 ? (numBarq * g.barqRac) : null;
+      el.textContent = `Barqueta: ${g.barqRac} rac. ${totalRac !== null ? `(${totalRac} rac. tot.)` : ''}`;
     } else {
-      el.textContent = 'Barqueta Primaria: —';
+      el.textContent = 'Barqueta: —';
     }
   });
 }
@@ -527,8 +563,6 @@ function grams(){
   const el = $(id);
   if (el) el.addEventListener('input', grams);
 });
-
-$('gr').onchange = grams;
 
 function renderSuggestions(idx, inputId, dropId, dataList){
   const q = norm($(inputId).value.trim());
@@ -651,90 +685,114 @@ if (presetEl) {
   });
 }
 
-function buildCardHtml(title, dishName, gramValue, kgTotales, kgNoServ, kgSobr, pctWaste, info, numBarq, racPerBarq){
+function buildCardHtml(title, dishName, gInf, gPrim, numBarq, racPerBarq, resInf, resPrim, resTot){
   let totalRacBarq = numBarq * racPerBarq;
-  let barqKg = (totalRacBarq * gramValue) / 1000;
 
   return `
     <div class="space-y-3">
       <div class="flex items-center justify-between border-b border-slate-100 pb-2">
         <span class="text-xs font-bold uppercase tracking-wider text-slate-500">${title}</span>
-        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full ${info.badge} flex items-center gap-1">
-          <i class="fa-solid ${info.icon}"></i> ${info.text.split('—')[0].trim()}
+        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full ${resTot.info.badge} flex items-center gap-1">
+          <i class="fa-solid ${resTot.info.icon}"></i> ${resTot.info.tag} (${P(resTot.pct)})
         </span>
       </div>
 
       <h3 class="text-sm font-bold text-slate-900 leading-snug">${dishName}</h3>
-      <div class="flex items-center justify-between text-xs text-slate-500 font-medium">
-        <span>${gramValue} g / ración</span>
-        <span class="text-brand-700 font-semibold bg-brand-50 px-2 py-0.5 rounded">${racPerBarq} rac/barqueta</span>
+      <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+        <span>Inf: ${gInf}g | Prim: ${gPrim}g</span>
+        <span class="text-brand-700 font-semibold bg-brand-50 px-2 py-0.5 rounded">${racPerBarq} rac/barq.</span>
       </div>
 
       ${numBarq > 0 ? `
-      <div class="bg-brand-50/70 border border-brand-200/80 rounded-xl p-2.5 space-y-1 text-xs">
+      <div class="bg-brand-50/70 border border-brand-200/80 rounded-xl p-2.5 space-y-0.5 text-xs">
         <div class="flex justify-between items-center text-brand-900 font-semibold">
           <span><i class="fa-solid fa-box text-brand-600 mr-1"></i> Barquetas recibidas:</span>
-          <span>${numBarq} barq.</span>
-        </div>
-        <div class="flex justify-between items-center text-brand-800 font-bold">
-          <span>Raciones Totales Primaria:</span>
-          <span class="text-brand-700 text-sm">${totalRacBarq} raciones</span>
-        </div>
-        <div class="flex justify-between items-center text-slate-600 text-[11px]">
-          <span>Peso total barquetas:</span>
-          <span>${K(barqKg)}</span>
+          <span>${numBarq} barq. (${totalRacBarq} rac. tot.)</span>
         </div>
       </div>
       ` : ''}
 
-      <div class="space-y-2 pt-1 text-xs divide-y divide-slate-100">
-        <div class="flex justify-between py-1">
-          <span class="text-slate-600 font-medium">kg TOTALES</span>
-          <span class="font-bold text-slate-800">${K(kgTotales)}</span>
+      <!-- Desglose por ciclos -->
+      <div class="space-y-2 pt-1 text-xs">
+        <!-- Infantil -->
+        ${resInf.hasComensales ? `
+        <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-2.5 space-y-1">
+          <div class="flex justify-between items-center font-bold text-sky-900 border-b border-sky-200/50 pb-1">
+            <span class="flex items-center gap-1"><i class="fa-solid fa-child text-sky-600"></i> Infantil:</span>
+            <span class="text-xs px-2 py-0.5 rounded ${resInf.info.badge}">${resInf.info.tag} — ${P(resInf.pct)}</span>
+          </div>
+          <div class="flex justify-between text-[11px] text-slate-600 pt-0.5">
+            <span>Servido: ${K(resInf.servidos)}</span>
+            <span>Sobras (SP): ${K(resInf.sp)}</span>
+          </div>
         </div>
-        <div class="flex justify-between py-1">
-          <span class="text-slate-600 font-medium">kg No servidos (NS)</span>
-          <span class="font-bold text-amber-700">${K(kgNoServ)}</span>
-        </div>
-        <div class="flex justify-between py-1">
-          <span class="text-slate-600 font-medium">kg Sobras de platos (SP)</span>
-          <span class="font-bold text-slate-800">${K(kgSobr)}</span>
-        </div>
-        <div class="flex justify-between py-2.5 font-bold text-slate-900 pt-2 border-t border-slate-200">
-          <span>% Aceptación (% Residuo)</span>
-          <span class="text-sm ${pctWaste > 50 ? 'text-rose-600' : 'text-emerald-600'}">${P(pctWaste)}</span>
-        </div>
-      </div>
-    </div>
+        ` : '<div class="text-[11px] text-slate-400 italic">Infantil: Sin comensales registrados</div>'}
 
-    <div class="pt-3 border-t border-slate-100">
-      <div class="p-2.5 rounded-xl ${info.bg} border ${info.border} text-xs font-semibold text-slate-800 text-center">
-        Clasificación: ${info.text}
+        <!-- Primaria -->
+        ${resPrim.hasComensales ? `
+        <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-2.5 space-y-1">
+          <div class="flex justify-between items-center font-bold text-indigo-900 border-b border-indigo-200/50 pb-1">
+            <span class="flex items-center gap-1"><i class="fa-solid fa-graduation-cap text-indigo-600"></i> Primaria:</span>
+            <span class="text-xs px-2 py-0.5 rounded ${resPrim.info.badge}">${resPrim.info.tag} — ${P(resPrim.pct)}</span>
+          </div>
+          <div class="flex justify-between text-[11px] text-slate-600 pt-0.5">
+            <span>Servido: ${K(resPrim.servidos)}</span>
+            <span>Sobras (SP): ${K(resPrim.sp)}</span>
+          </div>
+        </div>
+        ` : '<div class="text-[11px] text-slate-400 italic">Primaria: Sin comensales registrados</div>'}
+
+        <!-- Global Consolidado -->
+        <div class="pt-2 border-t border-slate-200 space-y-1">
+          <div class="flex justify-between font-bold text-slate-900">
+            <span>Total Centro % Residuo:</span>
+            <span class="text-sm ${resTot.pct > 50 ? 'text-rose-600' : 'text-emerald-600'}">${P(resTot.pct)}</span>
+          </div>
+          <div class="p-2 rounded-xl ${resTot.info.bg} border ${resTot.info.border} text-xs font-semibold ${resTot.info.textCol} text-center">
+            Clasificación Global: ${resTot.info.text}
+          </div>
+        </div>
       </div>
     </div>
   `;
 }
 
-function card(cardId, title, arr, sp, as, na, selIdx, numBarq){
-  if (selIdx === null || selIdx === undefined || !arr[selIdx]) {
-    $(cardId).innerHTML = buildEmptyCardHtml(title);
-    return;
-  }
-  let g = arr[selIdx][+$('gr').value + 1];
-  let racPerBarq = arr[selIdx][3];
+function calcGroup(as, na, g, sp){
+  if (as <= 0) return { hasComensales: false, servidos: 0, residuos: 0, sp: 0, pct: 0, info: catInfo(0) };
   let e = (as + na) * g / 1000;
   let n = na * g / 1000;
   let servidos = e - n;
   let residuos = n + sp;
-  let p = servidos > 0 ? (residuos / servidos) * 100 : 0;
-  let info = catInfo(p);
-  
-  $(cardId).innerHTML = buildCardHtml(title, arr[selIdx][0], g, e, n, sp, p, info, numBarq, racPerBarq);
+  let pct = servidos > 0 ? (residuos / servidos) * 100 : 0;
+  return { hasComensales: true, servidos, residuos, sp, pct, info: catInfo(pct) };
+}
+
+function card(cardId, title, arr, spInf, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq){
+  if (selIdx === null || selIdx === undefined || !arr[selIdx]) {
+    $(cardId).innerHTML = buildEmptyCardHtml(title);
+    return;
+  }
+  let gInf = arr[selIdx][1];
+  let gPrim = arr[selIdx][2];
+  let racPerBarq = arr[selIdx][3];
+
+  let resInf = calcGroup(asInf, naInf, gInf, spInf);
+  let resPrim = calcGroup(asPrim, naPrim, gPrim, spPrim);
+
+  let totServidos = resInf.servidos + resPrim.servidos;
+  let totResiduos = resInf.residuos + resPrim.residuos;
+  let totPct = totServidos > 0 ? (totResiduos / totServidos) * 100 : 0;
+  let resTot = { pct: totPct, info: catInfo(totPct) };
+
+  $(cardId).innerHTML = buildCardHtml(title, arr[selIdx][0], gInf, gPrim, numBarq, racPerBarq, resInf, resPrim, resTot);
 }
 
 $('go').onclick = () => {
-  let as = N('as'), na = Z('na');
-  let s = [ Z('s1'), Z('s2'), Z('s3') ];
+  let asInf = Z('as_i'), naInf = Z('na_i');
+  let asPrim = Z('as_p'), naPrim = Z('na_p');
+
+  let sInf = [ Z('s1_i'), Z('s2_i'), Z('s3_i') ];
+  let sPrim = [ Z('s1_p'), Z('s2_p'), Z('s3_p') ];
   let b = [ Z('b1'), Z('b2'), Z('b3') ];
   
   const errContainer = $('err');
@@ -748,22 +806,31 @@ $('go').onclick = () => {
     return;
   }
 
-  if (![as, na, ...s, ...b].every(Number.isFinite) || as <= 0 || na < 0 || s.some(x => x < 0) || b.some(x => x < 0) || na > as) {
-    errText.textContent = 'Introduce valores válidos. Los asistentes deben ser mayores que cero, los faltantes no pueden superar a los asistentes y el número de barquetas no puede ser negativo.';
+  if ((asInf <= 0 && asPrim <= 0)) {
+    errText.textContent = 'Debes introducir al menos los asistentes de Infantil o de Primaria.';
+    errContainer.classList.remove('hidden');
+    return;
+  }
+
+  if (naInf > asInf || naPrim > asPrim || [...sInf, ...sPrim, ...b].some(x => x < 0)) {
+    errText.textContent = 'Introduce valores válidos. Los faltantes no pueden superar a los asistentes y los valores no pueden ser negativos.';
     errContainer.classList.remove('hidden');
     return;
   }
   
-  card('c1', 'Primer plato', first, s[0], as, na, selectedDishes[0], b[0]);
-  card('c2', 'Segundo plato', second, s[1], as, na, selectedDishes[1], b[1]);
-  card('c3', 'Guarnición', side, s[2], as, na, selectedDishes[2], b[2]);
+  card('c1', 'Primer plato', first, sInf[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0]);
+  card('c2', 'Segundo plato', second, sInf[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1]);
+  card('c3', 'Guarnición', side, sInf[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2]);
   
   $('out').classList.remove('hidden');
   $('out').classList.add('grid');
 };
 
 $('clear').onclick = () => {
-  ['as','na','s1','s2','s3','b1','b2','b3','q1','q2','q3','preset-menu'].forEach(x => $(x).value = '');
+  ['as_i','na_i','as_p','na_p','s1_i','s1_p','s2_i','s2_p','s3_i','s3_p','b1','b2','b3','q1','q2','q3','preset-menu'].forEach(x => {
+    let el = $(x);
+    if (el) el.value = '';
+  });
   selectedDishes = [null, null, null];
   ['drop1','drop2','drop3'].forEach(id => $(id).classList.add('hidden'));
   [0, 1, 2].forEach(updateClearBtn);
