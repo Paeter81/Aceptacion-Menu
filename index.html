@@ -121,9 +121,9 @@
         <div>
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
             Calculadora de Aceptación de Menús
-            <span class="text-xs bg-amber-400/20 text-amber-200 border border-amber-400/30 font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">v2.4</span>
+            <span class="text-xs bg-amber-400/20 text-amber-200 border border-amber-400/30 font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">v2.6</span>
           </h1>
-          <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro de aceptabilidad y diagnóstico según norma IT6.5-23</p>
+          <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro de aceptabilidad e informe oficial según norma IT6.5-23</p>
         </div>
       </div>
     </div>
@@ -136,20 +136,53 @@
     <summary class="flex items-center justify-between p-5 font-semibold text-slate-800 cursor-pointer hover:bg-slate-50/80 select-none">
       <span class="flex items-center gap-2 text-brand-700">
         <i class="fa-solid fa-circle-info text-brand-500 text-lg"></i>
-        <span>Instrucciones y Guía de Uso</span>
+        <span>Instrucciones de Uso y Baremos Oficiales</span>
       </span>
       <span class="transition group-open:rotate-180 text-slate-400">
         <i class="fa-solid fa-chevron-down"></i>
       </span>
     </summary>
-    <div class="px-5 pb-5 border-t border-slate-100 pt-4 text-sm text-slate-600 leading-relaxed space-y-3">
-      <ol class="list-decimal list-inside space-y-2 text-slate-700">
-        <li><strong>Grupo educativo:</strong> Selecciona el ciclo (Infantil o Primaria) para ajustar los gramajes oficiales por ración.</li>
-        <li><strong>Comensales:</strong> Introduce el número de asistentes y, si los hay, los no asistentes (faltantes).</li>
-        <li><strong>Carga de Menú Oficial:</strong> Puedes seleccionar directamente un día del calendario oficial (del 21 de Septiembre al 9 de Octubre).</li>
-        <li><strong>Sobrantes en plato:</strong> Registra los kilos de sobras que retornan en los platos o fuentes de servido.</li>
-        <li><strong>Cálculo Automático:</strong> Obtén los datos oficiales requeridos para la hoja de registro: Kg Totales, Kg No Servidos, Kg Sobras de Platos, % Residuo y Clasificación (MA, A, M, B, MB).</li>
-      </ol>
+    <div class="px-5 pb-5 border-t border-slate-100 pt-4 text-sm text-slate-600 leading-relaxed space-y-4">
+      
+      <!-- Pasos sencillos de uso -->
+      <div class="space-y-2">
+        <p class="font-semibold text-slate-800 flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-brand-600"></i>
+          <span>Pasos para registrar la jornada:</span>
+        </p>
+        <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-700 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 font-medium">
+          <li><strong>Comensales:</strong> Selecciona el grupo (Infantil o Primaria), introduce los asistentes y opcionalmente los faltantes.</li>
+          <li><strong>Cargar Menú:</strong> Elige la fecha en el desplegable de menús predefinidos o busca cada plato manualmente.</li>
+          <li><strong>Barquetas y Sobras:</strong> Introduce las barquetas recibidas y el peso en kg de las sobras de plato (SP).</li>
+          <li><strong>Calcular:</strong> Pulsa el botón verde para generar el desglose de raciones, % de residuo y su clasificación oficial.</li>
+        </ol>
+      </div>
+
+      <!-- Baremos oficiales -->
+      <div class="space-y-2 pt-1 border-t border-slate-100">
+        <p class="font-semibold text-slate-800 flex items-center gap-2">
+          <i class="fa-solid fa-chart-pie text-brand-600"></i>
+          <span>Baremos oficiales de clasificación por % de residuo (IT6.5-23):</span>
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 text-xs">
+          <div class="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-800">
+            <strong>MB (Muy Bajo)</strong><br>> 75% residuo (plato intacto)
+          </div>
+          <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800">
+            <strong>B (Bajo)</strong><br>50% - 75% residuo
+          </div>
+          <div class="p-2.5 rounded-lg bg-sky-50 border border-sky-200 text-sky-800">
+            <strong>M (Moderado)</strong><br>~ 50% residuo
+          </div>
+          <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800">
+            <strong>A (Alto)</strong><br>25% - 50% residuo
+          </div>
+          <div class="p-2.5 rounded-lg bg-emerald-100 border border-emerald-300 text-emerald-900">
+            <strong>MA (Muy Alto)</strong><br>< 25% residuo (plato vacío)
+          </div>
+        </div>
+      </div>
+
       <p class="text-xs text-slate-500 bg-amber-50 border border-amber-200/60 p-2.5 rounded-lg flex items-center gap-2">
         <i class="fa-solid fa-lightbulb text-amber-500"></i>
         <span>Puedes ingresar decimales usando coma (,) o punto (.).</span>
@@ -188,7 +221,7 @@
       </div>
     </div>
 
-    <!-- Carga Rápida de Menú Oficial Línea Fría (21 Sep a 9 Oct) -->
+    <!-- Carga Rápida de Menú Oficial Línea Fría -->
     <div class="pt-3 border-t border-slate-100">
       <label for="preset-menu" class="block text-xs font-semibold text-brand-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
         <i class="fa-solid fa-calendar-days text-brand-500"></i>
@@ -222,15 +255,18 @@
 
   <!-- Primer Plato -->
   <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
-    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 font-bold flex items-center justify-center text-sm">2</div>
         <h2 class="text-base font-bold text-slate-900">Primer Plato</h2>
       </div>
-      <span id="g1" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span id="g1" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
+        <span id="bq-info1" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta Primaria: —</span>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
       <div class="md:col-span-2 relative">
         <label for="q1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
@@ -246,7 +282,15 @@
       </div>
 
       <div>
-        <label for="s1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras de Platos (SP)</label>
+        <label for="b1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
+        <div class="relative">
+          <input id="b1" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">barq.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="s1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras (SP)</label>
         <div class="relative">
           <input id="s1" type="text" placeholder="Ej.: 1,2" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
           <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">KG</span>
@@ -257,15 +301,18 @@
 
   <!-- Segundo Plato -->
   <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
-    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 font-bold flex items-center justify-center text-sm">3</div>
         <h2 class="text-base font-bold text-slate-900">Segundo Plato</h2>
       </div>
-      <span id="g2" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span id="g2" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
+        <span id="bq-info2" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta Primaria: —</span>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
       <div class="md:col-span-2 relative">
         <label for="q2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
@@ -281,7 +328,15 @@
       </div>
 
       <div>
-        <label for="s2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras de Platos (SP)</label>
+        <label for="b2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
+        <div class="relative">
+          <input id="b2" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">barq.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="s2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras (SP)</label>
         <div class="relative">
           <input id="s2" type="text" placeholder="Ej.: 0,8" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
           <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">KG</span>
@@ -292,15 +347,18 @@
 
   <!-- Guarnición o Ensalada -->
   <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
-    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 font-bold flex items-center justify-center text-sm">4</div>
         <h2 class="text-base font-bold text-slate-900">Guarnición o Ensalada <span class="text-xs font-normal text-slate-400">(Opcional)</span></h2>
       </div>
-      <span id="g3" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
+      <div class="flex items-center gap-2 flex-wrap">
+        <span id="g3" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
+        <span id="bq-info3" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta Primaria: —</span>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
       <div class="md:col-span-2 relative">
         <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Guarnición</label>
         <div class="relative">
@@ -316,7 +374,15 @@
       </div>
 
       <div>
-        <label for="s3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras de Platos (SP)</label>
+        <label for="b3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
+        <div class="relative">
+          <input id="b3" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">barq.</span>
+        </div>
+      </div>
+
+      <div>
+        <label for="s3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Kg Sobras (SP)</label>
         <div class="relative">
           <input id="s3" type="text" placeholder="Ej.: 0,4" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
           <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">KG</span>
@@ -363,69 +429,14 @@ const Z=x=>$(x).value.trim()===''?0:N(x);
 const K=x=>x.toLocaleString('es-ES',{maximumFractionDigits:3})+' kg';
 const P=x=>x.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
 
-const A=s=>s.split('|').map(x=>{let[a,b,c]=x.split(';');return[a,+b,+c]});
+const A=s=>s.split('|').map(x=>{let[a,b,c,d]=x.split(';');return[a,+b,+c,d?+d:12]});
 
-// Platos oficial Línea Fría Andalucía
-let first=A('Arroz integral a la campesina;179;214|Arroz con pisto;173;207|Arroz hervido con tomate frito;165;198|Coditos con tomate y orégano;150;180|Crema de calabacín;210;210|Crema de calabaza;210;210|Crema de verduras;208;208|Crema de zanahoria;210;210|Crema hortelana;210;210|Espirales integrales con tomate;155;186|Garbanzos encebollados;118;235|Lacitos con tomate ECO;133;160|Lentejas con verduras cocidas;125;231|Macarrones integrales con tomate;155;186|Potaje de alubias blancas;150;274|Potaje de alubias blancas con calabacín;163;299|Potaje de lentejas con calabaza;158;289|Puchero;151;283|Ensalada Lechuga, tomate y maíz;125;125|Ensalada Lechuga, tomate y huevo cocido;140;140|Ensalada Tomate y queso fresco;130;130');
-let second=A('Abadejo al horno a las finas hierbas;66;94|Albóndigas de cerdo con tomate;85;125|Albóndigas de pollo a la jardinera;67;108|Alubias pintas guisadas con arroz;202;257|Chuleta de pavo adobada;62;119|Estofado de pavo en salsa con verduras;125;162|Filete de lomo de cerdo;48;77|Garbanzos encebollados;118;235|Hamburguesa de pavo con salsa rondeña;78;96|Huevo cocido con arroz integral y tomate;151;151|Huevo cocido con patatas a lo pobre;123;141|Huevo cocido con pisto de verduras;141;141|Jamoncito de pollo al horno en salsa;81;130|Jureles al horno encebollados;88;126|Lentejas con verduras cocidas;125;231|Lentejas guisadas con arroz;158;289|Merluza a la plancha al ajo y perejil;67;96|Merluza a la plancha en salsa verde;72;103|Muslito de pollo al horno al ajillo;80;128|Salmón al vapor en salsa de cebolla y eneldo;67;96|Solomillo de pollo rustido;78;125|Tortilla de patatas con calabacín;100;100|Tortilla de patatas con cebolla;116;116');
-let side=A('Patatas panaderas al vapor ECO;63;84|Patatas a la provenzal ECO;63;98|Arroz pilaf ECO;68;81|Ensalada 4 estaciones;57;57|Ensalada Campestre;61;61|Ensalada Lechuga y maíz;65;65|Ensalada Mézclum;61;61|Ensalada Lechuga;61;61|Ensalada Clásica;61;61|Ensalada Tomate natural;61;61');
+// Platos oficial Línea Fría Andalucía con raciones/barqueta específicas para Primaria
+let first=A('Arroz integral a la campesina;179;214;11|Arroz con pisto;173;207;11|Arroz hervido con tomate frito;165;198;12|Coditos con tomate y orégano;150;180;13|Crema de calabacín;210;210;10|Crema de calabaza;210;210;10|Crema de verduras;208;208;10|Crema de zanahoria;210;210;10|Crema hortelana;210;210;10|Espirales integrales con tomate;155;186;12|Garbanzos encebollados;118;235;12|Lacitos con tomate ECO;133;160;14|Lentejas con verduras cocidas;125;231;12|Macarrones integrales con tomate;155;186;12|Potaje de alubias blancas;150;274;8|Potaje de alubias blancas con calabacín;163;299;7|Potaje de lentejas con calabaza;158;289;8|Puchero;151;283;8|Ensalada Lechuga, tomate y maíz;125;125;15|Ensalada Lechuga, tomate y huevo cocido;140;140;15|Ensalada Tomate y queso fresco;130;130;15');
 
-// Calendario exacto ajustado a los menús de las imágenes
-const presetMenus = [
-  ['Crema hortelana', 'Estofado de pavo en salsa con verduras', 'Ensalada Tomate natural'],                     // Lun 21 Sep
-  ['Espirales integrales con tomate', 'Lentejas con verduras cocidas', null],                                   // Mar 22 Sep
-  ['Ensalada Tomate y queso fresco', 'Jamoncito de pollo al horno en salsa', 'Patatas a la provenzal ECO'],     // Mié 23 Sep
-  ['Puchero', 'Merluza a la plancha al ajo y perejil', 'Ensalada 4 estaciones'],                                // Jue 24 Sep
-  ['Arroz hervido con tomate frito', 'Huevo cocido con pisto de verduras', 'Ensalada Lechuga y maíz'],            // Vie 25 Sep
-  ['Potaje de alubias blancas', 'Salmón al vapor en salsa de cebolla y eneldo', 'Ensalada Clásica'],             // Lun 28 Sep
-  ['Crema de calabacín', 'Hamburguesa de pavo con salsa rondeña', 'Ensalada Campestre'],                         // Mar 29 Sep
-  ['Ensalada Lechuga, tomate y maíz', 'Solomillo de pollo rustido', 'Arroz pilaf ECO'],                         // Mié 30 Sep
-  ['Arroz integral a la campesina', 'Garbanzos encebollados', null],                                            // Jue 1 Oct
-  ['Lacitos con tomate ECO', 'Huevo cocido con patatas a lo pobre', 'Ensalada Lechuga'],                         // Vie 2 Oct
-  ['Potaje de lentejas con calabaza', 'Jureles al horno encebollados', 'Ensalada Lechuga y maíz'],                // Lun 5 Oct
-  ['Coditos con tomate y orégano', 'Alubias pintas guisadas con arroz', null],                                  // Mar 6 Oct
-  ['Ensalada Tomate y queso fresco', 'Filete de lomo de cerdo', 'Patatas a la provenzal ECO'],                  // Mié 7 Oct
-  ['Puchero', 'Jamoncito de pollo al horno en salsa', 'Ensalada Campestre'],                                    // Jue 8 Oct
-  ['Crema de verduras', 'Huevo cocido con arroz integral y tomate', 'Ensalada Mézclum']                          // Vie 9 Oct
-];
+let second=A('Abadejo al horno a las finas hierbas;66;94;15|Albóndigas de cerdo con tomate;85;125;14|Albóndigas de pollo a la jardinera;67;108;15|Alubias pintas guisadas con arroz;202;257;11|Chuleta de pavo adobada;62;119;15|Estofado de pavo en salsa con verduras;125;162;15|Filete de lomo de cerdo;48;77;15|Garbanzos encebollados;118;235;12|Hamburguesa de pavo con salsa rondeña;78;96;15|Huevo cocido con arroz integral y tomate;151;151;15|Huevo cocido con patatas a lo pobre;123;141;15|Huevo cocido con pisto de verduras;141;141;15|Jamoncito de pollo al horno en salsa;81;130;15|Jureles al horno encebollados;88;126;15|Lentejas con verduras cocidas;125;231;12|Lentejas guisadas con arroz;158;289;10|Merluza a la plancha al ajo y perejil;67;96;15|Merluza a la plancha en salsa verde;72;103;15|Muslito de pollo al horno al ajillo;80;128;15|Salmón al vapor en salsa de cebolla y eneldo;67;96;15|Solomillo de pollo rustido;78;125;15|Tortilla de patatas con calabacín;100;100;18|Tortilla de patatas con cebolla;116;116;18');
 
-function autoSelectByName(idx, dataList, dishName, inputId, clrId) {
-  const el = $(inputId);
-  if (!el) return;
-
-  if (!dishName) {
-    selectedDishes[idx] = null;
-    el.value = '';
-    updateClearBtn(idx);
-    return;
-  }
-  const targetNorm = norm(dishName);
-  let foundIdx = dataList.findIndex(item => norm(item[0]) === targetNorm);
-  if (foundIdx === -1) {
-    foundIdx = dataList.findIndex(item => norm(item[0]).includes(targetNorm) || targetNorm.includes(norm(item[0])));
-  }
-  if (foundIdx !== -1) {
-    selectedDishes[idx] = foundIdx;
-    el.value = dataList[foundIdx][0];
-  } else {
-    selectedDishes[idx] = null;
-    el.value = dishName;
-  }
-  updateClearBtn(idx);
-}
-
-$('preset-menu').addEventListener('change', (e) => {
-  const val = e.target.value;
-  if (val === '') return;
-  const menu = presetMenus[parseInt(val, 10)];
-  if (!menu) return;
-
-  autoSelectByName(0, first, menu[0], 'q1', 'clr1');
-  autoSelectByName(1, second, menu[1], 'q2', 'clr2');
-  autoSelectByName(2, side, menu[2], 'q3', 'clr3');
-
-  grams();
-});
+let side=A('Patatas panaderas al vapor ECO;63;84;25|Patatas a la provenzal ECO;63;98;20|Arroz pilaf ECO;68;81;20|Ensalada 4 estaciones;57;57;15|Ensalada Campestre;61;61;15|Ensalada Lechuga y maíz;65;65;15|Ensalada Mézclum;61;61;15|Ensalada Lechuga;61;61;15|Ensalada Clásica;61;61;15|Ensalada Tomate natural;61;61;15');
 
 let selectedDishes = [null, null, null];
 
@@ -434,9 +445,59 @@ function norm(s){
   return s.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 }
 
+// Clasificación de aceptabilidad oficial basada en la tabla del registro oficial (IT6.5-23):
+// MB: Consumo MUY BAJO - Plato intacto o > 75% residuo
+// B:  Consumo BAJO - Plato entre 50 - 75% residuo
+// M:  Consumo MODERADO - Plato ~ 50% residuo
+// A:  Consumo ALTO - Plato entre 25 - 50% residuo
+// MA: Consumo MUY ALTO - Plato vacío o < 25% residuo
+function catInfo(x){
+  if (x > 75) {
+    return { text: 'MB — Consumo MUY BAJO (> 75% residuo)', bg: 'bg-rose-50', border: 'border-rose-200', badge: 'bg-rose-600 text-white', icon: 'fa-face-frown' };
+  }
+  if (x > 50) {
+    return { text: 'B — Consumo BAJO (50 - 75% residuo)', bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-500 text-white', icon: 'fa-face-meh' };
+  }
+  if (Math.abs(x - 50) < 0.01) {
+    return { text: 'M — Consumo MODERADO (~ 50% residuo)', bg: 'bg-sky-50', border: 'border-sky-200', badge: 'bg-sky-600 text-white', icon: 'fa-face-smile' };
+  }
+  if (x >= 25) {
+    return { text: 'A — Consumo ALTO (25 - 50% residuo)', bg: 'bg-emerald-50', border: 'border-emerald-200', badge: 'bg-emerald-600 text-white', icon: 'fa-face-laugh-beam' };
+  }
+  return { text: 'MA — Consumo MUY ALTO (< 25% residuo)', bg: 'bg-emerald-100', border: 'border-emerald-300', badge: 'bg-emerald-700 text-white', icon: 'fa-face-grin-stars' };
+}
+
+function buildEmptyCardHtml(title){
+  return `
+    <div class="space-y-3 opacity-60">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">${title}</span>
+        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-400">Sin seleccionar</span>
+      </div>
+      <p class="text-xs text-slate-400 italic">No se ha seleccionado plato para esta categoría.</p>
+    </div>
+  `;
+}
+
+function updateClearBtn(idx){
+  const inp = $(['q1','q2','q3'][idx]);
+  const btn = $(['clr1','clr2','clr3'][idx]);
+  if (!inp || !btn) return;
+  if (inp.value.trim().length > 0) {
+    btn.classList.remove('hidden');
+  } else {
+    btn.classList.add('hidden');
+  }
+}
+
 function gram(idx, arr){
   let i = selectedDishes[idx];
   return (i === null || i === undefined || !arr[i]) ? NaN : arr[i][+$('gr').value + 1];
+}
+
+function barqPortions(idx, arr){
+  let i = selectedDishes[idx];
+  return (i === null || i === undefined || !arr[i]) ? NaN : arr[i][3];
 }
 
 function grams(){
@@ -447,7 +508,27 @@ function grams(){
     let g = gram(idx, lists[idx]);
     el.textContent = Number.isFinite(g) ? 'Gramaje: ' + g + ' g / ración' : 'Gramaje: —';
   });
+
+  ['bq-info1', 'bq-info2', 'bq-info3'].forEach((bqid, idx) => {
+    let el = $(bqid);
+    if (!el) return;
+    let r = barqPortions(idx, lists[idx]);
+    let numBarq = Z(['b1','b2','b3'][idx]);
+    if (Number.isFinite(r)) {
+      let totalRac = numBarq > 0 ? (numBarq * r) : null;
+      el.textContent = `Barqueta Primaria: ${r} rac. ${totalRac !== null ? `(Total: ${totalRac} rac.)` : ''}`;
+    } else {
+      el.textContent = 'Barqueta Primaria: —';
+    }
+  });
 }
+
+['b1','b2','b3'].forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', grams);
+});
+
+$('gr').onchange = grams;
 
 function renderSuggestions(idx, inputId, dropId, dataList){
   const q = norm($(inputId).value.trim());
@@ -483,8 +564,8 @@ function selectDish(idx, inputId, dropId, dataList, itemIndex){
   selectedDishes[idx] = itemIndex;
   $(inputId).value = dataList[itemIndex][0];
   $(dropId).classList.add('hidden');
-  grams();
   updateClearBtn(idx);
+  grams();
 }
 
 const configs = [
@@ -493,16 +574,6 @@ const configs = [
   { idx: 2, inputId: 'q3', dropId: 'drop3', clrId: 'clr3', data: side }
 ];
 
-function updateClearBtn(idx) {
-  const cfg = configs[idx];
-  const clr = $(cfg.clrId);
-  if ($(cfg.inputId).value.trim() !== '') {
-    clr.classList.remove('hidden');
-  } else {
-    clr.classList.add('hidden');
-  }
-}
-
 configs.forEach(cfg => {
   const inp = $(cfg.inputId);
   const drop = $(cfg.dropId);
@@ -510,9 +581,9 @@ configs.forEach(cfg => {
 
   inp.addEventListener('input', () => {
     selectedDishes[cfg.idx] = null;
+    updateClearBtn(cfg.idx);
     grams();
     renderSuggestions(cfg.idx, cfg.inputId, cfg.dropId, cfg.data);
-    updateClearBtn(cfg.idx);
   });
 
   inp.addEventListener('focus', () => {
@@ -523,15 +594,15 @@ configs.forEach(cfg => {
     setTimeout(() => { drop.classList.add('hidden'); }, 180);
   });
 
-  clr.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-    inp.value = '';
-    selectedDishes[cfg.idx] = null;
-    grams();
-    drop.classList.add('hidden');
-    updateClearBtn(cfg.idx);
-    inp.focus();
-  });
+  if (clr) {
+    clr.addEventListener('click', () => {
+      inp.value = '';
+      selectedDishes[cfg.idx] = null;
+      updateClearBtn(cfg.idx);
+      drop.classList.add('hidden');
+      grams();
+    });
+  }
 });
 
 document.addEventListener('click', (e) => {
@@ -540,17 +611,50 @@ document.addEventListener('click', (e) => {
   }
 });
 
-$('gr').onchange = grams;
+const presets = [
+  { f: 8,  s: 5,  g: 9 },
+  { f: 9,  s: 14, g: null },
+  { f: 20, s: 12, g: 1 },
+  { f: 17, s: 16, g: 3 },
+  { f: 2,  s: 11, g: 5 },
+  { f: 14, s: 19, g: 8 },
+  { f: 4,  s: 8,  g: 4 },
+  { f: 18, s: 20, g: 2 },
+  { f: 0,  s: 7,  g: null },
+  { f: 11, s: 10, g: 7 },
+  { f: 16, s: 13, g: 5 },
+  { f: 3,  s: 3,  g: null },
+  { f: 20, s: 6,  g: 1 },
+  { f: 17, s: 12, g: 4 },
+  { f: 6,  s: 9,  g: 6 }
+];
 
-function catInfo(x){
-  if (x >= 90) return { text: 'MB — Consumo Muy Bajo', bg: 'bg-rose-50', border: 'border-rose-200', badge: 'bg-rose-600 text-white', icon: 'fa-face-frown' };
-  if (x >= 75) return { text: 'B — Consumo Bajo', bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-500 text-white', icon: 'fa-face-meh' };
-  if (x >= 50) return { text: 'M — Consumo Moderado', bg: 'bg-sky-50', border: 'border-sky-200', badge: 'bg-sky-600 text-white', icon: 'fa-face-smile' };
-  if (x >= 25) return { text: 'A — Consumo Alto', bg: 'bg-emerald-50', border: 'border-emerald-200', badge: 'bg-emerald-600 text-white', icon: 'fa-face-laugh-beam' };
-  return { text: 'MA — Consumo Muy Alto', bg: 'bg-emerald-100', border: 'border-emerald-300', badge: 'bg-emerald-700 text-white', icon: 'fa-face-grin-stars' };
+const presetEl = $('preset-menu');
+if (presetEl) {
+  presetEl.addEventListener('change', (e) => {
+    const val = e.target.value;
+    if (val === '') return;
+    const idx = parseInt(val, 10);
+    const p = presets[idx];
+    if (!p) return;
+
+    if (p.f !== null) selectDish(0, 'q1', 'drop1', first, p.f);
+    if (p.s !== null) selectDish(1, 'q2', 'drop2', second, p.s);
+    if (p.g !== null) {
+      selectDish(2, 'q3', 'drop3', side, p.g);
+    } else {
+      $('q3').value = '';
+      selectedDishes[2] = null;
+      updateClearBtn(2);
+      grams();
+    }
+  });
 }
 
-function buildCardHtml(title, dishName, gramValue, kgTotales, kgNoServ, kgSobr, pctWaste, info){
+function buildCardHtml(title, dishName, gramValue, kgTotales, kgNoServ, kgSobr, pctWaste, info, numBarq, racPerBarq){
+  let totalRacBarq = numBarq * racPerBarq;
+  let barqKg = (totalRacBarq * gramValue) / 1000;
+
   return `
     <div class="space-y-3">
       <div class="flex items-center justify-between border-b border-slate-100 pb-2">
@@ -561,9 +665,29 @@ function buildCardHtml(title, dishName, gramValue, kgTotales, kgNoServ, kgSobr, 
       </div>
 
       <h3 class="text-sm font-bold text-slate-900 leading-snug">${dishName}</h3>
-      <p class="text-xs text-slate-500 font-medium">${gramValue} g / ración</p>
+      <div class="flex items-center justify-between text-xs text-slate-500 font-medium">
+        <span>${gramValue} g / ración</span>
+        <span class="text-brand-700 font-semibold bg-brand-50 px-2 py-0.5 rounded">${racPerBarq} rac/barqueta</span>
+      </div>
 
-      <div class="space-y-2 pt-2 text-xs divide-y divide-slate-100">
+      ${numBarq > 0 ? `
+      <div class="bg-brand-50/70 border border-brand-200/80 rounded-xl p-2.5 space-y-1 text-xs">
+        <div class="flex justify-between items-center text-brand-900 font-semibold">
+          <span><i class="fa-solid fa-box text-brand-600 mr-1"></i> Barquetas recibidas:</span>
+          <span>${numBarq} barq.</span>
+        </div>
+        <div class="flex justify-between items-center text-brand-800 font-bold">
+          <span>Raciones Totales Primaria:</span>
+          <span class="text-brand-700 text-sm">${totalRacBarq} raciones</span>
+        </div>
+        <div class="flex justify-between items-center text-slate-600 text-[11px]">
+          <span>Peso total barquetas:</span>
+          <span>${K(barqKg)}</span>
+        </div>
+      </div>
+      ` : ''}
+
+      <div class="space-y-2 pt-1 text-xs divide-y divide-slate-100">
         <div class="flex justify-between py-1">
           <span class="text-slate-600 font-medium">kg TOTALES</span>
           <span class="font-bold text-slate-800">${K(kgTotales)}</span>
@@ -578,7 +702,7 @@ function buildCardHtml(title, dishName, gramValue, kgTotales, kgNoServ, kgSobr, 
         </div>
         <div class="flex justify-between py-2.5 font-bold text-slate-900 pt-2 border-t border-slate-200">
           <span>% Aceptación (% Residuo)</span>
-          <span class="text-sm ${pctWaste >= 50 ? 'text-rose-600' : 'text-emerald-600'}">${P(pctWaste)}</span>
+          <span class="text-sm ${pctWaste > 50 ? 'text-rose-600' : 'text-emerald-600'}">${P(pctWaste)}</span>
         </div>
       </div>
     </div>
@@ -591,74 +715,55 @@ function buildCardHtml(title, dishName, gramValue, kgTotales, kgNoServ, kgSobr, 
   `;
 }
 
-function buildEmptyCardHtml(title){
-  return `
-    <div class="space-y-3 opacity-60">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">${title}</span>
-        <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-500">Sin Servir</span>
-      </div>
-      <h3 class="text-sm font-semibold text-slate-500 italic">No incluye guarnición hoy</h3>
-      <p class="text-xs text-slate-400">Este plato no forma parte del menú seleccionado.</p>
-    </div>
-    <div class="pt-3 border-t border-slate-100 text-center">
-      <span class="text-xs text-slate-400 italic">Sin datos de residuo</span>
-    </div>
-  `;
-}
-
-function card(cardId, title, arr, sp, as, na, selIdx){
+function card(cardId, title, arr, sp, as, na, selIdx, numBarq){
   if (selIdx === null || selIdx === undefined || !arr[selIdx]) {
     $(cardId).innerHTML = buildEmptyCardHtml(title);
     return;
   }
   let g = arr[selIdx][+$('gr').value + 1];
-  let e = (as + na) * g / 1000;  // kg TOTALES recibidos o elaborados
-  let n = na * g / 1000;        // kg No servidos (NS)
-  let servidos = e - n;         // kg TOTALES - kg NS
-  let residuos = n + sp;        // kg RES = NS + SP
+  let racPerBarq = arr[selIdx][3];
+  let e = (as + na) * g / 1000;
+  let n = na * g / 1000;
+  let servidos = e - n;
+  let residuos = n + sp;
   let p = servidos > 0 ? (residuos / servidos) * 100 : 0;
   let info = catInfo(p);
   
-  $(cardId).innerHTML = buildCardHtml(title, arr[selIdx][0], g, e, n, sp, p, info);
+  $(cardId).innerHTML = buildCardHtml(title, arr[selIdx][0], g, e, n, sp, p, info, numBarq, racPerBarq);
 }
 
 $('go').onclick = () => {
   let as = N('as'), na = Z('na');
-  let s = [
-    Z('s1'),
-    Z('s2'),
-    Z('s3')
-  ];
+  let s = [ Z('s1'), Z('s2'), Z('s3') ];
+  let b = [ Z('b1'), Z('b2'), Z('b3') ];
   
   const errContainer = $('err');
   const errText = $('err-text');
   errContainer.classList.add('hidden');
   $('out').classList.add('hidden');
   
-  // Primer y segundo plato son obligatorios
   if (selectedDishes[0] === null || selectedDishes[1] === null) {
     errText.textContent = 'Por favor, selecciona al menos el Primer y Segundo plato de las listas desplegables.';
     errContainer.classList.remove('hidden');
     return;
   }
 
-  if (![as, na, ...s].every(Number.isFinite) || as <= 0 || na < 0 || s.some(x => x < 0) || na > as) {
-    errText.textContent = 'Introduce valores válidos. Los asistentes deben ser mayores que cero y los faltantes no pueden superar a los asistentes.';
+  if (![as, na, ...s, ...b].every(Number.isFinite) || as <= 0 || na < 0 || s.some(x => x < 0) || b.some(x => x < 0) || na > as) {
+    errText.textContent = 'Introduce valores válidos. Los asistentes deben ser mayores que cero, los faltantes no pueden superar a los asistentes y el número de barquetas no puede ser negativo.';
     errContainer.classList.remove('hidden');
     return;
   }
   
-  card('c1', 'Primer plato', first, s[0], as, na, selectedDishes[0]);
-  card('c2', 'Segundo plato', second, s[1], as, na, selectedDishes[1]);
-  card('c3', 'Guarnición', side, s[2], as, na, selectedDishes[2]);
+  card('c1', 'Primer plato', first, s[0], as, na, selectedDishes[0], b[0]);
+  card('c2', 'Segundo plato', second, s[1], as, na, selectedDishes[1], b[1]);
+  card('c3', 'Guarnición', side, s[2], as, na, selectedDishes[2], b[2]);
   
   $('out').classList.remove('hidden');
   $('out').classList.add('grid');
 };
 
 $('clear').onclick = () => {
-  ['as','na','s1','s2','s3','q1','q2','q3','preset-menu'].forEach(x => $(x).value = '');
+  ['as','na','s1','s2','s3','b1','b2','b3','q1','q2','q3','preset-menu'].forEach(x => $(x).value = '');
   selectedDishes = [null, null, null];
   ['drop1','drop2','drop3'].forEach(id => $(id).classList.add('hidden'));
   [0, 1, 2].forEach(updateClearBtn);
