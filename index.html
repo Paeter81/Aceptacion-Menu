@@ -288,7 +288,8 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <div class="md:col-span-6 relative">
+      <!-- Fila 1: Plato y Barquetas -->
+      <div class="md:col-span-9 relative">
         <label for="q1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
           <input id="q1" type="text" placeholder="Escribe para buscar (ej. arroz, lentejas, crema...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -302,7 +303,7 @@
         <div id="drop1" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div class="md:col-span-2">
+      <div class="md:col-span-3">
         <label for="b1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
           <input id="b1" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -310,19 +311,25 @@
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="s1_i" class="block text-xs font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
-        <div class="relative">
-          <input id="s1_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-500 font-semibold">KG</span>
+      <!-- Fila 2: Inputs Infantil -->
+      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-sky-50/40 p-3 rounded-xl border border-sky-100">
+        <div>
+          <label for="s1_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Infantil</label>
+          <div class="relative">
+            <input id="s1_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2.5 pr-10 transition">
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-sky-500 font-bold">KG</span>
+          </div>
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="s1_p" class="block text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
-        <div class="relative">
-          <input id="s1_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-500 font-semibold">KG</span>
+      <!-- Fila 3: Inputs Primaria -->
+      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100">
+        <div>
+          <label for="s1_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Primaria</label>
+          <div class="relative">
+            <input id="s1_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2.5 pr-10 transition">
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-indigo-500 font-bold">KG</span>
+          </div>
         </div>
       </div>
     </div>
@@ -342,7 +349,8 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <div class="md:col-span-6 relative">
+      <!-- Fila 1: Plato y Barquetas -->
+      <div class="md:col-span-9 relative">
         <label for="q2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
           <input id="q2" type="text" placeholder="Escribe para buscar (ej. pollo, merluza, tortilla...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -356,7 +364,7 @@
         <div id="drop2" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div class="md:col-span-2">
+      <div class="md:col-span-3">
         <label for="b2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
           <input id="b2" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -364,19 +372,25 @@
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="s2_i" class="block text-xs font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
-        <div class="relative">
-          <input id="s2_i" type="text" placeholder="Ej.: 0,3" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-500 font-semibold">KG</span>
+      <!-- Fila 2: Inputs Infantil -->
+      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-sky-50/40 p-3 rounded-xl border border-sky-100">
+        <div>
+          <label for="s2_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Infantil</label>
+          <div class="relative">
+            <input id="s2_i" type="text" placeholder="Ej.: 0,2" class="w-full bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2.5 pr-10 transition">
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-sky-500 font-bold">KG</span>
+          </div>
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="s2_p" class="block text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
-        <div class="relative">
-          <input id="s2_p" type="text" placeholder="Ej.: 0,5" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-500 font-semibold">KG</span>
+      <!-- Fila 3: Inputs Primaria -->
+      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100">
+        <div>
+          <label for="s2_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Primaria</label>
+          <div class="relative">
+            <input id="s2_p" type="text" placeholder="Ej.: 0,5" class="w-full bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2.5 pr-10 transition">
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-indigo-500 font-bold">KG</span>
+          </div>
         </div>
       </div>
     </div>
@@ -396,7 +410,8 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <div class="md:col-span-6 relative">
+      <!-- Fila 1: Plato y Barquetas -->
+      <div class="md:col-span-9 relative">
         <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Guarnición</label>
         <div class="relative">
           <input id="q3" type="text" placeholder="Escribe para buscar (ej. patatas, arroz, ensalada...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -410,7 +425,7 @@
         <div id="drop3" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div class="md:col-span-2">
+      <div class="md:col-span-3">
         <label for="b3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
           <input id="b3" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
@@ -418,19 +433,25 @@
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="s3_i" class="block text-xs font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
-        <div class="relative">
-          <input id="s3_i" type="text" placeholder="Ej.: 0,2" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-500 font-semibold">KG</span>
+      <!-- Fila 2: Inputs Infantil -->
+      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-sky-50/40 p-3 rounded-xl border border-sky-100">
+        <div>
+          <label for="s3_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Infantil</label>
+          <div class="relative">
+            <input id="s3_i" type="text" placeholder="Ej.: 0,2" class="w-full bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2.5 pr-10 transition">
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-sky-500 font-bold">KG</span>
+          </div>
         </div>
       </div>
 
-      <div class="md:col-span-2">
-        <label for="s3_p" class="block text-xs font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
-        <div class="relative">
-          <input id="s3_p" type="text" placeholder="Ej.: 0,4" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-500 font-semibold">KG</span>
+      <!-- Fila 3: Inputs Primaria -->
+      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100">
+        <div>
+          <label for="s3_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Primaria</label>
+          <div class="relative">
+            <input id="s3_p" type="text" placeholder="Ej.: 0,3" class="w-full bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2.5 pr-10 transition">
+            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-indigo-500 font-bold">KG</span>
+          </div>
         </div>
       </div>
     </div>
@@ -713,17 +734,20 @@ function buildCardHtml(title, dishName, gInf, gPrim, numBarq, racPerBarq, resInf
       ` : ''}
 
       <!-- Desglose por ciclos -->
-      <div class="space-y-2 pt-1 text-xs">
+      <div class="space-y-3 pt-1 text-xs">
         <!-- Infantil -->
         ${resInf.hasComensales ? `
         <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-2.5 space-y-1">
-          <div class="flex justify-between items-center font-bold text-sky-900 border-b border-sky-200/50 pb-1">
+          <div class="flex justify-between items-center font-bold text-sky-900 border-b border-sky-200/50 pb-1.5">
             <span class="flex items-center gap-1"><i class="fa-solid fa-child text-sky-600"></i> Infantil:</span>
             <span class="text-xs px-2 py-0.5 rounded ${resInf.info.badge}">${resInf.info.tag} — ${P(resInf.pct)}</span>
           </div>
-          <div class="flex justify-between text-[11px] text-slate-600 pt-0.5">
-            <span>Servido: ${K(resInf.servidos)}</span>
-            <span>Sobras (SP): ${K(resInf.sp)}</span>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600 pt-1">
+            <span>Elaborados (E): <strong class="text-slate-800">${K(resInf.e)}</strong></span>
+            <span>Servidos (E-NS): <strong class="text-slate-800">${K(resInf.servidos)}</strong></span>
+            <span>No Servidos (NS): <strong class="text-slate-800">${K(resInf.ns)}</strong></span>
+            <span>Sobras Platos (SP): <strong class="text-slate-800">${K(resInf.sp)}</strong></span>
+            <span class="col-span-2 pt-1 mt-1 border-t border-sky-200/60 font-semibold text-sky-800">Residuo (NS + SP): ${K(resInf.residuos)}</span>
           </div>
         </div>
         ` : '<div class="text-[11px] text-slate-400 italic">Infantil: Sin comensales registrados</div>'}
@@ -731,13 +755,16 @@ function buildCardHtml(title, dishName, gInf, gPrim, numBarq, racPerBarq, resInf
         <!-- Primaria -->
         ${resPrim.hasComensales ? `
         <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-2.5 space-y-1">
-          <div class="flex justify-between items-center font-bold text-indigo-900 border-b border-indigo-200/50 pb-1">
+          <div class="flex justify-between items-center font-bold text-indigo-900 border-b border-indigo-200/50 pb-1.5">
             <span class="flex items-center gap-1"><i class="fa-solid fa-graduation-cap text-indigo-600"></i> Primaria:</span>
             <span class="text-xs px-2 py-0.5 rounded ${resPrim.info.badge}">${resPrim.info.tag} — ${P(resPrim.pct)}</span>
           </div>
-          <div class="flex justify-between text-[11px] text-slate-600 pt-0.5">
-            <span>Servido: ${K(resPrim.servidos)}</span>
-            <span>Sobras (SP): ${K(resPrim.sp)}</span>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600 pt-1">
+            <span>Elaborados (E): <strong class="text-slate-800">${K(resPrim.e)}</strong></span>
+            <span>Servidos (E-NS): <strong class="text-slate-800">${K(resPrim.servidos)}</strong></span>
+            <span>No Servidos (NS): <strong class="text-slate-800">${K(resPrim.ns)}</strong></span>
+            <span>Sobras Platos (SP): <strong class="text-slate-800">${K(resPrim.sp)}</strong></span>
+            <span class="col-span-2 pt-1 mt-1 border-t border-indigo-200/60 font-semibold text-indigo-800">Residuo (NS + SP): ${K(resPrim.residuos)}</span>
           </div>
         </div>
         ` : '<div class="text-[11px] text-slate-400 italic">Primaria: Sin comensales registrados</div>'}
@@ -757,17 +784,19 @@ function buildCardHtml(title, dishName, gInf, gPrim, numBarq, racPerBarq, resInf
   `;
 }
 
-function calcGroup(as, na, g, sp){
-  if (as <= 0) return { hasComensales: false, servidos: 0, residuos: 0, sp: 0, pct: 0, info: catInfo(0) };
+function calcGroup(as, na, g, ns, sp){
+  if (as <= 0) return { hasComensales: false, e: 0, ns: 0, sp: 0, residuos: 0, servidos: 0, pct: 0, info: catInfo(0) };
+  
+  // NS calculado a partir de faltantes y gramaje; E = raciones previstas por gramaje.
   let e = (as + na) * g / 1000;
-  let n = na * g / 1000;
-  let servidos = e - n;
-  let residuos = n + sp;
+  let servidos = e - ns;
+  let residuos = ns + sp;
   let pct = servidos > 0 ? (residuos / servidos) * 100 : 0;
-  return { hasComensales: true, servidos, residuos, sp, pct, info: catInfo(pct) };
+  
+  return { hasComensales: true, e, ns, sp, residuos, servidos, pct, info: catInfo(pct) };
 }
 
-function card(cardId, title, arr, spInf, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq){
+function card(cardId, title, arr, nsInf, spInf, nsPrim, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq){
   if (selIdx === null || selIdx === undefined || !arr[selIdx]) {
     $(cardId).innerHTML = buildEmptyCardHtml(title);
     return;
@@ -776,8 +805,8 @@ function card(cardId, title, arr, spInf, spPrim, asInf, naInf, asPrim, naPrim, s
   let gPrim = arr[selIdx][2];
   let racPerBarq = arr[selIdx][3];
 
-  let resInf = calcGroup(asInf, naInf, gInf, spInf);
-  let resPrim = calcGroup(asPrim, naPrim, gPrim, spPrim);
+  let resInf = calcGroup(asInf, naInf, gInf, nsInf, spInf);
+  let resPrim = calcGroup(asPrim, naPrim, gPrim, nsPrim, spPrim);
 
   let totServidos = resInf.servidos + resPrim.servidos;
   let totResiduos = resInf.residuos + resPrim.residuos;
@@ -791,7 +820,10 @@ $('go').onclick = () => {
   let asInf = Z('as_i'), naInf = Z('na_i');
   let asPrim = Z('as_p'), naPrim = Z('na_p');
 
+  // Los kilos no servidos se calculan automáticamente según los faltantes y el gramaje.
+  let nsInf = [first, second, side].map((lista, i) => selectedDishes[i] === null ? 0 : naInf * lista[selectedDishes[i]][1] / 1000);
   let sInf = [ Z('s1_i'), Z('s2_i'), Z('s3_i') ];
+  let nsPrim = [first, second, side].map((lista, i) => selectedDishes[i] === null ? 0 : naPrim * lista[selectedDishes[i]][2] / 1000);
   let sPrim = [ Z('s1_p'), Z('s2_p'), Z('s3_p') ];
   let b = [ Z('b1'), Z('b2'), Z('b3') ];
   
@@ -812,15 +844,15 @@ $('go').onclick = () => {
     return;
   }
 
-  if (naInf > asInf || naPrim > asPrim || [...sInf, ...sPrim, ...b].some(x => x < 0)) {
+  if (naInf > asInf || naPrim > asPrim || [...nsInf, ...nsPrim, ...sInf, ...sPrim, ...b].some(x => x < 0)) {
     errText.textContent = 'Introduce valores válidos. Los faltantes no pueden superar a los asistentes y los valores no pueden ser negativos.';
     errContainer.classList.remove('hidden');
     return;
   }
   
-  card('c1', 'Primer plato', first, sInf[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0]);
-  card('c2', 'Segundo plato', second, sInf[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1]);
-  card('c3', 'Guarnición', side, sInf[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2]);
+  card('c1', 'Primer plato', first, nsInf[0], sInf[0], nsPrim[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0]);
+  card('c2', 'Segundo plato', second, nsInf[1], sInf[1], nsPrim[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1]);
+  card('c3', 'Guarnición', side, nsInf[2], sInf[2], nsPrim[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2]);
   
   $('out').classList.remove('hidden');
   $('out').classList.add('grid');
