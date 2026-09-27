@@ -93,6 +93,16 @@
 </script>
 
 <style>
+  :root { color-scheme: light; }
+  body { background: linear-gradient(155deg,#eff6ff 0%,#f8fafc 32%,#f0fdf4 100%); }
+  main > section { transition: box-shadow .2s ease, transform .2s ease; }
+  main > section:hover { box-shadow: 0 12px 30px rgba(15,23,42,.07); }
+  input:focus-visible, select:focus-visible, button:focus-visible { outline: 3px solid #38bdf8; outline-offset: 2px; }
+  #out > div { border-top: 4px solid #0284c7; }
+  #out > div:nth-child(2) { border-top-color: #6366f1; }
+  #out > div:nth-child(3) { border-top-color: #f59e0b; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
@@ -121,7 +131,6 @@
         <div>
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
             Calculadora de Aceptación de Menús
-            <span class="text-xs bg-amber-400/20 text-amber-200 border border-amber-400/30 font-semibold px-2.5 py-0.5 rounded-full uppercase tracking-wider">v3.0 Dual</span>
           </h1>
           <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro unificado de aceptabilidad (Infantil + Primaria) según norma IT6.5-23</p>
         </div>
@@ -153,7 +162,7 @@
         <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-700 bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 font-medium">
           <li><strong>Comensales:</strong> Anota los asistentes y faltantes de Infantil y Primaria al mismo tiempo.</li>
           <li><strong>Menú del día:</strong> Elige la fecha predefinida o busca los platos individualmente.</li>
-          <li><strong>Barquetas y Sobras:</strong> Introduce el número total de barquetas y separa el peso en kg de las sobras de Infantil y Primaria para cada plato.</li>
+          <li><strong>Barquetas y Sobras:</strong> Introduce las barquetas (dato informativo) y los kilos de sobras de los platos de Infantil y Primaria. Los kilos no servidos se calculan con los faltantes y el gramaje.</li>
           <li><strong>Calcular:</strong> Pulsa el botón verde para obtener los resultados desglosados por ciclo y el consolidado global.</li>
         </ol>
       </div>
@@ -283,7 +292,7 @@
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span id="g1" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
-        <span id="bq-info1" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barquet: —</span>
+        <span id="bq-info1" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta: —</span>
       </div>
     </div>
 
@@ -344,7 +353,7 @@
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span id="g2" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
-        <span id="bq-info2" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barquet: —</span>
+        <span id="bq-info2" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta: —</span>
       </div>
     </div>
 
@@ -405,7 +414,7 @@
       </div>
       <div class="flex items-center gap-2 flex-wrap">
         <span id="g3" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">Gramaje: —</span>
-        <span id="bq-info3" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barquet: —</span>
+        <span id="bq-info3" class="text-xs font-semibold px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Barqueta: —</span>
       </div>
     </div>
 
@@ -457,6 +466,10 @@
     </div>
   </section>
 
+  <div class="rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-900">
+    <strong><i class="fa-solid fa-circle-info mr-1"></i> Cálculo automático:</strong>
+    Kg totales = (asistentes + faltantes) × gramos por ración ÷ 1.000. NS = faltantes × gramos por ración ÷ 1.000. Porcentaje de residuo = (NS + sobras de platos) ÷ (kg totales − NS) × 100. Solo tienes que introducir los comensales, las sobras y seleccionar los platos; las barquetas son un dato informativo.
+  </div>
   <div class="flex flex-wrap gap-3 pt-2">
     <button id="go" class="flex-1 min-w-[220px] bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white font-semibold py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
       <i class="fa-solid fa-calculator"></i>
@@ -485,12 +498,13 @@
 <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
     <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
+    <p class="mt-2 text-[11px] text-slate-400">Versión 3.2 · Cálculo automático</p>
   </div>
 </footer>
 
 <script>
 const $=x=>document.getElementById(x);
-const N=x=>parseFloat($(x).value.trim().replace(',','.'));
+const N=x=>{const v=$(x).value.trim().replace(',','.'); return /^\d+(?:\.\d+)?$/.test(v)?Number(v):NaN};
 const Z=x=>$(x).value.trim()===''?0:N(x);
 const K=x=>x.toLocaleString('es-ES',{maximumFractionDigits:3})+' kg';
 const P=x=>x.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
@@ -707,88 +721,37 @@ if (presetEl) {
 }
 
 function buildCardHtml(title, dishName, gInf, gPrim, numBarq, racPerBarq, resInf, resPrim, resTot){
-  let totalRacBarq = numBarq * racPerBarq;
-
-  return `
-    <div class="space-y-3">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">${title}</span>
-        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full ${resTot.info.badge} flex items-center gap-1">
-          <i class="fa-solid ${resTot.info.icon}"></i> ${resTot.info.tag} (${P(resTot.pct)})
-        </span>
+  const totalRaciones = numBarq * racPerBarq;
+  function ciclo(nombre, res, color){
+    if (!res.hasComensales) return `<div class="text-xs text-slate-500">${nombre}: sin comensales registrados</div>`;
+    return `<div class="rounded-xl border ${color === 'sky' ? 'border-sky-200 bg-sky-50/60' : 'border-indigo-200 bg-indigo-50/60'} p-3 space-y-2">
+      <h4 class="font-bold text-sm text-slate-900">${nombre}</h4>
+      <div class="grid grid-cols-2 gap-x-3 gap-y-2 text-xs">
+        <span>Kg totales</span><strong class="text-right">${K(res.e)}</strong>
+        <span>Kg no servidos (NS)</span><strong class="text-right">${K(res.ns)}</strong>
+        <span>Kg sobras de platos (SP)</span><strong class="text-right">${K(res.sp)}</strong>
+        <span class="font-semibold border-t pt-2">% de residuo</span><strong class="text-right border-t pt-2">${P(res.pct)}</strong>
       </div>
-
-      <h3 class="text-sm font-bold text-slate-900 leading-snug">${dishName}</h3>
-      <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
-        <span>Inf: ${gInf}g | Prim: ${gPrim}g</span>
-        <span class="text-brand-700 font-semibold bg-brand-50 px-2 py-0.5 rounded">${racPerBarq} rac/barq.</span>
-      </div>
-
-      ${numBarq > 0 ? `
-      <div class="bg-brand-50/70 border border-brand-200/80 rounded-xl p-2.5 space-y-0.5 text-xs">
-        <div class="flex justify-between items-center text-brand-900 font-semibold">
-          <span><i class="fa-solid fa-box text-brand-600 mr-1"></i> Barquetas recibidas:</span>
-          <span>${numBarq} barq. (${totalRacBarq} rac. tot.)</span>
-        </div>
-      </div>
-      ` : ''}
-
-      <!-- Desglose por ciclos -->
-      <div class="space-y-3 pt-1 text-xs">
-        <!-- Infantil -->
-        ${resInf.hasComensales ? `
-        <div class="bg-sky-50/70 border border-sky-100 rounded-xl p-2.5 space-y-1">
-          <div class="flex justify-between items-center font-bold text-sky-900 border-b border-sky-200/50 pb-1.5">
-            <span class="flex items-center gap-1"><i class="fa-solid fa-child text-sky-600"></i> Infantil:</span>
-            <span class="text-xs px-2 py-0.5 rounded ${resInf.info.badge}">${resInf.info.tag} — ${P(resInf.pct)}</span>
-          </div>
-          <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600 pt-1">
-            <span>Elaborados (E): <strong class="text-slate-800">${K(resInf.e)}</strong></span>
-            <span>Servidos (E-NS): <strong class="text-slate-800">${K(resInf.servidos)}</strong></span>
-            <span>No Servidos (NS): <strong class="text-slate-800">${K(resInf.ns)}</strong></span>
-            <span>Sobras Platos (SP): <strong class="text-slate-800">${K(resInf.sp)}</strong></span>
-            <span class="col-span-2 pt-1 mt-1 border-t border-sky-200/60 font-semibold text-sky-800">Residuo (NS + SP): ${K(resInf.residuos)}</span>
-          </div>
-        </div>
-        ` : '<div class="text-[11px] text-slate-400 italic">Infantil: Sin comensales registrados</div>'}
-
-        <!-- Primaria -->
-        ${resPrim.hasComensales ? `
-        <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-2.5 space-y-1">
-          <div class="flex justify-between items-center font-bold text-indigo-900 border-b border-indigo-200/50 pb-1.5">
-            <span class="flex items-center gap-1"><i class="fa-solid fa-graduation-cap text-indigo-600"></i> Primaria:</span>
-            <span class="text-xs px-2 py-0.5 rounded ${resPrim.info.badge}">${resPrim.info.tag} — ${P(resPrim.pct)}</span>
-          </div>
-          <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600 pt-1">
-            <span>Elaborados (E): <strong class="text-slate-800">${K(resPrim.e)}</strong></span>
-            <span>Servidos (E-NS): <strong class="text-slate-800">${K(resPrim.servidos)}</strong></span>
-            <span>No Servidos (NS): <strong class="text-slate-800">${K(resPrim.ns)}</strong></span>
-            <span>Sobras Platos (SP): <strong class="text-slate-800">${K(resPrim.sp)}</strong></span>
-            <span class="col-span-2 pt-1 mt-1 border-t border-indigo-200/60 font-semibold text-indigo-800">Residuo (NS + SP): ${K(resPrim.residuos)}</span>
-          </div>
-        </div>
-        ` : '<div class="text-[11px] text-slate-400 italic">Primaria: Sin comensales registrados</div>'}
-
-        <!-- Global Consolidado -->
-        <div class="pt-2 border-t border-slate-200 space-y-1">
-          <div class="flex justify-between font-bold text-slate-900">
-            <span>Total Centro % Residuo:</span>
-            <span class="text-sm ${resTot.pct > 50 ? 'text-rose-600' : 'text-emerald-600'}">${P(resTot.pct)}</span>
-          </div>
-          <div class="p-2 rounded-xl ${resTot.info.bg} border ${resTot.info.border} text-xs font-semibold ${resTot.info.textCol} text-center">
-            Clasificación Global: ${resTot.info.text}
-          </div>
-        </div>
-      </div>
+      <div class="text-xs font-bold rounded-lg px-2 py-1.5 ${res.info.bg} ${res.info.textCol}">${res.info.tag} — ${res.info.text}</div>
+    </div>`;
+  }
+  return `<div class="space-y-3">
+    <div class="border-b border-slate-200 pb-2"><span class="text-xs font-bold uppercase text-slate-500">${title}</span><h3 class="font-bold text-slate-900 mt-1">${dishName}</h3></div>
+    <div class="bg-brand-50 border border-brand-200 rounded-xl p-3 text-xs space-y-1">
+      <div class="flex justify-between gap-2"><span>Raciones por barqueta</span><strong>${racPerBarq}</strong></div>
+      <div class="flex justify-between gap-2"><span>Barquetas</span><strong>${numBarq}</strong></div>
+      <div class="flex justify-between gap-2"><span>Raciones en total</span><strong>${totalRaciones}</strong></div>
     </div>
-  `;
+    ${ciclo('Infantil',resInf,'sky')}
+    ${ciclo('Primaria',resPrim,'indigo')}
+    <div class="border-t border-slate-200 pt-3 flex justify-between items-center gap-2 text-sm font-bold"><span>Resultado conjunto</span><span>${P(resTot.pct)} · ${resTot.info.tag}</span></div>
+  </div>`;
 }
 
-function calcGroup(as, na, g, ns, sp){
-  if (as <= 0) return { hasComensales: false, e: 0, ns: 0, sp: 0, residuos: 0, servidos: 0, pct: 0, info: catInfo(0) };
+function calcGroup(as, na, g, ns, sp, e){
+  if (as + na <= 0) return { hasComensales: false, e: 0, ns: 0, sp: 0, residuos: 0, servidos: 0, pct: 0, info: catInfo(0) };
   
-  // NS calculado a partir de faltantes y gramaje; E = raciones previstas por gramaje.
-  let e = (as + na) * g / 1000;
+  // E y NS se calculan automáticamente a partir de comensales y gramaje.
   let servidos = e - ns;
   let residuos = ns + sp;
   let pct = servidos > 0 ? (residuos / servidos) * 100 : 0;
@@ -796,7 +759,7 @@ function calcGroup(as, na, g, ns, sp){
   return { hasComensales: true, e, ns, sp, residuos, servidos, pct, info: catInfo(pct) };
 }
 
-function card(cardId, title, arr, nsInf, spInf, nsPrim, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq){
+function card(cardId, title, arr, nsInf, spInf, nsPrim, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq, eInf, ePrim){
   if (selIdx === null || selIdx === undefined || !arr[selIdx]) {
     $(cardId).innerHTML = buildEmptyCardHtml(title);
     return;
@@ -805,11 +768,12 @@ function card(cardId, title, arr, nsInf, spInf, nsPrim, spPrim, asInf, naInf, as
   let gPrim = arr[selIdx][2];
   let racPerBarq = arr[selIdx][3];
 
-  let resInf = calcGroup(asInf, naInf, gInf, nsInf, spInf);
-  let resPrim = calcGroup(asPrim, naPrim, gPrim, nsPrim, spPrim);
+  let resInf = calcGroup(asInf, naInf, gInf, nsInf, spInf, eInf);
+  let resPrim = calcGroup(asPrim, naPrim, gPrim, nsPrim, spPrim, ePrim);
 
   let totServidos = resInf.servidos + resPrim.servidos;
   let totResiduos = resInf.residuos + resPrim.residuos;
+  
   let totPct = totServidos > 0 ? (totResiduos / totServidos) * 100 : 0;
   let resTot = { pct: totPct, info: catInfo(totPct) };
 
@@ -826,6 +790,8 @@ $('go').onclick = () => {
   let nsPrim = [first, second, side].map((lista, i) => selectedDishes[i] === null ? 0 : naPrim * lista[selectedDishes[i]][2] / 1000);
   let sPrim = [ Z('s1_p'), Z('s2_p'), Z('s3_p') ];
   let b = [ Z('b1'), Z('b2'), Z('b3') ];
+  let eInf = [first, second, side].map((lista, i) => selectedDishes[i] === null ? 0 : (asInf + naInf) * lista[selectedDishes[i]][1] / 1000);
+  let ePrim = [first, second, side].map((lista, i) => selectedDishes[i] === null ? 0 : (asPrim + naPrim) * lista[selectedDishes[i]][2] / 1000);
   
   const errContainer = $('err');
   const errText = $('err-text');
@@ -844,15 +810,33 @@ $('go').onclick = () => {
     return;
   }
 
-  if (naInf > asInf || naPrim > asPrim || [...nsInf, ...nsPrim, ...sInf, ...sPrim, ...b].some(x => x < 0)) {
-    errText.textContent = 'Introduce valores válidos. Los faltantes no pueden superar a los asistentes y los valores no pueden ser negativos.';
+  if ([asInf, naInf, asPrim, naPrim, ...sInf, ...sPrim, ...eInf, ...ePrim, ...b].some(x => !Number.isFinite(x) || x < 0) || [asInf, naInf, asPrim, naPrim, ...b].some(x => !Number.isInteger(x))) {
+    errText.textContent = 'Introduce números válidos y no negativos. Los comensales y las barquetas deben ser números enteros.';
     errContainer.classList.remove('hidden');
     return;
   }
   
-  card('c1', 'Primer plato', first, nsInf[0], sInf[0], nsPrim[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0]);
-  card('c2', 'Segundo plato', second, nsInf[1], sInf[1], nsPrim[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1]);
-  card('c3', 'Guarnición', side, nsInf[2], sInf[2], nsPrim[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2]);
+  const listas = [first, second, side];
+  for (let i = 0; i < 3; i++) {
+    if (selectedDishes[i] === null) continue;
+    const plato = listas[i][selectedDishes[i]];
+    // Un grupo con cero asistentes puede tener faltantes y kg no servidos,
+    // pero no puede registrar sobras de platos. No se exige un denominador
+    // positivo a un grupo sin asistentes.
+    const maxSobrasInf = asInf * plato[1] / 1000;
+    const maxSobrasPrim = asPrim * plato[2] / 1000;
+    if (sInf[i] > maxSobrasInf + 1e-9 || sPrim[i] > maxSobrasPrim + 1e-9) {
+      const ciclo = sInf[i] > maxSobrasInf + 1e-9 ? 'Infantil' : 'Primaria';
+      const maximo = ciclo === 'Infantil' ? maxSobrasInf : maxSobrasPrim;
+      errText.textContent = `Revisa las sobras de ${['primer plato', 'segundo plato', 'guarnición'][i]} (${ciclo}). Con los asistentes y el gramaje indicados, el máximo es ${maximo.toLocaleString('es-ES', {maximumFractionDigits:3})} kg. Si has pesado más, comprueba los comensales, el gramaje o el peso de las sobras.`;
+      errContainer.classList.remove('hidden');
+      return;
+    }
+  }
+
+  card('c1', 'Primer plato', first, nsInf[0], sInf[0], nsPrim[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0], eInf[0], ePrim[0]);
+  card('c2', 'Segundo plato', second, nsInf[1], sInf[1], nsPrim[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1], eInf[1], ePrim[1]);
+  card('c3', 'Guarnición', side, nsInf[2], sInf[2], nsPrim[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2], eInf[2], ePrim[2]);
   
   $('out').classList.remove('hidden');
   $('out').classList.add('grid');
