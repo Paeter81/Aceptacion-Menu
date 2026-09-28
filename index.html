@@ -117,19 +117,39 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
   }
+
+  /* Actualización visual: conserva los identificadores y la lógica de cálculo. */
+  :root { --soft-shadow: 0 12px 36px rgba(15, 23, 42, .075); }
+  body { background: radial-gradient(ellipse at 5% 0%,#dbeafe 0,transparent 35%),radial-gradient(ellipse at 95% 24%,#d1fae5 0,transparent 32%),#f8fafc; }
+  header { position:relative; overflow:hidden; }
+  header::after { content:"";position:absolute;width:300px;height:300px;border:1px solid rgba(255,255,255,.16);border-radius:50%;right:-80px;top:-180px;box-shadow:0 0 0 55px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.025);pointer-events:none; }
+  main > section:not(#out), main > details { border-radius:22px;box-shadow:0 4px 22px rgba(15,23,42,.045);border:1px solid rgba(203,213,225,.75); }
+  main > section:not(#out):hover,main > details:hover {box-shadow:var(--soft-shadow);}
+  main input,main select {transition:border-color .18s,box-shadow .18s,background .18s;}
+  main input:focus,main select:focus {background:#fff;box-shadow:0 0 0 4px rgba(14,165,233,.12);}
+  #go {background:linear-gradient(110deg,#0369a1,#0284c7);box-shadow:0 9px 22px rgba(3,105,161,.23);}
+  #go:hover {filter:brightness(1.08);transform:translateY(-1px);}
+  #out > div {border-radius:24px;box-shadow:var(--soft-shadow);border-top-width:5px;padding:clamp(18px,3vw,28px);}
+  #out article {border-radius:18px;background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.045);transition:transform .18s,box-shadow .18s;}
+  #out article:hover {transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.09);}
+  #out article strong {font-variant-numeric:tabular-nums;}
+  #out article .border-t strong {color:#0369a1;}
+  #results-primaria article .border-t strong {color:#4f46e5;}
+  @media(max-width:640px){main{padding-top:18px!important;}main > section:not(#out){padding:18px!important;}#out article:hover{transform:none;}}
+  @media(prefers-reduced-motion:reduce){#go:hover,#out article:hover{transform:none;}}
 </style>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 min-h-full flex flex-col antialiased selection:bg-brand-500 selection:text-white">
 
-<header class="bg-gradient-to-r from-brand-900 via-brand-800 to-brand-700 text-white shadow-lg border-b border-brand-800/40">
+<header class="bg-gradient-to-r from-slate-900 via-brand-800 to-sky-700 text-white shadow-lg border-b border-brand-800/40">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+        <div class="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/25 shadow-inner">
           <i class="fa-solid fa-utensils text-2xl text-amber-300"></i>
         </div>
         <div>
-          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <h1 class="text-xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
             Calculadora de Aceptación de Menús
           </h1>
           <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro unificado de aceptabilidad (Infantil + Primaria) según norma IT6.5-23</p>
@@ -503,7 +523,7 @@
 <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
     <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
-    <p class="mt-2 text-[11px] text-slate-400">Versión 3.2 · Cálculo automático</p>
+    <p class="mt-2 text-[11px] text-slate-400">Versión 3.3 · Diseño renovado</p>
   </div>
 </footer>
 
