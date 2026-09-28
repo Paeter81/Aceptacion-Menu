@@ -487,10 +487,15 @@
     <span id="err-text"></span>
   </div>
 
-  <section id="out" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-    <div id="c1" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-md flex flex-col justify-between space-y-4"></div>
-    <div id="c2" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-md flex flex-col justify-between space-y-4"></div>
-    <div id="c3" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-md flex flex-col justify-between space-y-4"></div>
+  <section id="out" class="hidden space-y-6 pt-4">
+    <div class="bg-white rounded-2xl p-5 border border-sky-200 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-sky-800 flex items-center gap-2"><i class="fa-solid fa-child"></i> Infantil</h2>
+      <div id="results-infantil" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+    <div class="bg-white rounded-2xl p-5 border border-indigo-200 shadow-sm space-y-4">
+      <h2 class="text-xl font-bold text-indigo-800 flex items-center gap-2"><i class="fa-solid fa-graduation-cap"></i> Primaria</h2>
+      <div id="results-primaria" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
   </section>
 
 </main>
@@ -720,32 +725,24 @@ if (presetEl) {
   });
 }
 
-function buildCardHtml(title, dishName, gInf, gPrim, numBarq, racPerBarq, resInf, resPrim, resTot){
-  const totalRaciones = numBarq * racPerBarq;
-  function ciclo(nombre, res, color){
-    if (!res.hasComensales) return `<div class="text-xs text-slate-500">${nombre}: sin comensales registrados</div>`;
-    return `<div class="rounded-xl border ${color === 'sky' ? 'border-sky-200 bg-sky-50/60' : 'border-indigo-200 bg-indigo-50/60'} p-3 space-y-2">
-      <h4 class="font-bold text-sm text-slate-900">${nombre}</h4>
-      <div class="grid grid-cols-2 gap-x-3 gap-y-2 text-xs">
+function buildCycleCard(title, dishName, numBarq, racPerBarq, res, color){
+  const colorClass = color === 'sky' ? 'border-sky-200 bg-sky-50/30' : 'border-indigo-200 bg-indigo-50/30';
+  const body = !res.hasComensales
+    ? '<p class="text-sm text-slate-500">Sin comensales registrados.</p>'
+    : `<div class="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
         <span>Kg totales</span><strong class="text-right">${K(res.e)}</strong>
         <span>Kg no servidos (NS)</span><strong class="text-right">${K(res.ns)}</strong>
         <span>Kg sobras de platos (SP)</span><strong class="text-right">${K(res.sp)}</strong>
         <span class="font-semibold border-t pt-2">% de residuo</span><strong class="text-right border-t pt-2">${P(res.pct)}</strong>
-      </div>
-      <div class="text-xs font-bold rounded-lg px-2 py-1.5 ${res.info.bg} ${res.info.textCol}">${res.info.tag} — ${res.info.text}</div>
-    </div>`;
-  }
-  return `<div class="space-y-3">
-    <div class="border-b border-slate-200 pb-2"><span class="text-xs font-bold uppercase text-slate-500">${title}</span><h3 class="font-bold text-slate-900 mt-1">${dishName}</h3></div>
-    <div class="bg-brand-50 border border-brand-200 rounded-xl p-3 text-xs space-y-1">
-      <div class="flex justify-between gap-2"><span>Raciones por barqueta</span><strong>${racPerBarq}</strong></div>
-      <div class="flex justify-between gap-2"><span>Barquetas</span><strong>${numBarq}</strong></div>
-      <div class="flex justify-between gap-2"><span>Raciones en total</span><strong>${totalRaciones}</strong></div>
-    </div>
-    ${ciclo('Infantil',resInf,'sky')}
-    ${ciclo('Primaria',resPrim,'indigo')}
-    <div class="border-t border-slate-200 pt-3 flex justify-between items-center gap-2 text-sm font-bold"><span>Resultado conjunto</span><span>${P(resTot.pct)} · ${resTot.info.tag}</span></div>
-  </div>`;
+        <span>Clasificación</span><strong class="text-right">${res.info.tag}</strong>
+      </div>`;
+  return `<article class="rounded-xl border ${colorClass} p-4 space-y-3">
+    <div class="border-b border-slate-200 pb-2"><h3 class="font-bold text-slate-900">${title}</h3><p class="text-sm text-slate-600 mt-1">${dishName}</p></div>
+    ${body}
+    <div class="border-t border-slate-200 pt-2 text-xs flex justify-between gap-2"><span>Raciones por barqueta</span><strong>${racPerBarq}</strong></div>
+    <div class="text-xs flex justify-between gap-2"><span>Barquetas</span><strong>${numBarq}</strong></div>
+    <div class="text-xs flex justify-between gap-2"><span>Raciones en total</span><strong>${numBarq * racPerBarq}</strong></div>
+  </article>`;
 }
 
 function calcGroup(as, na, g, ns, sp, e){
@@ -759,25 +756,13 @@ function calcGroup(as, na, g, ns, sp, e){
   return { hasComensales: true, e, ns, sp, residuos, servidos, pct, info: catInfo(pct) };
 }
 
-function card(cardId, title, arr, nsInf, spInf, nsPrim, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq, eInf, ePrim){
-  if (selIdx === null || selIdx === undefined || !arr[selIdx]) {
-    $(cardId).innerHTML = buildEmptyCardHtml(title);
-    return;
-  }
-  let gInf = arr[selIdx][1];
-  let gPrim = arr[selIdx][2];
-  let racPerBarq = arr[selIdx][3];
-
-  let resInf = calcGroup(asInf, naInf, gInf, nsInf, spInf, eInf);
-  let resPrim = calcGroup(asPrim, naPrim, gPrim, nsPrim, spPrim, ePrim);
-
-  let totServidos = resInf.servidos + resPrim.servidos;
-  let totResiduos = resInf.residuos + resPrim.residuos;
-  
-  let totPct = totServidos > 0 ? (totResiduos / totServidos) * 100 : 0;
-  let resTot = { pct: totPct, info: catInfo(totPct) };
-
-  $(cardId).innerHTML = buildCardHtml(title, arr[selIdx][0], gInf, gPrim, numBarq, racPerBarq, resInf, resPrim, resTot);
+function card(title, arr, nsInf, spInf, nsPrim, spPrim, asInf, naInf, asPrim, naPrim, selIdx, numBarq, eInf, ePrim){
+  if (selIdx === null || selIdx === undefined || !arr[selIdx]) return;
+  const plato = arr[selIdx];
+  const resInf = calcGroup(asInf, naInf, plato[1], nsInf, spInf, eInf);
+  const resPrim = calcGroup(asPrim, naPrim, plato[2], nsPrim, spPrim, ePrim);
+  $('results-infantil').insertAdjacentHTML('beforeend', buildCycleCard(title, plato[0], numBarq, plato[3], resInf, 'sky'));
+  $('results-primaria').insertAdjacentHTML('beforeend', buildCycleCard(title, plato[0], numBarq, plato[3], resPrim, 'indigo'));
 }
 
 $('go').onclick = () => {
@@ -834,12 +819,14 @@ $('go').onclick = () => {
     }
   }
 
-  card('c1', 'Primer plato', first, nsInf[0], sInf[0], nsPrim[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0], eInf[0], ePrim[0]);
-  card('c2', 'Segundo plato', second, nsInf[1], sInf[1], nsPrim[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1], eInf[1], ePrim[1]);
-  card('c3', 'Guarnición', side, nsInf[2], sInf[2], nsPrim[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2], eInf[2], ePrim[2]);
+  $('results-infantil').innerHTML = '';
+  $('results-primaria').innerHTML = '';
+  card( 'Primer plato', first, nsInf[0], sInf[0], nsPrim[0], sPrim[0], asInf, naInf, asPrim, naPrim, selectedDishes[0], b[0], eInf[0], ePrim[0]);
+  card( 'Segundo plato', second, nsInf[1], sInf[1], nsPrim[1], sPrim[1], asInf, naInf, asPrim, naPrim, selectedDishes[1], b[1], eInf[1], ePrim[1]);
+  card( 'Guarnición', side, nsInf[2], sInf[2], nsPrim[2], sPrim[2], asInf, naInf, asPrim, naPrim, selectedDishes[2], b[2], eInf[2], ePrim[2]);
   
   $('out').classList.remove('hidden');
-  $('out').classList.add('grid');
+
 };
 
 $('clear').onclick = () => {
