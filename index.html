@@ -172,6 +172,18 @@
       </span>
     </summary>
     <div class="px-5 pb-5 border-t border-slate-100 pt-4 text-sm text-slate-600 leading-relaxed space-y-4">
+
+      <div class="rounded-xl border border-sky-200 bg-sky-50/80 p-3.5 text-xs sm:text-sm text-sky-900 shadow-sm">
+        <div class="flex items-start gap-2.5">
+          <i class="fa-solid fa-calculator text-sky-600 mt-0.5"></i>
+          <div>
+            <strong class="block text-sky-800 mb-1">Cálculo automático</strong>
+            <p>Kg totales = (asistentes + faltantes) × gramos por ración ÷ 1.000. NS = faltantes × gramos por ración ÷ 1.000. % de residuo = (NS + sobras de platos) ÷ (kg totales − NS) × 100.</p>
+            <p class="mt-1 text-sky-700">Solo tienes que introducir los comensales, las sobras y seleccionar los platos. Las barquetas son un dato informativo.</p>
+          </div>
+        </div>
+      </div>
+
       
       <!-- Pasos sencillos de uso -->
       <div class="space-y-2">
@@ -316,49 +328,37 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <!-- Fila 1: Plato y Barquetas -->
-      <div class="md:col-span-9 relative">
+    <div class="grid grid-cols-12 gap-3 sm:gap-4">
+      <!-- Plato -->
+      <div class="col-span-12 relative">
         <label for="q1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
           <input id="q1" type="text" placeholder="Escribe para buscar (ej. arroz, lentejas, crema...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <i class="fa-solid fa-magnifying-glass text-sm"></i>
-          </div>
-          <button id="clr1" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition">
-            <i class="fa-solid fa-circle-xmark text-sm"></i>
-          </button>
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-magnifying-glass text-sm"></i></div>
+          <button id="clr1" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition"><i class="fa-solid fa-circle-xmark text-sm"></i></button>
         </div>
         <div id="drop1" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div class="md:col-span-3">
-        <label for="b1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
+      <!-- Tres campos en una sola línea incluso en móvil -->
+      <div class="col-span-4 min-w-0 rounded-xl bg-slate-50/80 p-2.5 sm:p-3 border border-slate-200">
+        <label for="b1" class="block text-[10px] sm:text-[11px] font-semibold text-slate-700 uppercase tracking-wide mb-1.5 leading-tight">Nº Barquetas</label>
+        <input id="b1" type="text" inputmode="decimal" placeholder="Ej.: 5" class="w-full min-w-0 bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-2 sm:p-2.5 transition shadow-sm font-medium placeholder:text-slate-400">
+      </div>
+
+      <div class="col-span-4 min-w-0 rounded-xl bg-sky-50/60 p-2.5 sm:p-3 border border-sky-100">
+        <label for="s1_i" class="block text-[10px] sm:text-[11px] font-semibold text-sky-700 uppercase tracking-wide mb-1.5 leading-tight">Kg sobras Infantil</label>
         <div class="relative">
-          <input id="b1" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">barq.</span>
+          <input id="s1_i" type="text" inputmode="decimal" placeholder="Ej.: 0,4" class="w-full min-w-0 bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2 sm:p-2.5 pr-7 transition">
+          <span class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[9px] sm:text-[11px] text-sky-500 font-bold">KG</span>
         </div>
       </div>
 
-      <!-- Fila 2: Inputs Infantil -->
-      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-sky-50/40 p-3 rounded-xl border border-sky-100">
-        <div>
-          <label for="s1_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Infantil</label>
-          <div class="relative">
-            <input id="s1_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2.5 pr-10 transition">
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-sky-500 font-bold">KG</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fila 3: Inputs Primaria -->
-      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100">
-        <div>
-          <label for="s1_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Primaria</label>
-          <div class="relative">
-            <input id="s1_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2.5 pr-10 transition">
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-indigo-500 font-bold">KG</span>
-          </div>
+      <div class="col-span-4 min-w-0 rounded-xl bg-indigo-50/60 p-2.5 sm:p-3 border border-indigo-100">
+        <label for="s1_p" class="block text-[10px] sm:text-[11px] font-semibold text-indigo-700 uppercase tracking-wide mb-1.5 leading-tight">Kg sobras Primaria</label>
+        <div class="relative">
+          <input id="s1_p" type="text" inputmode="decimal" placeholder="Ej.: 0,8" class="w-full min-w-0 bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2 sm:p-2.5 pr-7 transition">
+          <span class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[9px] sm:text-[11px] text-indigo-500 font-bold">KG</span>
         </div>
       </div>
     </div>
@@ -377,49 +377,37 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <!-- Fila 1: Plato y Barquetas -->
-      <div class="md:col-span-9 relative">
+    <div class="grid grid-cols-12 gap-3 sm:gap-4">
+      <!-- Plato -->
+      <div class="col-span-12 relative">
         <label for="q2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
           <input id="q2" type="text" placeholder="Escribe para buscar (ej. pollo, merluza, tortilla...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <i class="fa-solid fa-magnifying-glass text-sm"></i>
-          </div>
-          <button id="clr2" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition">
-            <i class="fa-solid fa-circle-xmark text-sm"></i>
-          </button>
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-magnifying-glass text-sm"></i></div>
+          <button id="clr2" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition"><i class="fa-solid fa-circle-xmark text-sm"></i></button>
         </div>
         <div id="drop2" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div class="md:col-span-3">
-        <label for="b2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
+      <!-- Tres campos en una sola línea incluso en móvil -->
+      <div class="col-span-4 min-w-0 rounded-xl bg-slate-50/80 p-2.5 sm:p-3 border border-slate-200">
+        <label for="b2" class="block text-[10px] sm:text-[11px] font-semibold text-slate-700 uppercase tracking-wide mb-1.5 leading-tight">Nº Barquetas</label>
+        <input id="b2" type="text" inputmode="decimal" placeholder="Ej.: 5" class="w-full min-w-0 bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-2 sm:p-2.5 transition shadow-sm font-medium placeholder:text-slate-400">
+      </div>
+
+      <div class="col-span-4 min-w-0 rounded-xl bg-sky-50/60 p-2.5 sm:p-3 border border-sky-100">
+        <label for="s2_i" class="block text-[10px] sm:text-[11px] font-semibold text-sky-700 uppercase tracking-wide mb-1.5 leading-tight">Kg sobras Infantil</label>
         <div class="relative">
-          <input id="b2" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">barq.</span>
+          <input id="s2_i" type="text" inputmode="decimal" placeholder="Ej.: 0,4" class="w-full min-w-0 bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2 sm:p-2.5 pr-7 transition">
+          <span class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[9px] sm:text-[11px] text-sky-500 font-bold">KG</span>
         </div>
       </div>
 
-      <!-- Fila 2: Inputs Infantil -->
-      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-sky-50/40 p-3 rounded-xl border border-sky-100">
-        <div>
-          <label for="s2_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Infantil</label>
-          <div class="relative">
-            <input id="s2_i" type="text" placeholder="Ej.: 0,2" class="w-full bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2.5 pr-10 transition">
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-sky-500 font-bold">KG</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fila 3: Inputs Primaria -->
-      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100">
-        <div>
-          <label for="s2_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Primaria</label>
-          <div class="relative">
-            <input id="s2_p" type="text" placeholder="Ej.: 0,5" class="w-full bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2.5 pr-10 transition">
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-indigo-500 font-bold">KG</span>
-          </div>
+      <div class="col-span-4 min-w-0 rounded-xl bg-indigo-50/60 p-2.5 sm:p-3 border border-indigo-100">
+        <label for="s2_p" class="block text-[10px] sm:text-[11px] font-semibold text-indigo-700 uppercase tracking-wide mb-1.5 leading-tight">Kg sobras Primaria</label>
+        <div class="relative">
+          <input id="s2_p" type="text" inputmode="decimal" placeholder="Ej.: 0,8" class="w-full min-w-0 bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2 sm:p-2.5 pr-7 transition">
+          <span class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[9px] sm:text-[11px] text-indigo-500 font-bold">KG</span>
         </div>
       </div>
     </div>
@@ -438,58 +426,41 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
-      <!-- Fila 1: Plato y Barquetas -->
-      <div class="md:col-span-9 relative">
-        <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Guarnición</label>
+    <div class="grid grid-cols-12 gap-3 sm:gap-4">
+      <!-- Plato -->
+      <div class="col-span-12 relative">
+        <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Buscar o Seleccionar Plato</label>
         <div class="relative">
-          <input id="q3" type="text" placeholder="Escribe para buscar (ej. patatas, arroz, ensalada...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-            <i class="fa-solid fa-magnifying-glass text-sm"></i>
-          </div>
-          <button id="clr3" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition">
-            <i class="fa-solid fa-circle-xmark text-sm"></i>
-          </button>
+          <input id="q3" type="text" placeholder="Escribe para buscar (ej. ensalada, patatas, arroz...)" autocomplete="off" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pl-10 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-magnifying-glass text-sm"></i></div>
+          <button id="clr3" type="button" aria-label="Borrar búsqueda" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 transition"><i class="fa-solid fa-circle-xmark text-sm"></i></button>
         </div>
         <div id="drop3" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar divide-y divide-slate-100"></div>
       </div>
 
-      <div class="md:col-span-3">
-        <label for="b3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Nº Barquetas</label>
+      <!-- Tres campos en una sola línea incluso en móvil -->
+      <div class="col-span-4 min-w-0 rounded-xl bg-slate-50/80 p-2.5 sm:p-3 border border-slate-200">
+        <label for="b3" class="block text-[10px] sm:text-[11px] font-semibold text-slate-700 uppercase tracking-wide mb-1.5 leading-tight">Nº Barquetas</label>
+        <input id="b3" type="text" inputmode="decimal" placeholder="Ej.: 5" class="w-full min-w-0 bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-2 sm:p-2.5 transition shadow-sm font-medium placeholder:text-slate-400">
+      </div>
+
+      <div class="col-span-4 min-w-0 rounded-xl bg-sky-50/60 p-2.5 sm:p-3 border border-sky-100">
+        <label for="s3_i" class="block text-[10px] sm:text-[11px] font-semibold text-sky-700 uppercase tracking-wide mb-1.5 leading-tight">Kg sobras Infantil</label>
         <div class="relative">
-          <input id="b3" type="text" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-12 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-xs text-slate-400 font-semibold">barq.</span>
+          <input id="s3_i" type="text" inputmode="decimal" placeholder="Ej.: 0,4" class="w-full min-w-0 bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2 sm:p-2.5 pr-7 transition">
+          <span class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[9px] sm:text-[11px] text-sky-500 font-bold">KG</span>
         </div>
       </div>
 
-      <!-- Fila 2: Inputs Infantil -->
-      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-sky-50/40 p-3 rounded-xl border border-sky-100">
-        <div>
-          <label for="s3_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Infantil</label>
-          <div class="relative">
-            <input id="s3_i" type="text" placeholder="Ej.: 0,2" class="w-full bg-white border border-sky-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 p-2.5 pr-10 transition">
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-sky-500 font-bold">KG</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fila 3: Inputs Primaria -->
-      <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 gap-4 bg-indigo-50/40 p-3 rounded-xl border border-indigo-100">
-        <div>
-          <label for="s3_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-1.5">Kg Sobras Platos (SP) - Primaria</label>
-          <div class="relative">
-            <input id="s3_p" type="text" placeholder="Ej.: 0,3" class="w-full bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2.5 pr-10 transition">
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[11px] text-indigo-500 font-bold">KG</span>
-          </div>
+      <div class="col-span-4 min-w-0 rounded-xl bg-indigo-50/60 p-2.5 sm:p-3 border border-indigo-100">
+        <label for="s3_p" class="block text-[10px] sm:text-[11px] font-semibold text-indigo-700 uppercase tracking-wide mb-1.5 leading-tight">Kg sobras Primaria</label>
+        <div class="relative">
+          <input id="s3_p" type="text" inputmode="decimal" placeholder="Ej.: 0,8" class="w-full min-w-0 bg-white border border-indigo-200 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 p-2 sm:p-2.5 pr-7 transition">
+          <span class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[9px] sm:text-[11px] text-indigo-500 font-bold">KG</span>
         </div>
       </div>
     </div>
   </section>
-
-  <div class="rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-900">
-    <strong><i class="fa-solid fa-circle-info mr-1"></i> Cálculo automático:</strong>
-    Kg totales = (asistentes + faltantes) × gramos por ración ÷ 1.000. NS = faltantes × gramos por ración ÷ 1.000. Porcentaje de residuo = (NS + sobras de platos) ÷ (kg totales − NS) × 100. Solo tienes que introducir los comensales, las sobras y seleccionar los platos; las barquetas son un dato informativo.
-  </div>
   <div class="flex flex-wrap gap-3 pt-2">
     <button id="go" class="flex-1 min-w-[220px] bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white font-semibold py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
       <i class="fa-solid fa-calculator"></i>
@@ -500,6 +471,19 @@
       <i class="fa-solid fa-rotate-left"></i>
       <span>Limpiar todo</span>
     </button>
+  </div>
+
+  <div id="clear-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/50 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div><h3 class="font-bold text-slate-900">¿Limpiar todos los datos?</h3><p class="text-xs text-slate-500 mt-0.5">Se borrarán los datos introducidos y los resultados.</p></div>
+      </div>
+      <div class="p-5 flex flex-col-reverse sm:flex-row sm:justify-end gap-2">
+        <button id="cancel-clear" type="button" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-5 rounded-xl transition">Cancelar</button>
+        <button id="confirm-clear" type="button" class="w-full sm:w-auto bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 px-5 rounded-xl transition">Sí, limpiar todo</button>
+      </div>
+    </div>
   </div>
 
   <div id="err" class="hidden bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-2">
@@ -857,7 +841,11 @@ $('go').onclick = () => {
 
 };
 
-$('clear').onclick = () => {
+const clearModal = $('clear-modal');
+const closeClearModal = () => { clearModal.classList.add('hidden'); clearModal.classList.remove('flex'); };
+$('clear').onclick = () => { clearModal.classList.remove('hidden'); clearModal.classList.add('flex'); };
+$('cancel-clear').onclick = closeClearModal;
+$('confirm-clear').onclick = () => {
   ['as_i','na_i','as_p','na_p','s1_i','s1_p','s2_i','s2_p','s3_i','s3_p','b1','b2','b3','q1','q2','q3','preset-menu'].forEach(x => {
     let el = $(x);
     if (el) el.value = '';
@@ -868,7 +856,10 @@ $('clear').onclick = () => {
   $('out').classList.add('hidden');
   $('err').classList.add('hidden');
   grams();
+  closeClearModal();
 };
+clearModal.addEventListener('click', e => { if (e.target === clearModal) closeClearModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !clearModal.classList.contains('hidden')) closeClearModal(); });
 </script>
 </body>
 </html>
