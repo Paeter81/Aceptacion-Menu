@@ -114,6 +114,7 @@
     .calendar-mobile { display:block; }
     #month-select { flex:1; min-width:0; width:100%; text-align:center; }
     #prev-month, #next-month { flex:0 0 42px; }
+    #week-select { flex:0 1 170px; width:170px; max-width:170px; min-width:0; text-align:center; padding-left:8px; padding-right:8px; }
   }
 
     .menu-week-day{min-height:132px;}
@@ -228,7 +229,7 @@
             <i class="fa-solid fa-chevron-left"></i>
           </button>
           <div class="flex items-center gap-2 min-w-0">
-            <select id="week-select" class="bg-white border border-slate-300 text-slate-800 font-bold text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500"></select>
+            <select id="week-select" class="w-44 max-w-[11rem] bg-white border border-slate-300 text-slate-800 font-bold text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500"></select>
           </div>
           <button id="next-week" type="button" class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition shadow-sm" aria-label="Semana siguiente">
             <i class="fa-solid fa-chevron-right"></i>
@@ -715,7 +716,13 @@ let currentWeekIndex=findInitialWeek();
 function renderCalendar(){
   const host=$('menu-calendar'); const select=$('week-select');
   if(!host||!select||!availableWeeks.length) return;
-  select.innerHTML=availableWeeks.map((w,i)=>`<option value="${i}">${weekLabel(w)}</option>`).join('');
+  select.innerHTML=availableWeeks.map((w,i)=>{
+    const first=dateFromISO(w.items[0].date), last=dateFromISO(w.items[w.items.length-1].date);
+    const shortFirst=`${first.getUTCDate()} ${monthNames[first.getUTCMonth()].slice(0,3)}`;
+    const shortLast=`${last.getUTCDate()} ${monthNames[last.getUTCMonth()].slice(0,3)}`;
+    const shortLabel=first.getUTCMonth()===last.getUTCMonth() ? `${first.getUTCDate()}–${last.getUTCDate()} ${monthNames[first.getUTCMonth()].slice(0,3)}` : `${shortFirst}–${shortLast}`;
+    return `<option value="${i}">${shortLabel}</option>`;
+  }).join('');
   select.value=String(currentWeekIndex);
   const week=availableWeeks[currentWeekIndex];
   let html='<div class="space-y-3 p-2 sm:p-3 bg-slate-50">';
