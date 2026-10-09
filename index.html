@@ -786,7 +786,7 @@ function buildCycleCardHtml(cycle, res, dishes, accent){
         <div class="flex items-center justify-between gap-2">
           <div class="font-bold text-slate-800 flex items-center gap-2">
             <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white border border-slate-200 text-xs">${i+1}</span>
-            <span>${d.title}</span>
+            <span class="block min-w-0"><span class="block text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Plato</span><span class="block text-sm sm:text-base font-extrabold text-slate-900">${d.title}</span></span>
           </div>
           <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${r.info.badge}">${r.info.tag} — ${P(r.pct)}</span>
         </div>
