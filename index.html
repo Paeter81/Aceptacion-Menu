@@ -760,7 +760,14 @@ function renderCalendar(){
     currentSelectedDate=menu.date;
     loadMenu(menu);
     const restored=restoreHistory(menu.date);
-    if(restored){const notice=$('menu-load-notice'); if(notice){notice.querySelector('span').textContent='Datos anteriores recuperados del historial.'; notice.classList.remove('hidden');}}
+    if(restored){
+      const notice=$('menu-load-notice');
+      if(notice){notice.querySelector('span').textContent='Resultados anteriores recuperados del historial.'; notice.classList.remove('hidden');}
+      // Mostrar directamente los resultados guardados al seleccionar un día ya calculado.
+      $('go').click();
+    } else {
+      $('out').classList.add('hidden');
+    }
     renderCalendar();
   }));
 }
@@ -791,16 +798,19 @@ function buildCycleCardHtml(cycle, res, dishes, accent){
           <div class="rounded-lg ${r.info.bg} border ${r.info.border} p-2.5"><span class="${r.info.textCol}">% de residuo</span><strong class="block ${r.info.textCol} mt-0.5">${P(r.pct)}</strong></div>
         </div>
         <div class="rounded-lg ${r.info.bg} border ${r.info.border} p-2.5 text-center font-semibold text-xs ${r.info.textCol}">Clasificación: ${r.info.text}</div>
-        <div class="rounded-lg bg-white border border-brand-100 p-2.5 text-xs text-slate-600"><span class="font-semibold text-brand-800">Raciones por barqueta:</span> ${d.rac}</div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="rounded-lg bg-white border border-brand-100 p-2.5 text-slate-600"><span class="font-semibold text-brand-800">Raciones por barqueta</span><strong class="block text-slate-900 mt-0.5">${d.rac}</strong></div>
+          <div class="rounded-lg bg-brand-50 border border-brand-100 p-2.5 text-brand-800"><span class="font-semibold">Raciones totales en barquetas</span><strong class="block mt-0.5">${(Number(d.barq)||0) * (Number(d.rac)||0)}</strong><span class="text-[10px] text-brand-700">${Number(d.barq)||0} barquetas × ${Number(d.rac)||0}</span></div>
+        </div>
         ` : '<div class="text-sm text-slate-400 italic">No hay comensales registrados para este ciclo.</div>'}
       </div>`;
   }).join('');
 
   return `
     <div class="space-y-4">
-      <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
         <div class="flex items-center gap-2 font-bold ${accent.title}"><i class="fa-solid ${icon}"></i><span>Resultados ${cycle}</span></div>
-        <span class="text-xs font-semibold text-slate-500">Resultados por plato</span>
+        <span class="text-xs font-semibold text-slate-500">Raciones totales previstas: ${res.totalRaciones}</span>
       </div>
       ${dishCards || '<div class="text-sm text-slate-400 italic">No hay platos seleccionados.</div>'}
     </div>`;
@@ -819,6 +829,7 @@ function calcDish(as, na, d){
 function calcCycle(as, na, dishes){
   return {
     hasComensales:(as+na)>0,
+    totalRaciones:as+na,
     dishes:dishes.map(d=>calcDish(as,na,d))
   };
 }
@@ -878,8 +889,8 @@ $('go').onclick = () => {
     { title:'Segundo plato', arr:second, idx:selectedDishes[1], spI:sInf[1], spP:sPrim[1], barq:b[1] },
     { title:'Guarnición', arr:side, idx:selectedDishes[2], spI:sInf[2], spP:sPrim[2], barq:b[2] }
   ];
-  const infDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,g:d.arr[d.idx][1],rac:d.arr[d.idx][3],sp:d.spI}));
-  const primDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,g:d.arr[d.idx][2],rac:d.arr[d.idx][3],sp:d.spP}));
+  const infDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,g:d.arr[d.idx][1],rac:d.arr[d.idx][3],sp:d.spI,barq:d.barq}));
+  const primDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,g:d.arr[d.idx][2],rac:d.arr[d.idx][3],sp:d.spP,barq:d.barq}));
   const resInf=calcCycle(asInf,naInf,infDishes);
   const resPrim=calcCycle(asPrim,naPrim,primDishes);
   $('c1').innerHTML=buildCycleCardHtml('Infantil',resInf,infDishes,{title:'text-sky-800'});
