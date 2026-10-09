@@ -686,9 +686,15 @@ function loadMenu(menu){
 const monthNames=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 let currentSelectedDate=null;
 const HISTORY_KEY='calculadoraMenusHistorialV4';
-function getHistory(){ try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}')||{};}catch(e){return {};} }
-function saveHistory(date,payload){ try{const h=getHistory(); h[date]={...payload,guardadoEn:new Date().toISOString()}; localStorage.setItem(HISTORY_KEY,JSON.stringify(h));}catch(e){} }
+function getHistory(){ try{const raw=localStorage.getItem(HISTORY_KEY); const parsed=raw?JSON.parse(raw):{}; return parsed && typeof parsed==='object' ? parsed : {};}catch(e){return {};} }
+function saveHistory(date,payload){ try{const h=getHistory(); h[date]={...payload,guardadoEn:new Date().toISOString()}; const serialized=JSON.stringify(h); localStorage.setItem(HISTORY_KEY,serialized); const check=JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}'); return !!check[date];}catch(e){console.error('No se pudo guardar el historial:',e); return false;} }
 function hasHistory(date){ return !!getHistory()[date]; }
+function restoreHistory(date){
+  const entry=getHistory()[date]; if(!entry || !entry.inputs) return false;
+  const v=entry.inputs;
+  [['as_i',v.asInf],['na_i',v.naInf],['as_p',v.asPrim],['na_p',v.naPrim],['s1_i',v.sInf?.[0]],['s2_i',v.sInf?.[1]],['s3_i',v.sInf?.[2]],['s1_p',v.sPrim?.[0]],['s2_p',v.sPrim?.[1]],['s3_p',v.sPrim?.[2]],['b1',v.b?.[0]],['b2',v.b?.[1]],['b3',v.b?.[2]]].forEach(([id,val])=>{const el=$(id); if(el && val!==undefined) el.value=String(val);});
+  grams(); return true;
+}
 function dateFromISO(s){const [y,m,d]=s.split('-').map(Number);return new Date(Date.UTC(y,m-1,d));}
 function isoDate(d){return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;}
 function mondayOf(date){const d=new Date(date.getTime()); const day=d.getUTCDay(); const diff=day===0?-6:1-day; d.setUTCDate(d.getUTCDate()+diff); return d;}
@@ -753,6 +759,8 @@ function renderCalendar(){
     const menu=menuCalendar.find(x=>x.date===btn.dataset.date); if(!menu) return;
     currentSelectedDate=menu.date;
     loadMenu(menu);
+    const restored=restoreHistory(menu.date);
+    if(restored){const notice=$('menu-load-notice'); if(notice){notice.querySelector('span').textContent='Datos anteriores recuperados del historial.'; notice.classList.remove('hidden');}}
     renderCalendar();
   }));
 }
@@ -878,7 +886,7 @@ $('go').onclick = () => {
   $('c2').innerHTML=buildCycleCardHtml('Primaria',resPrim,primDishes,{title:'text-indigo-800'});
 
   if(currentSelectedDate){
-    saveHistory(currentSelectedDate,{
+    const saved=saveHistory(currentSelectedDate,{
       date:currentSelectedDate,
       menu:menuCalendar.find(x=>x.date===currentSelectedDate)||null,
       inputs:{asInf,naInf,asPrim,naPrim,sInf,sPrim,b},
@@ -886,10 +894,14 @@ $('go').onclick = () => {
     });
     const notice=$('menu-load-notice');
     if(notice){
-      notice.querySelector('span').textContent='Cálculo realizado y guardado en el historial.';
+      notice.querySelector('span').textContent=saved ? 'Cálculo guardado en el historial de este navegador.' : 'ERROR: el navegador no permite guardar el historial. Abre la calculadora desde GitHub Pages y no en modo incógnito.';
       notice.classList.remove('hidden');
+      notice.classList.toggle('bg-rose-50',!saved); notice.classList.toggle('border-rose-200',!saved); notice.classList.toggle('text-rose-700',!saved);
     }
+    if(!saved) alert('No se ha podido guardar el historial en este navegador. Comprueba que no estás en modo incógnito y que has abierto la calculadora desde GitHub Pages.');
     renderCalendar();
+  } else {
+    alert('Selecciona primero un día del calendario. El historial se guarda asociado a una fecha.');
   }
   
   $('out').classList.remove('hidden');
