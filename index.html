@@ -3,62 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Aceptación de Menús Escolares</title>
-
-<!-- Favicon SVG vectorial -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%230369a1%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2218%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M22%2020v6c0%202.5%202%203.5%202%203.5V44M19%2020v5M22%2020v5M25%2020v5%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M41%2020c-3.5%203-3.5%209%200%2011.5V44%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E">
-
-<script>
-  (function() {
-    try {
-      const canvas = document.createElement('canvas');
-      canvas.width = 64;
-      canvas.height = 64;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.fillStyle = '#0369a1';
-        if (ctx.roundRect) {
-          ctx.roundRect(0, 0, 64, 64, 16);
-          ctx.fill();
-        } else {
-          ctx.fillRect(0, 0, 64, 64);
-        }
-        
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.arc(32, 32, 17, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(22, 20); ctx.lineTo(22, 25);
-        ctx.moveTo(19, 20); ctx.lineTo(19, 25);
-        ctx.moveTo(25, 20); ctx.lineTo(25, 25);
-        ctx.moveTo(22, 25); ctx.lineTo(22, 44);
-        ctx.stroke();
-
-        ctx.lineWidth = 2.2;
-        ctx.beginPath();
-        ctx.moveTo(41, 20);
-        ctx.quadraticCurveTo(37, 26, 41, 31);
-        ctx.lineTo(41, 44);
-        ctx.stroke();
-        
-        const link = document.createElement('link');
-        link.rel = 'icon';
-        link.type = 'image/png';
-        link.href = canvas.toDataURL('image/png');
-        document.head.appendChild(link);
-
-        const appleLink = document.createElement('link');
-        appleLink.rel = 'apple-touch-icon';
-        appleLink.href = canvas.toDataURL('image/png');
-        document.head.appendChild(appleLink);
-      }
-    } catch (e) {}
-  })();
-</script>
+<title>Calculadora de aceptacion de menus</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0369a1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Aceptación Menús">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=2">
+<link rel="icon" href="./favicon.ico?v=2" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png?v=2">
 
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -488,11 +442,11 @@ const P=x=>x.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigi
 const A=s=>s.split('|').map(x=>{let[a,b,c,d]=x.split(';');return[a,+b,+c,d?+d:12]});
 
 // Platos oficial Línea Fría Andalucía [nombre, g_infantil, g_primaria, rac_barqueta]
-let first=A('Arroz integral a la campesina ECO;179;214;13|Arroz con Pisto ECO;173;207;13|Arroz Hervido con tomate frito;165;198;14|Coditos con Tomate y Orégano;150;180;15|Crema de calabacín ECO;210;210;10|Crema de calabaza ECO;210;210;10|Crema de verduras ECO;208;208;11|Crema de zanahorias ECO;210;210;10|Crema hortelana ECO;210;210;10|Espirales Integrales con tomate ECO;155;186;15|Garbanzos Encebollados ECO;118;235;21|Lacitos con Tomate ECO;133;160;17|Lentejas con Verduras cocidas ECO;125;231;20|Macarrones Integrales con Tomate ECO;155;186;15|Potaje de alubias blancas ECO;150;274;15|Potaje de alubias blancas con calabacín ECO;163;299;13|Potaje de lentejas con calabaza ECO;158;289;14|Puchero ECO;154;283;14|Ensalada Lechuga, tomate y maíz;125;125;15|Ensalada Lechuga, tomate y huevo cocido;140;140;15|Ensalada de Lechuga, Tomate y Huevo cocido;140;140;15|Ensalada Tomate y queso fresco;130;130;15|Ensalada de Tomate y Queso Fresco;130;130;15');
+let first=A('Arroz con Pisto ECO;173;207;13|Arroz Hervido con tomate frito;165;198;14|Arroz integral a la campesina ECO;179;214;13|Coditos con Tomate y Orégano;150;180;15|Crema de calabacín ECO;210;210;10|Crema de calabaza ECO;210;210;10|Crema de verduras ECO;208;208;11|Crema de zanahorias ECO;210;210;10|Crema hortelana ECO;210;210;10|Ensalada Lechuga, tomate y huevo cocido;140;140;15|Ensalada Lechuga, tomate y maíz;125;125;15|Ensalada Tomate y queso fresco;130;130;15|Espirales Integrales con tomate ECO;155;186;15|Garbanzos Encebollados ECO;118;235;21|Lacitos con Tomate ECO;133;160;17|Lentejas con Verduras cocidas ECO;125;231;20|Macarrones Integrales con Tomate ECO;155;186;15|Potaje de alubias blancas ECO;150;274;15|Potaje de alubias blancas con calabacín ECO;163;299;13|Potaje de lentejas con calabaza ECO;158;289;14|Puchero ECO;154;283;14');
 
 let second=A('Abadejo al horno a las finas hierbas;72;103;20|Albóndigas de cerdo con tomate + Patatas Panaderas al vapor ECO;148;209;19|Albóndigas de Pollo a la Jardinera + Patatas Panaderas al vapor ECO;130;192;22|Alubias Pintas guisadas con arroz ECO;202;257;12|Caballa al Vapor en Salsa;87;123;21|Chuleta de Pavo adobada;62;119;29|Contramuslo de pollo asado;54;86;24|Estofado de cerdo en salsa con verduras;125;162;19|Filete lomo de cerdo + Patatas a la Provenzal ECO;111;175;23|Guisadillo de Garbanzos ECO;128;256;20|Hamburguesa de Pavo con salsa Rondeña;78;96;19|Huevo Cocido con Arroz Integral y Tomate;151;151;15|Huevo Cocido con Patatas a lo Pobre;123;141;17|Huevo Cocido con Pisto de Verduras;141;141;15|Jamoncito de Pollo al horno en salsa;81;130;23|Jamoncito de Pollo al horno en salsa + Patatas a la Provenzal ECO;144;228;19|Jureles al Horno encebollados;88;126;21|Lentejas guisadas con arroz ECO;158;289;16|Lentejas con Verduras Cocidas ECO;125;231;20|Merluza a la Plancha al ajo y perejil;67;96;22|Merluza a la Plancha en salsa Verde;72;103;21|Muslito de pollo al horno al ajillo;52;83;37|Potaje de alubias blancas ECO;150;274;15|Potaje de alubias blancas con calabacín ECO;163;299;13|Potaje de lentejas con calabaza ECO;158;289;14|Puchero ECO;154;283;14|Salmón al vapor en salsa de cebolla y eneldo;67;96;22|Solomillo de Pollo rustido + Arroz Pilaf ECO;144;174;18|Tiras de pollo al Horno adobadas;62;119;29|Tortilla de patatas con calabacín;123;123;13|Tortilla de patatas con cebolla;113;113;12');
 
-let side=A('Patatas Panaderas al vapor ECO;63;84;19|Patatas a la Provenzal ECO;63;98;23|Arroz Pilaf ECO;68;81;18|Ensalada 4 estaciones;57;57;15|Ensalada Campestre;61;61;15|Ensalada Lechuga y maíz;65;65;15|Ensalada Mézclum;61;61;15|Ensalada Lechuga;61;61;15|Ensalada Clásica;61;61;15|Tomate Natural;61;61;15|Ensalada de Lechuga, Tomate y Huevo cocido;140;140;15|Ensalada de Lechuga;61;61;15|Ensalada de Lechuga y Maíz;65;65;15|Patatas Panaderas al Horno a la Provenzal ECO;63;98;23');
+let side=A('Patatas Panaderas al vapor ECO;63;84;19|Patatas a la Provenzal ECO;63;98;23|Arroz Pilaf ECO;68;81;18|Ensalada 4 estaciones;57;57;15|Ensalada Campestre;61;61;15|Ensalada Lechuga y maíz;65;65;15|Ensalada Mézclum;61;61;15|Ensalada Lechuga;61;61;15|Ensalada Clásica;61;61;15|Tomate Natural;61;61;15|Ensalada de Lechuga;61;61;15|Ensalada de Lechuga y Maíz;65;65;15|Patatas Panaderas al Horno a la Provenzal ECO;63;98;23');
 
 let selectedDishes = [null, null, null];
 
@@ -931,6 +885,13 @@ $('clear').onclick = () => {
   $('err').classList.add('hidden');
   grams();
 };
+</script>
+
+<script>
+// Registro de la PWA para poder instalarla desde GitHub Pages.
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.warn('No se pudo registrar el modo PWA:', err)); });
+}
 </script>
 </body>
 </html>
