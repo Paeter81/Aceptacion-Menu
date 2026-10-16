@@ -71,11 +71,21 @@
     #week-select { flex:0 1 170px; width:170px; max-width:170px; min-width:0; text-align:center; padding-left:8px; padding-right:8px; }
   }
 
-    .menu-week-day{min-height:132px;}
+    
     @media (max-width: 639px){
-      .menu-week-day{min-height:145px;}
+      
       #menu-calendar{max-height:none;}
     }
+
+/* Calendario semanal */
+:root{--cal-accent:#059669;--cal-ink:#334155;--cal-muted:#64748b;--cal-line:#dce6df;--cal-gap:12px}
+.cal-header{text-align:center;margin-bottom:16px}.cal-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--cal-accent)}.cal-help{margin-top:4px;font-size:12px;color:var(--cal-muted)}
+#menu-calendar{border:0;background:none}.week-strip{display:flex;gap:var(--cal-gap);overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px}
+.menu-week-day{flex:1 0 170px;display:flex;flex-direction:column;gap:14px;padding:14px;text-align:left;background:white;border:1px solid var(--cal-line);border-radius:14px;scroll-snap-align:center;overflow-wrap:anywhere}
+.menu-week-day:hover{border-color:var(--cal-accent)}.menu-week-day[aria-pressed=true]{background:#ecfdf5;border-color:var(--cal-accent);box-shadow:0 0 0 1px var(--cal-accent)}.menu-week-day:focus-visible{outline:3px solid var(--cal-accent);outline-offset:2px}
+.day-head{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:700;color:var(--cal-accent);text-transform:uppercase}.course{font-size:13px;line-height:1.45;color:var(--cal-ink)}.course-label{display:block;margin-bottom:2px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cal-muted)}
+#comensales{scroll-margin-top:24px}#prev-week:disabled,#next-week:disabled{opacity:.35;cursor:default}
+@media(max-width:639px){.menu-week-day{flex-basis:80%}}
 </style>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 min-h-full flex flex-col antialiased selection:bg-brand-500 selection:text-white">
@@ -167,16 +177,7 @@
   <!-- Calendario del menú oficial -->
   <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="pt-3 border-t border-slate-100">
-      <div class="flex items-center justify-between gap-3 flex-wrap mb-3">
-        <div>
-          <p class="text-xs font-semibold text-brand-700 uppercase tracking-wider flex items-center gap-1.5">
-            <i class="fa-solid fa-calendar-days text-brand-500"></i>
-            <span>Calendario del menú</span>
-          </p>
-          <p class="text-xs text-slate-500 mt-1">Pulsa un día para ver el menú completo y cargarlo en la calculadora. Sábados y domingos no se muestran.</p>
-        </div>
-        <span id="selected-date" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Sin fecha seleccionada</span>
-      </div>
+      <header class="cal-header"><p class="cal-title">Calendario del menú</p><p class="cal-help">Consulta el menú y pulsa un día para cargarlo e ir a Comensales.</p><span id="selected-date" hidden></span></header>
       <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-3 sm:p-4">
         <div class="flex items-center justify-between gap-2 mb-3">
           <button id="prev-week" type="button" class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition shadow-sm" aria-label="Semana anterior">
@@ -201,7 +202,7 @@
   </section>
 
   <!-- Sección 1: Comensales (Infantil y Primaria) -->
-  <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+  <section id="comensales" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
       <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 font-bold flex items-center justify-center text-sm">1</div>
       <div>
@@ -428,7 +429,7 @@
 <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
     <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
-    <p class="mt-1 font-semibold text-slate-400">Versión 4.0</p>
+    <p class="mt-1 font-semibold text-slate-400">Versión 4.1</p>
   </div>
 </footer>
 
@@ -612,8 +613,8 @@ const menuAliases={
   'albóndigas de cerdo al horno con salsa de tomate':'Albóndigas de cerdo con tomate + Patatas Panaderas al vapor ECO',
   'patatas panaderas al horno a la provenzal':'Patatas a la Provenzal ECO',
   'patatas panaderas al horno a la provenzal eco':'Patatas a la Provenzal ECO',
-  'ensalada de lechuga, tomate y huevo cocido':'Ensalada de Lechuga, Tomate y Huevo cocido',
-  'ensalada de tomate y queso fresco':'Ensalada de Tomate y Queso Fresco',
+  'ensalada de lechuga, tomate y huevo cocido':'Ensalada Lechuga, tomate y huevo cocido',
+  'ensalada de tomate y queso fresco':'Ensalada Tomate y queso fresco',
   'ensalada de lechuga y maíz (guarnición)':'Ensalada de Lechuga y Maíz'
 };
 function clearDish(idx){ selectedDishes[idx]=null; const el=$(['q1','q2','q3'][idx]); if(el) el.value=''; }
@@ -685,30 +686,11 @@ function renderCalendar(){
   }).join('');
   select.value=String(currentWeekIndex);
   const week=availableWeeks[currentWeekIndex];
-  let html='<div class="space-y-3 p-2 sm:p-3 bg-slate-50">';
-  html+=`<div class="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-    <div class="px-3 py-2 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-2">
-      <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500">${weekLabel(week)}</span>
-      <span class="text-[10px] sm:text-xs font-semibold text-slate-400">${week.items.length} días con menú</span>
-    </div>
-    <div class="grid grid-cols-2 gap-px bg-slate-200">`;
-  week.items.forEach(menu=>{
-    const selected=currentSelectedDate===menu.date;
-    const done=hasHistory(menu.date);
-    html+=`<button type="button" data-date="${menu.date}" class="menu-week-day min-w-0 text-left bg-white p-2.5 sm:p-3 ${selected?'ring-2 ring-inset ring-emerald-500 bg-emerald-50':''} hover:bg-brand-50 active:scale-[0.995] transition">
-      <div class="flex items-start justify-between gap-1.5 mb-1.5">
-        <div class="min-w-0"><div class="text-[10px] sm:text-xs font-bold uppercase ${selected?'text-emerald-700':'text-brand-700'}">${menu.label}</div></div>
-        <span class="shrink-0 inline-flex items-center justify-center w-6 h-6 rounded-full ${done?'bg-emerald-100 text-emerald-700':'bg-slate-100 text-slate-300'}" title="${done?'Cálculo guardado':'Sin cálculo guardado'}"><i class="fa-solid ${done?'fa-check':'fa-circle'} text-[10px]"></i></span>
-      </div>
-      <div class="space-y-1 text-[9px] sm:text-[10px] leading-tight text-slate-600">
-        <div><span class="font-bold text-emerald-700">1º</span> ${menu.f||'—'}</div>
-        <div><span class="font-bold text-indigo-700">2º</span> ${menu.s||'—'}</div>
-        <div><span class="font-bold text-amber-700">G</span> ${menu.g||'—'}</div>
-      </div>
-    </button>`;
-  });
-  html+='</div></div></div>';
-  host.innerHTML=html;
+  const oldScroll=host.dataset.week===String(currentWeekIndex)?(host.querySelector('.week-strip')?.scrollLeft||0):0;
+  const esc=v=>String(v||'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  host.innerHTML='<div class="week-strip">'+week.items.map(menu=>`<button type="button" class="menu-week-day" data-date="${menu.date}" aria-pressed="${currentSelectedDate===menu.date}"><span class="day-head">${esc(menu.label)}${hasHistory(menu.date)?'<span title="Cálculo guardado">✓</span>':''}</span>${[['Primer plato',menu.f],['Segundo plato',menu.s],['Guarnición',menu.g]].map(([label,dish])=>`<span class="course"><span class="course-label">${label}</span>${esc(dish)}</span>`).join('')}</button>`).join('')+'</div>';
+  host.dataset.week=String(currentWeekIndex);host.querySelector('.week-strip').scrollLeft=oldScroll;
+  $('prev-week').disabled=currentWeekIndex===0;$('next-week').disabled=currentWeekIndex===availableWeeks.length-1;
   host.querySelectorAll('[data-date]').forEach(btn=>btn.addEventListener('click',()=>{
     const menu=menuCalendar.find(x=>x.date===btn.dataset.date); if(!menu) return;
     currentSelectedDate=menu.date;
@@ -723,6 +705,7 @@ function renderCalendar(){
       $('out').classList.add('hidden');
     }
     renderCalendar();
+    requestAnimationFrame(()=>$('comensales').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}));
   }));
 }
 $('prev-week')?.addEventListener('click',()=>{ if(currentWeekIndex>0){currentWeekIndex--; renderCalendar();}});
@@ -730,6 +713,7 @@ $('next-week')?.addEventListener('click',()=>{ if(currentWeekIndex<availableWeek
 $('week-select')?.addEventListener('change',e=>{currentWeekIndex=Number(e.target.value);renderCalendar();});
 renderCalendar();
 
+function escapeResultText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function buildCycleCardHtml(cycle, res, dishes, accent){
   const icon = cycle === 'Infantil' ? 'fa-child' : 'fa-graduation-cap';
   const dishCards = dishes.map((d, i) => {
@@ -740,7 +724,7 @@ function buildCycleCardHtml(cycle, res, dishes, accent){
         <div class="flex items-center justify-between gap-2">
           <div class="font-bold text-slate-800 flex items-center gap-2">
             <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white border border-slate-200 text-xs">${i+1}</span>
-            <span class="block min-w-0"><span class="block text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Plato</span><span class="block text-sm sm:text-base font-extrabold text-slate-900">${d.title}</span></span>
+            <span class="block min-w-0"><span class="block text-[10px] uppercase tracking-wide text-slate-500 font-semibold">${escapeResultText(d.title)}</span><span class="block text-sm sm:text-base font-extrabold text-slate-900">${escapeResultText(d.name || d.title)}</span></span>
           </div>
           <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${r.info.badge}">${r.info.tag} — ${P(r.pct)}</span>
         </div>
@@ -843,8 +827,8 @@ $('go').onclick = () => {
     { title:'Segundo plato', arr:second, idx:selectedDishes[1], spI:sInf[1], spP:sPrim[1], barq:b[1] },
     { title:'Guarnición', arr:side, idx:selectedDishes[2], spI:sInf[2], spP:sPrim[2], barq:b[2] }
   ];
-  const infDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,g:d.arr[d.idx][1],rac:d.arr[d.idx][3],sp:d.spI,barq:d.barq}));
-  const primDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,g:d.arr[d.idx][2],rac:d.arr[d.idx][3],sp:d.spP,barq:d.barq}));
+  const infDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,name:d.arr[d.idx][0],g:d.arr[d.idx][1],rac:d.arr[d.idx][3],sp:d.spI,barq:d.barq}));
+  const primDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,name:d.arr[d.idx][0],g:d.arr[d.idx][2],rac:d.arr[d.idx][3],sp:d.spP,barq:d.barq}));
   const resInf=calcCycle(asInf,naInf,infDishes);
   const resPrim=calcCycle(asPrim,naPrim,primDishes);
   $('c1').innerHTML=buildCycleCardHtml('Infantil',resInf,infDishes,{title:'text-sky-800'});
