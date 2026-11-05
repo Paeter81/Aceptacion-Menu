@@ -2,17 +2,18 @@
 <html lang="es" class="h-full bg-slate-50">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de aceptacion de menus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Calculadora de aceptación de menús</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#0369a1">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Aceptación Menús">
-<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=2">
-<link rel="icon" href="./favicon.ico?v=2" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=2">
-<link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=3">
+<link rel="icon" href="./favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=3">
+<link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png?v=3">
 
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -47,68 +48,29 @@
 </script>
 
 <style>
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-
-  .calendar-mobile { display:none; }
-  @media (max-width: 639px) {
-    .calendar-desktop { display:none !important; }
-    .calendar-mobile { display:block; }
-    #month-select { flex:1; min-width:0; width:100%; text-align:center; }
-    #prev-month, #next-month { flex:0 0 42px; }
-    #week-select { flex:0 1 170px; width:170px; max-width:170px; min-width:0; text-align:center; padding-left:8px; padding-right:8px; }
-  }
-
-    
-    @media (max-width: 639px){
-      
-      #menu-calendar{max-height:none;}
-    }
-
-/* Calendario semanal */
-:root{--cal-accent:#059669;--cal-ink:#334155;--cal-muted:#64748b;--cal-line:#dce6df;--cal-gap:12px}
-.cal-header{text-align:center;margin-bottom:16px}.cal-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--cal-accent)}.cal-help{margin-top:4px;font-size:12px;color:var(--cal-muted)}
-#menu-calendar{border:0;background:none}.week-strip{display:flex;gap:var(--cal-gap);overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 14px}
-.menu-week-day{flex:1 0 170px;display:flex;flex-direction:column;gap:14px;padding:14px;text-align:left;background:white;border:1px solid var(--cal-line);border-radius:14px;scroll-snap-align:center;overflow-wrap:anywhere}
-.menu-week-day:hover{border-color:var(--cal-accent)}.menu-week-day[aria-pressed=true]{background:#ecfdf5;border-color:var(--cal-accent);box-shadow:0 0 0 1px var(--cal-accent)}.menu-week-day:focus-visible{outline:3px solid var(--cal-accent);outline-offset:2px}
-.day-head{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:700;color:var(--cal-accent);text-transform:uppercase}.course{font-size:13px;line-height:1.45;color:var(--cal-ink)}.course-label{display:block;margin-bottom:2px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cal-muted)}
-#comensales{scroll-margin-top:24px}#prev-week:disabled,#next-week:disabled{opacity:.35;cursor:default}
-@media(max-width:639px){.menu-week-day{flex-basis:80%}}
+  body { padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right); }
+  #week-days { scrollbar-width:thin; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; }
 </style>
 </head>
 <body class="font-sans text-slate-800 bg-slate-50 min-h-full flex flex-col antialiased selection:bg-brand-500 selection:text-white">
 
-<header class="bg-gradient-to-r from-brand-900 via-brand-800 to-brand-700 text-white shadow-lg border-b border-brand-800/40">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-    <div class="flex items-center justify-between flex-wrap gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
-          <i class="fa-solid fa-utensils text-2xl text-amber-300"></i>
-        </div>
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            Calculadora de Aceptación de Menús
-          </h1>
-          <p class="text-xs sm:text-sm text-brand-100 font-normal">Registro unificado de aceptabilidad (Infantil + Primaria) según norma IT6.5-23</p>
-        </div>
+<header class="bg-brand-800 text-white border-b border-brand-900/40 shadow-sm">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+    <div class="flex items-center gap-3">
+      <img src="data:image/png;base64,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" alt="" width="48" height="48" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-contain ring-2 ring-white/25">
+      <div class="min-w-0">
+        <h1 class="text-base sm:text-xl font-bold tracking-tight leading-tight">
+          <span class="sm:hidden">Aceptación de menús</span><span class="hidden sm:inline">Calculadora de Aceptación de Menús</span>
+        </h1>
+        <p class="text-xs sm:text-sm text-brand-100 leading-snug truncate">
+          <span class="sm:hidden">Infantil + Primaria · IT6.5-23</span><span class="hidden sm:inline">Registro unificado de aceptabilidad (Infantil + Primaria) según norma IT6.5-23</span>
+        </p>
       </div>
     </div>
   </div>
 </header>
 
-<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-20 sm:py-8 flex-1 w-full space-y-4 sm:space-y-6">
 
   <details class="group bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden transition-all duration-200">
     <summary class="flex items-center justify-between p-5 font-semibold text-slate-800 cursor-pointer hover:bg-slate-50/80 select-none">
@@ -122,7 +84,6 @@
     </summary>
     <div class="px-5 pb-5 border-t border-slate-100 pt-4 text-sm text-slate-600 leading-relaxed space-y-4">
       
-      <!-- Pasos sencillos de uso -->
       <div class="space-y-2">
         <p class="font-semibold text-slate-800 flex items-center gap-2">
           <i class="fa-solid fa-list-check text-brand-600"></i>
@@ -142,7 +103,6 @@
         <p><strong>Kg no servidos (NS)</strong> = faltantes × gramos por ración ÷ 1.000.</p>
         <p><strong>Residuo</strong> = NS + SP; <strong>% residuo</strong> = (NS + SP) ÷ (Kg totales − NS) × 100.</p>
       </div>
-      <!-- Baremos oficiales -->
       <div class="space-y-2 pt-1 border-t border-slate-100">
         <p class="font-semibold text-slate-800 flex items-center gap-2">
           <i class="fa-solid fa-chart-pie text-brand-600"></i>
@@ -175,34 +135,28 @@
   </details>
 
   <!-- Calendario del menú oficial -->
-  <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
-    <div class="pt-3 border-t border-slate-100">
-      <header class="cal-header"><p class="cal-title">Calendario del menú</p><p class="cal-help">Consulta el menú y pulsa un día para cargarlo e ir a Comensales.</p><span id="selected-date" hidden></span></header>
-      <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-3 sm:p-4">
-        <div class="flex items-center justify-between gap-2 mb-3">
-          <button id="prev-week" type="button" class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition shadow-sm" aria-label="Semana anterior">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <div class="flex items-center gap-2 min-w-0">
-            <select id="week-select" class="w-44 max-w-[11rem] bg-white border border-slate-300 text-slate-800 font-bold text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500"></select>
-          </div>
-          <button id="next-week" type="button" class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition shadow-sm" aria-label="Semana siguiente">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-        <div id="menu-calendar" class="overflow-hidden rounded-xl border border-slate-200 bg-white"></div>
+  <section class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80 space-y-3">
+    <div class="flex items-center justify-between gap-2 flex-wrap">
+      <div class="min-w-0">
+        <p class="text-xs font-semibold text-brand-700 uppercase tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-days text-brand-500"></i>
+          <span>Calendario del menú</span>
+        </p>
+        <p class="text-[11px] text-slate-400 mt-0.5">Pulsa un día para cargarlo</p>
       </div>
-      <div id="menu-load-notice" class="hidden mb-3 px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-circle-check"></i><span></span></div>
-      <div class="mt-3 flex flex-wrap gap-3 text-[11px] text-slate-500">
-        <span class="flex items-center gap-1.5"><span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fa-solid fa-check text-[9px]"></i></span>Cálculo guardado</span>
-        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>Fecha seleccionada</span>
-      </div>
+      <span id="selected-date" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Sin fecha seleccionada</span>
     </div>
-  </section>
+    <div class="flex items-center gap-2 sm:justify-center">
+      <button id="prev-week" type="button" class="w-10 h-10 shrink-0 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition" aria-label="Semana anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <select id="week-select" class="flex-1 min-w-0 sm:flex-none sm:w-56 bg-white border border-slate-300 text-slate-800 font-bold text-base sm:text-sm text-center rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500"></select>
+      <button id="next-week" type="button" class="w-10 h-10 shrink-0 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition" aria-label="Semana siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div id="menu-calendar"></div>
+    <div id="menu-load-notice" class="hidden px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-circle-check"></i><span></span></div>
   </section>
 
   <!-- Sección 1: Comensales (Infantil y Primaria) -->
-  <section id="comensales" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+  <section class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="flex items-center gap-3 border-b border-slate-100 pb-3">
       <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 font-bold flex items-center justify-center text-sm">1</div>
       <div>
@@ -223,11 +177,11 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label for="as_i" class="block text-xs font-semibold text-slate-700 mb-1">Asistentes</label>
-            <input id="as_i" type="text" placeholder="Ej.: 35" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-2.5 transition font-medium placeholder:text-slate-400">
+            <input id="as_i" type="text" inputmode="numeric" placeholder="Ej.: 35" class="w-full bg-white border border-slate-300 text-slate-800 text-base sm:text-sm rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-2.5 transition font-medium placeholder:text-slate-400">
           </div>
           <div>
             <label for="na_i" class="block text-xs font-semibold text-slate-700 mb-1">Faltantes <span class="text-slate-400 font-normal">(opc.)</span></label>
-            <input id="na_i" type="text" placeholder="Ej.: 2" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-2.5 transition font-medium placeholder:text-slate-400">
+            <input id="na_i" type="text" inputmode="numeric" placeholder="Ej.: 2" class="w-full bg-white border border-slate-300 text-slate-800 text-base sm:text-sm rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 p-2.5 transition font-medium placeholder:text-slate-400">
           </div>
         </div>
       </div>
@@ -243,11 +197,11 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label for="as_p" class="block text-xs font-semibold text-slate-700 mb-1">Asistentes</label>
-            <input id="as_p" type="text" placeholder="Ej.: 77" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 transition font-medium placeholder:text-slate-400">
+            <input id="as_p" type="text" inputmode="numeric" placeholder="Ej.: 77" class="w-full bg-white border border-slate-300 text-slate-800 text-base sm:text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 transition font-medium placeholder:text-slate-400">
           </div>
           <div>
             <label for="na_p" class="block text-xs font-semibold text-slate-700 mb-1">Faltantes <span class="text-slate-400 font-normal">(opc.)</span></label>
-            <input id="na_p" type="text" placeholder="Ej.: 3" class="w-full bg-white border border-slate-300 text-slate-800 text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 transition font-medium placeholder:text-slate-400">
+            <input id="na_p" type="text" inputmode="numeric" placeholder="Ej.: 3" class="w-full bg-white border border-slate-300 text-slate-800 text-base sm:text-sm rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2.5 transition font-medium placeholder:text-slate-400">
           </div>
         </div>
       </div>
@@ -256,7 +210,7 @@
   </section>
 
   <!-- Primer Plato -->
-  <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+  <section class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 font-bold flex items-center justify-center text-sm">2</div>
@@ -268,33 +222,33 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
-      <div class="md:col-span-6">
+    <div class="grid grid-cols-3 md:grid-cols-12 gap-3 items-end">
+      <div class="col-span-3 md:col-span-6">
         <label for="q1" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Primer Plato del día</label>
         <div class="relative">
-          <input id="q1" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400 cursor-default">
+          <input id="q1" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-base sm:text-sm rounded-xl p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400 cursor-default">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-calendar-check text-sm"></i></div>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="b1" class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">Nº Barquetas</label>
+        <label for="b1" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-slate-500 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
-          <input id="b1" type="text" inputmode="decimal" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-500 font-semibold">barq.</span>
+          <input id="b1" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-500 font-semibold">barq.</span>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="s1_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
+        <label for="s1_i" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
         <div class="relative">
-          <input id="s1_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-700 font-semibold">KG</span>
+          <input id="s1_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-sky-700 font-semibold">KG</span>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="s1_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
+        <label for="s1_p" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
         <div class="relative">
-          <input id="s1_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-700 font-semibold">KG</span>
+          <input id="s1_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-indigo-700 font-semibold">KG</span>
         </div>
       </div>
     </div>
@@ -305,7 +259,7 @@
     </div>
   </section>
   <!-- Segundo Plato -->
-  <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+  <section class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 font-bold flex items-center justify-center text-sm">3</div>
@@ -317,33 +271,33 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
-      <div class="md:col-span-6">
+    <div class="grid grid-cols-3 md:grid-cols-12 gap-3 items-end">
+      <div class="col-span-3 md:col-span-6">
         <label for="q2" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Segundo Plato del día</label>
         <div class="relative">
-          <input id="q2" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400 cursor-default">
+          <input id="q2" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-base sm:text-sm rounded-xl p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400 cursor-default">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-calendar-check text-sm"></i></div>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="b2" class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">Nº Barquetas</label>
+        <label for="b2" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-slate-500 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
-          <input id="b2" type="text" inputmode="decimal" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-500 font-semibold">barq.</span>
+          <input id="b2" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-500 font-semibold">barq.</span>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="s2_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
+        <label for="s2_i" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
         <div class="relative">
-          <input id="s2_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-700 font-semibold">KG</span>
+          <input id="s2_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-sky-700 font-semibold">KG</span>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="s2_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
+        <label for="s2_p" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
         <div class="relative">
-          <input id="s2_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-700 font-semibold">KG</span>
+          <input id="s2_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-indigo-700 font-semibold">KG</span>
         </div>
       </div>
     </div>
@@ -354,7 +308,7 @@
     </div>
   </section>
   <!-- Guarnición o Ensalada -->
-  <section class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+  <section class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
     <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 font-bold flex items-center justify-center text-sm">4</div>
@@ -366,33 +320,33 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
-      <div class="md:col-span-6">
+    <div class="grid grid-cols-3 md:grid-cols-12 gap-3 items-end">
+      <div class="col-span-3 md:col-span-6">
         <label for="q3" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Guarnición / ensalada del día</label>
         <div class="relative">
-          <input id="q3" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400 cursor-default">
+          <input id="q3" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-base sm:text-sm rounded-xl p-3 pl-10 transition shadow-sm font-medium placeholder:text-slate-400 cursor-default">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-calendar-check text-sm"></i></div>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="b3" class="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">Nº Barquetas</label>
+        <label for="b3" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-slate-500 uppercase tracking-wider mb-2">Nº Barquetas</label>
         <div class="relative">
-          <input id="b3" type="text" inputmode="decimal" placeholder="Ej.: 5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-slate-500 font-semibold">barq.</span>
+          <input id="b3" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-500 font-semibold">barq.</span>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="s3_i" class="block text-[11px] font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
+        <label for="s3_i" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-sky-700 uppercase tracking-wider mb-2">Sobras Infantil</label>
         <div class="relative">
-          <input id="s3_i" type="text" placeholder="Ej.: 0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-sky-700 font-semibold">KG</span>
+          <input id="s3_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-sky-50/50 border border-sky-200 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-sky-700 font-semibold">KG</span>
         </div>
       </div>
       <div class="md:col-span-2">
-        <label for="s3_p" class="block text-[11px] font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
+        <label for="s3_p" class="block text-[10px] sm:text-[11px] leading-tight font-semibold text-indigo-700 uppercase tracking-wider mb-2">Sobras Primaria</label>
         <div class="relative">
-          <input id="s3_p" type="text" placeholder="Ej.: 0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 p-3 pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
-          <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs text-indigo-700 font-semibold">KG</span>
+          <input id="s3_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-indigo-50/50 border border-indigo-200 text-slate-800 text-base sm:text-sm rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10 transition shadow-sm font-medium placeholder:text-slate-400">
+          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-indigo-700 font-semibold">KG</span>
         </div>
       </div>
     </div>
@@ -402,15 +356,15 @@
       <span>El menú se carga desde el calendario; no es necesario buscar el plato manualmente.</span>
     </div>
   </section>
-  <div class="flex flex-wrap gap-3 pt-2">
-    <button id="go" class="flex-1 min-w-[220px] bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white font-semibold py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+  <div id="action-bar" class="sticky bottom-0 z-20 -mx-4 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex gap-3 bg-slate-50/90 backdrop-blur border-t border-slate-200 sm:static sm:mx-0 sm:px-0 sm:pt-2 sm:pb-0 sm:bg-transparent sm:backdrop-blur-none sm:border-0">
+    <button id="go" class="flex-1 min-w-0 bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white font-semibold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
       <i class="fa-solid fa-calculator"></i>
-      <span>Calcular y rellenar registros</span>
+      <span class="sm:hidden">Calcular</span><span class="hidden sm:inline">Calcular y rellenar registros</span>
     </button>
 
-    <button id="clear" class="bg-red-600 hover:bg-red-700 active:scale-[0.99] text-white font-semibold py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+    <button id="clear" class="bg-red-600 hover:bg-red-700 active:scale-[0.99] text-white font-semibold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
       <i class="fa-solid fa-rotate-left"></i>
-      <span>Limpiar todo</span>
+      <span class="sm:hidden">Limpiar</span><span class="hidden sm:inline">Limpiar todo</span>
     </button>
   </div>
 
@@ -419,157 +373,107 @@
     <span id="err-text"></span>
   </div>
 
-  <section id="out" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+  <section id="out" class="scroll-mt-4 hidden grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
     <div id="c1" class="bg-white rounded-2xl p-5 border border-sky-200 shadow-md flex flex-col justify-between space-y-4"></div>
     <div id="c2" class="bg-white rounded-2xl p-5 border border-indigo-200 shadow-md flex flex-col justify-between space-y-4"></div>
+    <div id="c3" class="hidden md:col-span-2 bg-white rounded-2xl p-5 border border-brand-200 shadow-md space-y-3"></div>
   </section>
 
 </main>
 
-<footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
+<footer class="bg-white border-t border-slate-200 mt-6 sm:mt-12 py-6 text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
     <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
-    <p class="mt-1 font-semibold text-slate-400">Versión 4.1</p>
+    <p class="mt-1 font-semibold text-slate-400">Versión 4.10</p>
   </div>
 </footer>
 
 <script>
 const $=x=>document.getElementById(x);
-const N=x=>parseFloat($(x).value.trim().replace(',','.'));
-const Z=x=>$(x).value.trim()===''?0:N(x);
+// Número estricto (coma o punto). Vacío = 0; texto no válido o negativo = NaN.
+const Z=x=>{const v=$(x).value.trim().replace(',','.'); if(v==='') return 0; return /^(\d+\.?\d*|\.\d+)$/.test(v)?parseFloat(v):NaN;};
 const K=x=>x.toLocaleString('es-ES',{maximumFractionDigits:3})+' kg';
 const P=x=>x.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
 
-const A=s=>s.split('|').map(x=>{let[a,b,c,d]=x.split(';');return[a,+b,+c,d?+d:12]});
+// TABLA DE RACIONES (SDA · L. Fría · 3er periodo).
+// Formato: nombre;g Infantil;g Primaria;raciones/barqueta Infantil;raciones/barqueta Primaria
+// Los platos "A + B" suman el gramaje de ambos componentes (la barqueta los lleva juntos).
+// Ensaladas: el PDF no indica raciones/barqueta (se usa 15 como valor orientativo).
+const A=s=>s.split('|').map(x=>{const[n,gi,gp,ri,rp]=x.split(';');return[n,+gi,+gp,+ri,+rp];});
 
-// Platos oficial Línea Fría Andalucía [nombre, g_infantil, g_primaria, rac_barqueta]
-let first=A('Arroz con Pisto ECO;173;207;13|Arroz Hervido con tomate frito;165;198;14|Arroz integral a la campesina ECO;179;214;13|Coditos con Tomate y Orégano;150;180;15|Crema de calabacín ECO;210;210;10|Crema de calabaza ECO;210;210;10|Crema de verduras ECO;208;208;11|Crema de zanahorias ECO;210;210;10|Crema hortelana ECO;210;210;10|Ensalada Lechuga, tomate y huevo cocido;140;140;15|Ensalada Lechuga, tomate y maíz;125;125;15|Ensalada Tomate y queso fresco;130;130;15|Espirales Integrales con tomate ECO;155;186;15|Garbanzos Encebollados ECO;118;235;21|Lacitos con Tomate ECO;133;160;17|Lentejas con Verduras cocidas ECO;125;231;20|Macarrones Integrales con Tomate ECO;155;186;15|Potaje de alubias blancas ECO;150;274;15|Potaje de alubias blancas con calabacín ECO;163;299;13|Potaje de lentejas con calabaza ECO;158;289;14|Puchero ECO;154;283;14');
+const first=A('Arroz con Pisto ECO;173;207;13;11|Arroz Hervido con Tomate Frito;165;198;14;12|Arroz Integral a la Campesina ECO;179;214;13;11|Coditos con Tomate y Orégano;150;180;15;13|Crema de Calabacín ECO;210;210;10;10|Crema de Calabaza ECO;210;210;10;10|Crema de Verduras ECO;208;208;11;11|Crema de Zanahorias ECO;210;210;10;10|Crema Hortelana ECO;210;210;10;10|Ensalada de Lechuga, Tomate y Huevo cocido;140;140;15;15|Ensalada de Lechuga, Tomate y Maíz;125;125;15;15|Ensalada de Tomate y Queso Fresco;130;130;15;15|Ensalada de Tomate, Maíz y Queso Fresco;130;130;15;15|Espirales Integrales con Tomate ECO;155;186;15;12|Garbanzos Encebollados ECO;118;235;21;10|Lacitos con Tomate ECO;133;160;17;14|Lentejas con Verduras Cocidas ECO;125;231;20;10|Macarrones Integrales con Tomate ECO;155;186;15;12|Potaje de Alubias Blancas ECO;150;274;15;8|Potaje de Alubias Blancas con Calabacín ECO;163;299;13;7|Potaje de Lentejas con Calabaza ECO;158;289;14;8|Puchero ECO;154;283;14;8');
 
-let second=A('Abadejo al horno a las finas hierbas;72;103;20|Albóndigas de cerdo con tomate + Patatas Panaderas al vapor ECO;148;209;19|Albóndigas de Pollo a la Jardinera + Patatas Panaderas al vapor ECO;130;192;22|Alubias Pintas guisadas con arroz ECO;202;257;12|Caballa al Vapor en Salsa;87;123;21|Chuleta de Pavo adobada;62;119;29|Contramuslo de pollo asado;54;86;24|Estofado de cerdo en salsa con verduras;125;162;19|Filete lomo de cerdo + Patatas a la Provenzal ECO;111;175;23|Guisadillo de Garbanzos ECO;128;256;20|Hamburguesa de Pavo con salsa Rondeña;78;96;19|Huevo Cocido con Arroz Integral y Tomate;151;151;15|Huevo Cocido con Patatas a lo Pobre;123;141;17|Huevo Cocido con Pisto de Verduras;141;141;15|Jamoncito de Pollo al horno en salsa;81;130;23|Jamoncito de Pollo al horno en salsa + Patatas a la Provenzal ECO;144;228;19|Jureles al Horno encebollados;88;126;21|Lentejas guisadas con arroz ECO;158;289;16|Lentejas con Verduras Cocidas ECO;125;231;20|Merluza a la Plancha al ajo y perejil;67;96;22|Merluza a la Plancha en salsa Verde;72;103;21|Muslito de pollo al horno al ajillo;52;83;37|Potaje de alubias blancas ECO;150;274;15|Potaje de alubias blancas con calabacín ECO;163;299;13|Potaje de lentejas con calabaza ECO;158;289;14|Puchero ECO;154;283;14|Salmón al vapor en salsa de cebolla y eneldo;67;96;22|Solomillo de Pollo rustido + Arroz Pilaf ECO;144;174;18|Tiras de pollo al Horno adobadas;62;119;29|Tortilla de patatas con calabacín;123;123;13|Tortilla de patatas con cebolla;113;113;12');
+const second=A('Abadejo al Horno a las Finas Hierbas;72;103;20;14|Albóndigas de Cerdo con Tomate + Patatas Panaderas al Vapor ECO;148;209;19;14|Albóndigas de Pollo a la Jardinera + Patatas Panaderas al Vapor ECO;128;188;22;15|Alubias Pintas Guisadas con Arroz ECO;177;354;14;10|Caballa al Vapor en Salsa;87;123;17;12|Chuleta de Pavo Adobada;62;119;29;15|Contramuslo de Pollo Asado;54;86;24;15|Estofado de Cerdo en Salsa con Verduras;125;162;19;15|Filete de Lomo de Cerdo + Patatas a la Provenzal ECO;111;175;23;15|Garbanzos Encebollados ECO;118;235;21;10|Guisadillo de Garbanzos ECO;128;256;20;10|Hamburguesa de Pavo con Salsa Rondeña;78;96;19;15|Huevo Cocido con Arroz Integral y Tomate;151;151;15;15|Huevo Cocido con Patatas a lo Pobre;123;141;17;15|Huevo Cocido con Pisto de Verduras;141;141;15;15|Jamoncito de Pollo al Horno en Salsa;81;130;23;15|Jamoncito de Pollo al Horno en Salsa + Patatas a la Provenzal ECO;144;228;19;12|Jureles al Horno Encebollados;88;126;21;15|Lentejas Guisadas con Arroz ECO;158;289;16;10|Lentejas con Verduras Cocidas ECO;125;231;20;10|Merluza a la Plancha al Ajo y Perejil;67;96;22;15|Merluza a la Plancha en Salsa Verde;72;103;21;15|Muslito de Pollo al Horno al Ajillo;52;83;37;23|Potaje de Alubias Blancas ECO;150;274;15;8|Potaje de Alubias Blancas con Calabacín ECO;163;299;13;7|Potaje de Lentejas con Calabaza ECO;158;289;14;8|Puchero ECO;154;283;14;8|Salmón al Vapor en Salsa de Cebolla y Eneldo;67;96;22;15|Solomillo de Pollo Rustido + Arroz Pilaf ECO;144;174;18;15|Tiras de Pollo al Horno Adobadas;62;119;23;12|Tortilla de Patatas con Calabacín;123;123;16;16|Tortilla de Patatas con Cebolla;113;113;12;12');
 
-let side=A('Patatas Panaderas al vapor ECO;63;84;19|Patatas a la Provenzal ECO;63;98;23|Arroz Pilaf ECO;68;81;18|Ensalada 4 estaciones;57;57;15|Ensalada Campestre;61;61;15|Ensalada Lechuga y maíz;65;65;15|Ensalada Mézclum;61;61;15|Ensalada Lechuga;61;61;15|Ensalada Clásica;61;61;15|Tomate Natural;61;61;15|Ensalada de Lechuga;61;61;15|Ensalada de Lechuga y Maíz;65;65;15|Patatas Panaderas al Horno a la Provenzal ECO;63;98;23');
+// Guarniciones: las raciones/barqueta de patatas y arroz son las del plato combinado en el que aparecen en el PDF.
+const side=A('Patatas Panaderas al Vapor ECO;63;84;19;14|Patatas a la Provenzal ECO;63;98;23;15|Arroz Pilaf ECO;68;81;18;15|Ensalada 4 Estaciones;57;57;15;15|Ensalada Campestre;61;61;15;15|Ensalada de Lechuga y Maíz;65;65;15;15|Ensalada Mézclum;61;61;15;15|Ensalada de Lechuga;61;61;15;15|Ensalada Clásica;61;61;15;15|Tomate Natural;61;61;15;15|Ensalada de Lechuga, Tomate y Huevo cocido;140;140;15;15');
 
-let selectedDishes = [null, null, null];
+const LISTS=[first,second,side];
+let selectedDishes=[null,null,null];
 
-function norm(s){
-  if (typeof s !== 'string') s = String(s || '');
-  return s.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-}
-
-// Baremos oficiales de clasificación IT6.5-23:
+// Baremos oficiales de clasificación IT6.5-23
 function catInfo(x){
-  if (x > 75) {
-    return { tag: 'MB', text: 'MB — Consumo MUY BAJO (> 75% residuo)', bg: 'bg-rose-50', border: 'border-rose-200', textCol: 'text-rose-700', badge: 'bg-rose-600 text-white', icon: 'fa-face-frown' };
-  }
-  if (x > 50) {
-    return { tag: 'B', text: 'B — Consumo BAJO (50 - 75% residuo)', bg: 'bg-amber-50', border: 'border-amber-200', textCol: 'text-amber-700', badge: 'bg-amber-500 text-white', icon: 'fa-face-meh' };
-  }
-  if (Math.abs(x - 50) < 0.01) {
-    return { tag: 'M', text: 'M — Consumo MODERADO (~ 50% residuo)', bg: 'bg-sky-50', border: 'border-sky-200', textCol: 'text-sky-700', badge: 'bg-sky-600 text-white', icon: 'fa-face-smile' };
-  }
-  if (x >= 25) {
-    return { tag: 'A', text: 'A — Consumo ALTO (25 - 50% residuo)', bg: 'bg-emerald-50', border: 'border-emerald-200', textCol: 'text-emerald-700', badge: 'bg-emerald-600 text-white', icon: 'fa-face-laugh-beam' };
-  }
-  return { tag: 'MA', text: 'MA — Consumo MUY ALTO (< 25% residuo)', bg: 'bg-emerald-100', border: 'border-emerald-300', textCol: 'text-emerald-800', badge: 'bg-emerald-700 text-white', icon: 'fa-face-grin-stars' };
+  if (x > 75) return { tag:'MB', text:'MB — Consumo MUY BAJO (> 75% residuo)', bg:'bg-rose-50', border:'border-rose-200', textCol:'text-rose-700', badge:'bg-rose-600 text-white' };
+  if (x > 50) return { tag:'B', text:'B — Consumo BAJO (50 - 75% residuo)', bg:'bg-amber-50', border:'border-amber-200', textCol:'text-amber-700', badge:'bg-amber-500 text-white' };
+  if (Math.abs(x - 50) < 0.01) return { tag:'M', text:'M — Consumo MODERADO (~ 50% residuo)', bg:'bg-sky-50', border:'border-sky-200', textCol:'text-sky-700', badge:'bg-sky-600 text-white' };
+  if (x >= 25) return { tag:'A', text:'A — Consumo ALTO (25 - 50% residuo)', bg:'bg-emerald-50', border:'border-emerald-200', textCol:'text-emerald-700', badge:'bg-emerald-600 text-white' };
+  return { tag:'MA', text:'MA — Consumo MUY ALTO (< 25% residuo)', bg:'bg-emerald-100', border:'border-emerald-300', textCol:'text-emerald-800', badge:'bg-emerald-700 text-white' };
 }
 
-function buildEmptyCardHtml(title){
-  return `
-    <div class="space-y-3 opacity-60">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">${title}</span>
-        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-400">Sin seleccionar</span>
-      </div>
-      <p class="text-xs text-slate-400 italic">No se ha seleccionado plato para esta categoría.</p>
-    </div>
-  `;
+// ---------- Búsqueda de platos del calendario en la tabla ----------
+function norm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function menuNorm(s){ return norm(s).replace(/\(guarnicion\)/g,'').replace(/\beco\b/g,'').replace(/\s+/g,' ').trim(); }
+// Nombres del calendario que difieren del nombre de la tabla (coincidencia exacta, sin aproximaciones).
+const MENU_ALIASES=Object.fromEntries(Object.entries({
+  'Albóndigas de Pollo al Horno a la Jardinera':'Albóndigas de Pollo a la Jardinera + Patatas Panaderas al Vapor ECO',
+  'Albóndigas de Cerdo al Horno con Salsa de Tomate':'Albóndigas de Cerdo con Tomate + Patatas Panaderas al Vapor ECO',
+  'Filete de Lomo de Cerdo al Horno':'Filete de Lomo de Cerdo + Patatas a la Provenzal ECO',
+  'Solomillo de Pollo Rustido':'Solomillo de Pollo Rustido + Arroz Pilaf ECO',
+  'Hamburguesa de Pavo a la Plancha con Salsa Rondeña':'Hamburguesa de Pavo con Salsa Rondeña',
+  'Patatas Panaderas al Horno a la Provenzal':'Patatas a la Provenzal ECO',
+  'Arroz Pilaf Salteado ECO':'Arroz Pilaf ECO',
+  'Crema de Zanahoria ECO':'Crema de Zanahorias ECO',
+  'Jureles al Horno':'Jureles al Horno Encebollados'
+}).map(([k,v])=>[menuNorm(k),v]));
+function findDishIndex(arr,name){
+  if(!name) return null;
+  const target=menuNorm(MENU_ALIASES[menuNorm(name)]||name);
+  const i=arr.findIndex(x=>menuNorm(x[0])===target);
+  return i>=0?i:null;
 }
 
-function updateClearBtn(idx){
-  const inp = $(['q1','q2','q3'][idx]);
-  const btn = $(['clr1','clr2','clr3'][idx]);
-  if (!inp || !btn) return;
-  if (inp.value.trim().length > 0) {
-    btn.classList.remove('hidden');
-  } else {
-    btn.classList.add('hidden');
-  }
+function getGrams(idx){
+  const d=LISTS[idx][selectedDishes[idx]];
+  return d ? { inf:d[1], prim:d[2], racInf:d[3], racPrim:d[4] } : null;
 }
 
-function getGrams(idx, arr){
-  let i = selectedDishes[idx];
-  if (i === null || i === undefined || !arr[i]) return null;
-  return { inf: arr[i][1], prim: arr[i][2], barqRac: arr[i][3] };
+// Raciones por barqueta cuando se mezclan ambos ciclos: media armónica ponderada por asistentes
+// (los faltantes no cuentan). Equivale a peso de barqueta / gramaje medio de la ración.
+// Sin asistentes introducidos se usa el valor de Primaria.
+function racMix(d,wI,wP){
+  const w=wI+wP;
+  return w>0 ? w/(wI/d[3]+wP/d[4]) : d[4];
 }
+const fmtRac=x=>x.toLocaleString('es-ES',{maximumFractionDigits:1});
+const weights=()=>[Z('as_i')||0,Z('as_p')||0];
 
 function grams(){
-  const lists = [first, second, side];
-  ['g1', 'g2', 'g3'].forEach((gid, idx) => {
-    let el = $(gid);
-    if (!el) return;
-    let g = getGrams(idx, lists[idx]);
-    el.textContent = g ? `Inf: ${g.inf}g | Prim: ${g.prim}g` : 'Gramaje: —';
-  });
-
-  ['bq-info1', 'bq-info2', 'bq-info3'].forEach((bqid, idx) => {
-    let el = $(bqid);
-    if (!el) return;
-    let g = getGrams(idx, lists[idx]);
-    let numBarq = Z(['b1','b2','b3'][idx]);
-    if (g) {
-      let totalRac = numBarq > 0 ? (numBarq * g.barqRac) : null;
-      el.textContent = `Barqueta: ${g.barqRac} rac. ${totalRac !== null ? `(${totalRac} rac. tot.)` : ''}`;
-    } else {
-      el.textContent = 'Barqueta: —';
-    }
+  const [wI,wP]=weights();
+  LISTS.forEach((list,idx)=>{
+    const n=idx+1, g=getGrams(idx);
+    $('g'+n).textContent = g ? `Inf: ${g.inf} g | Prim: ${g.prim} g` : 'Gramaje: —';
+    const bq=$('bq-info'+n);
+    if(!g){ bq.textContent='Barqueta: —'; return; }
+    const mix=racMix(list[selectedDishes[idx]],wI,wP);
+    const nb=Z('b'+n);
+    bq.textContent=`Barqueta: ${fmtRac(mix)} rac.`+(nb>0 ? ` · ${nb} barq. = ${Math.round(nb*mix)} rac.` : '');
   });
 }
+['b1','b2','b3','as_i','as_p'].forEach(id=>$(id).addEventListener('input',grams));
 
-['b1','b2','b3'].forEach(id => {
-  const el = $(id);
-  if (el) el.addEventListener('input', grams);
-});
-
-function renderSuggestions(idx, inputId, dropId, dataList){
-  const q = norm($(inputId).value.trim());
-  const drop = $(dropId);
-  
-  const matches = dataList
-    .map((item, originalIndex) => ({ name: item[0], index: originalIndex }))
-    .filter(item => !q || norm(item.name).includes(q));
-
-  if (matches.length === 0) {
-    drop.innerHTML = '<div class="p-3 text-xs text-slate-400 italic">No se encontraron platos que coincidan</div>';
-  } else {
-    drop.innerHTML = matches.map(item => 
-      `<div class="combo-item p-3 hover:bg-brand-50 cursor-pointer text-sm text-slate-700 font-medium transition flex items-center justify-between" data-index="${item.index}">
-        <span>${item.name}</span>
-        <i class="fa-solid fa-chevron-right text-xs text-slate-300"></i>
-      </div>`
-    ).join('');
-  }
-  
-  drop.classList.remove('hidden');
-
-  drop.querySelectorAll('.combo-item').forEach(el => {
-    el.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      const itemIndex = parseInt(el.getAttribute('data-index'), 10);
-      selectDish(idx, inputId, dropId, dataList, itemIndex);
-    });
-  });
-}
-
-function selectDish(idx, inputId, dropId, dataList, itemIndex){
-  selectedDishes[idx] = itemIndex;
-  $(inputId).value = dataList[itemIndex][0];
-  $(dropId).classList.add('hidden');
-  updateClearBtn(idx);
-  grams();
-}
-
-
+// ---------- Calendario ----------
 const menuCalendar = [
+  // MENÚ ORIGINAL (Octubre/Noviembre 2026)
   {date:'2026-10-05', label:'Lun 5 Oct', f:'Potaje de Lentejas con Calabaza ECO', s:'Jureles al Horno', g:'Ensalada de Lechuga y Maíz'},
   {date:'2026-10-06', label:'Mar 6 Oct', f:'Coditos con Tomate y Orégano ECO', s:'Alubias Pintas Guisadas con Arroz ECO', g:null},
   {date:'2026-10-07', label:'Mié 7 Oct', f:'Ensalada de Tomate y Queso Fresco', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas a la Provenzal ECO'},
@@ -594,141 +498,190 @@ const menuCalendar = [
   {date:'2026-11-03', label:'Mar 3 Nov', f:'Espirales Integrales con Tomate ECO', s:'Lentejas con Verduras Cocidas ECO', g:null},
   {date:'2026-11-04', label:'Mié 4 Nov', f:'Ensalada de Tomate y Queso Fresco', s:'Jamoncito de Pollo al Horno en Salsa', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
   {date:'2026-11-05', label:'Jue 5 Nov', f:'Puchero ECO', s:'Merluza a la Plancha al Ajo y Perejil', g:'Ensalada 4 Estaciones (guarnición)'},
-  {date:'2026-11-06', label:'Vie 6 Nov', f:'Arroz Hervido con Tomate Frito', s:'Tortilla de Patatas con Calabacín', g:'Ensalada de Lechuga y Maíz (guarnición)'}
+  {date:'2026-11-06', label:'Vie 6 Nov', f:'Arroz Hervido con Tomate Frito', s:'Tortilla de Patatas con Calabacín', g:'Ensalada de Lechuga y Maíz (guarnición)'},
+
+  // NUEVO MENÚ (Imagen 3er Periodo)
+  {date:'2026-11-09', label:'Lun 9 Nov', f:'Potaje de Alubias Blancas ECO', s:'Salmón al Vapor en Salsa de Cebolla y Eneldo', g:'Ensalada Clásica'},
+  {date:'2026-11-10', label:'Mar 10 Nov', f:'Crema de Calabacín ECO', s:'Hamburguesa de Pavo a la Plancha con Salsa Rondeña', g:'Ensalada Campestre'},
+  {date:'2026-11-11', label:'Mié 11 Nov', f:'Ensalada de Lechuga, Tomate y Maíz', s:'Solomillo de Pollo Rustido', g:'Arroz Pilaf Salteado ECO'},
+  {date:'2026-11-12', label:'Jue 12 Nov', f:'Arroz Integral a la Campesina ECO', s:'Garbanzos Encebollados ECO', g:null},
+  {date:'2026-11-13', label:'Vie 13 Nov', f:'Lacitos con Tomate ECO', s:'Tortilla de Patatas con Cebolla', g:'Ensalada de Lechuga'},
+  {date:'2026-11-16', label:'Lun 16 Nov', f:'Potaje de Lentejas con Calabaza ECO', s:'Merluza a la Plancha en Salsa Verde', g:'Ensalada de Lechuga y Maíz (guarnición)'},
+  {date:'2026-11-17', label:'Mar 17 Nov', f:'Espirales Integrales con Tomate ECO', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
+  {date:'2026-11-18', label:'Mié 18 Nov', f:'Ensalada de Tomate, Maíz y Queso Fresco', s:'Alubias Pintas Guisadas con Arroz ECO', g:null},
+  {date:'2026-11-19', label:'Jue 19 Nov', f:'Crema de Verduras ECO', s:'Jamoncito de Pollo al Horno en Salsa', g:'Ensalada Campestre'},
+  {date:'2026-11-20', label:'Vie 20 Nov', f:'Arroz Hervido con Tomate Frito', s:'Tortilla de Patatas con Calabacín', g:'Ensalada Mézclum'},
+  {date:'2026-11-23', label:'Lun 23 Nov', f:'Potaje de Alubias Blancas con Calabacín ECO', s:'Tortilla de Patatas con Cebolla', g:'Tomate Natural'},
+  {date:'2026-11-24', label:'Mar 24 Nov', f:'Crema de Zanahoria ECO', s:'Contramuslo de Pollo Asado', g:'Ensalada de Lechuga y Maíz (guarnición)'},
+  {date:'2026-11-25', label:'Mié 25 Nov', f:'Ensalada de Lechuga, Tomate y Huevo cocido', s:'Albóndigas de Pollo al Horno a la Jardinera', g:'Patatas Panaderas al Vapor ECO'},
+  {date:'2026-11-26', label:'Jue 26 Nov', f:'Arroz con Pisto ECO', s:'Guisadillo de Garbanzos ECO', g:null},
+  {date:'2026-11-27', label:'Vie 27 Nov', f:'Macarrones Integrales con Tomate ECO', s:'Jureles al Horno Encebollados', g:'Ensalada de Lechuga'},
+  {date:'2026-11-30', label:'Lun 30 Nov', f:'Puchero ECO', s:'Tortilla de Patatas con Calabacín', g:'Ensalada 4 Estaciones (guarnición)'},
+  {date:'2026-12-01', label:'Mar 1 Dic', f:'Espirales Integrales con Tomate ECO', s:'Merluza a la Plancha al Ajo y Perejil', g:'Ensalada Mézclum'},
+  {date:'2026-12-02', label:'Mié 2 Dic', f:'Ensalada de Tomate, Maíz y Queso Fresco', s:'Lentejas Guisadas con Arroz ECO', g:null},
+  {date:'2026-12-03', label:'Jue 3 Dic', f:'Crema de Calabaza ECO', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
+  {date:'2026-12-04', label:'Vie 4 Dic', f:'Arroz Hervido con Tomate Frito', s:'Tiras de Pollo al Horno Adobadas', g:'Ensalada Clásica'}
 ];
 
-function menuNorm(s){ return norm(String(s||'')).replace(/\beco\b/g,'').replace(/\s+/g,' ').trim(); }
-function findDishIndex(arr, name){
-  if(!name) return null;
-  const raw=String(name||'').trim().toLowerCase();
-  const target=menuNorm(menuAliases[raw] || name);
-  let i=arr.findIndex(x=>menuNorm(x[0])===target);
-  if(i>=0) return i;
-  i=arr.findIndex(x=>target.includes(menuNorm(x[0])) || menuNorm(x[0]).includes(target));
-  return i>=0?i:null;
-}
-const menuAliases={
-  'albóndigas de pollo al horno a la jardinera':'Albóndigas de Pollo a la Jardinera + Patatas Panaderas al vapor ECO',
-  'filete de lomo de cerdo al horno':'Filete lomo de cerdo + Patatas a la Provenzal ECO',
-  'albóndigas de cerdo al horno con salsa de tomate':'Albóndigas de cerdo con tomate + Patatas Panaderas al vapor ECO',
-  'patatas panaderas al horno a la provenzal':'Patatas a la Provenzal ECO',
-  'patatas panaderas al horno a la provenzal eco':'Patatas a la Provenzal ECO',
-  'ensalada de lechuga, tomate y huevo cocido':'Ensalada Lechuga, tomate y huevo cocido',
-  'ensalada de tomate y queso fresco':'Ensalada Tomate y queso fresco',
-  'ensalada de lechuga y maíz (guarnición)':'Ensalada de Lechuga y Maíz'
-};
-function clearDish(idx){ selectedDishes[idx]=null; const el=$(['q1','q2','q3'][idx]); if(el) el.value=''; }
-function loadMenu(menu){
-  currentSelectedDate=menu.date;
-  const names=[menu.f,menu.s,menu.g];
-  const lists=[first,second,side];
-  names.forEach((name,idx)=>{
-    const input=$(['q1','q2','q3'][idx]);
-    if(!input) return;
-    if(!name){ clearDish(idx); return; }
-    input.value=name;
-    const found=findDishIndex(lists[idx],name);
-    selectedDishes[idx]=found;
-  });
-  grams();
-  $('selected-date').textContent = menu.label + (menu.festivo ? ' • Festivo' : '');
-  const notice=$('menu-load-notice');
-  if(notice){
-    notice.querySelector('span').textContent = `Menú cargado: ${menu.label}`;
-    notice.classList.remove('hidden');
-  }
-}
 const monthNames=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 let currentSelectedDate=null;
 const HISTORY_KEY='calculadoraMenusHistorialV4';
+const INPUT_IDS=['as_i','na_i','as_p','na_p','s1_i','s1_p','s2_i','s2_p','s3_i','s3_p','b1','b2','b3'];
+
 function getHistory(){ try{const raw=localStorage.getItem(HISTORY_KEY); const parsed=raw?JSON.parse(raw):{}; return parsed && typeof parsed==='object' ? parsed : {};}catch(e){return {};} }
-function saveHistory(date,payload){ try{const h=getHistory(); h[date]={...payload,guardadoEn:new Date().toISOString()}; const serialized=JSON.stringify(h); localStorage.setItem(HISTORY_KEY,serialized); const check=JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}'); return !!check[date];}catch(e){console.error('No se pudo guardar el historial:',e); return false;} }
+function saveHistory(date,payload){
+  try{
+    const h=getHistory(); h[date]={...payload,guardadoEn:new Date().toISOString()};
+    localStorage.setItem(HISTORY_KEY,JSON.stringify(h));
+    return !!(JSON.parse(localStorage.getItem(HISTORY_KEY)||'{}')[date]);
+  }catch(e){ console.error('No se pudo guardar el historial:',e); return false; }
+}
 function hasHistory(date){ return !!getHistory()[date]; }
+function resetInputs(){ INPUT_IDS.forEach(id=>{ $(id).value=''; }); }
 function restoreHistory(date){
   const entry=getHistory()[date]; if(!entry || !entry.inputs) return false;
   const v=entry.inputs;
-  [['as_i',v.asInf],['na_i',v.naInf],['as_p',v.asPrim],['na_p',v.naPrim],['s1_i',v.sInf?.[0]],['s2_i',v.sInf?.[1]],['s3_i',v.sInf?.[2]],['s1_p',v.sPrim?.[0]],['s2_p',v.sPrim?.[1]],['s3_p',v.sPrim?.[2]],['b1',v.b?.[0]],['b2',v.b?.[1]],['b3',v.b?.[2]]].forEach(([id,val])=>{const el=$(id); if(el && val!==undefined) el.value=String(val);});
-  grams(); return true;
+  [['as_i',v.asInf],['na_i',v.naInf],['as_p',v.asPrim],['na_p',v.naPrim],['s1_i',v.sInf?.[0]],['s2_i',v.sInf?.[1]],['s3_i',v.sInf?.[2]],['s1_p',v.sPrim?.[0]],['s2_p',v.sPrim?.[1]],['s3_p',v.sPrim?.[2]],['b1',v.b?.[0]],['b2',v.b?.[1]],['b3',v.b?.[2]]]
+    .forEach(([id,val])=>{ if(val!==undefined) $(id).value=String(val); });
+  return true;
 }
+
+function showNotice(text,isError=false){
+  const n=$('menu-load-notice');
+  n.querySelector('span').textContent=text;
+  n.querySelector('i').className='fa-solid '+(isError?'fa-triangle-exclamation':'fa-circle-check');
+  [['bg-emerald-50','bg-rose-50'],['border-emerald-200','border-rose-200'],['text-emerald-700','text-rose-700']].forEach(([ok,ko])=>{
+    n.classList.toggle(ok,!isError); n.classList.toggle(ko,isError);
+  });
+  n.classList.remove('hidden');
+}
+
+// Carga el menú del día en los campos; devuelve los platos que no están en la tabla de raciones.
+function loadMenu(menu){
+  currentSelectedDate=menu.date;
+  const missing=[];
+  [menu.f,menu.s,menu.g].forEach((name,idx)=>{
+    const input=$('q'+(idx+1));
+    if(!name){ selectedDishes[idx]=null; input.value=''; return; }
+    input.value=name;
+    selectedDishes[idx]=findDishIndex(LISTS[idx],name);
+    if(selectedDishes[idx]===null) missing.push(name);
+  });
+  $('selected-date').textContent = menu.label + (menu.festivo ? ' • Festivo' : '');
+  return missing;
+}
+
 function dateFromISO(s){const [y,m,d]=s.split('-').map(Number);return new Date(Date.UTC(y,m-1,d));}
 function isoDate(d){return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;}
-function mondayOf(date){const d=new Date(date.getTime()); const day=d.getUTCDay(); const diff=day===0?-6:1-day; d.setUTCDate(d.getUTCDate()+diff); return d;}
+function mondayOf(date){const d=new Date(date.getTime()); const day=d.getUTCDay(); d.setUTCDate(d.getUTCDate()+(day===0?-6:1-day)); return d;}
 function buildWeekGroups(){
   const groups={};
-  menuCalendar.forEach(menu=>{
-    const monday=isoDate(mondayOf(dateFromISO(menu.date)));
-    (groups[monday] ||= []).push(menu);
-  });
+  menuCalendar.forEach(menu=>{ (groups[isoDate(mondayOf(dateFromISO(menu.date)))] ||= []).push(menu); });
   return Object.entries(groups).sort((a,b)=>a[0].localeCompare(b[0])).map(([monday,items])=>({monday,items:items.sort((a,b)=>a.date.localeCompare(b.date))}));
 }
 const availableWeeks=buildWeekGroups();
+function weekRange(week){ return [dateFromISO(week.items[0].date), dateFromISO(week.items[week.items.length-1].date)]; }
 function weekLabel(week){
-  const first=dateFromISO(week.items[0].date), last=dateFromISO(week.items[week.items.length-1].date);
-  const f=`${first.getUTCDate()} ${monthNames[first.getUTCMonth()]}`;
-  const l=`${last.getUTCDate()} ${monthNames[last.getUTCMonth()]}`;
-  return first.getUTCMonth()===last.getUTCMonth() ? `Semana del ${first.getUTCDate()} al ${last.getUTCDate()} de ${monthNames[first.getUTCMonth()]}` : `Semana del ${f} al ${l}`;
+  const [a,b]=weekRange(week);
+  const m=i=>monthNames[i].slice(0,3).toLowerCase();
+  return a.getUTCMonth()===b.getUTCMonth()
+    ? `Semana ${a.getUTCDate()}–${b.getUTCDate()} ${m(a.getUTCMonth())}`
+    : `Semana ${a.getUTCDate()} ${m(a.getUTCMonth())}–${b.getUTCDate()} ${m(b.getUTCMonth())}`;
 }
+// Semana actual; si hoy no tiene menú (fin de semana, fuera de calendario) la siguiente, o la última.
 function findInitialWeek(){
-  const today=new Date(); const todayIso=isoDate(new Date(Date.UTC(today.getFullYear(),today.getMonth(),today.getDate())));
-  const idx=availableWeeks.findIndex(w=>w.items.some(x=>x.date===todayIso));
-  return idx>=0 ? idx : 0;
+  const t=new Date(); const today=isoDate(new Date(Date.UTC(t.getFullYear(),t.getMonth(),t.getDate())));
+  const idx=availableWeeks.findIndex(w=>w.items[w.items.length-1].date>=today);
+  return idx>=0 ? idx : availableWeeks.length-1;
 }
 let currentWeekIndex=findInitialWeek();
-function renderCalendar(){
-  const host=$('menu-calendar'); const select=$('week-select');
-  if(!host||!select||!availableWeeks.length) return;
-  select.innerHTML=availableWeeks.map((w,i)=>{
-    const first=dateFromISO(w.items[0].date), last=dateFromISO(w.items[w.items.length-1].date);
-    const shortFirst=`${first.getUTCDate()} ${monthNames[first.getUTCMonth()].slice(0,3)}`;
-    const shortLast=`${last.getUTCDate()} ${monthNames[last.getUTCMonth()].slice(0,3)}`;
-    const shortLabel=first.getUTCMonth()===last.getUTCMonth() ? `${first.getUTCDate()}–${last.getUTCDate()} ${monthNames[first.getUTCMonth()].slice(0,3)}` : `${shortFirst}–${shortLast}`;
-    return `<option value="${i}">${shortLabel}</option>`;
-  }).join('');
+
+function onDayClick(menu){
+  if(currentSelectedDate===menu.date) return;   // no pisar lo que se esté escribiendo
+  resetInputs();                                 // evita arrastrar datos del día anterior
+  const missing=loadMenu(menu);
+  const restored=restoreHistory(menu.date);
+  grams();
+  if(missing.length) showNotice('Falta en la tabla de raciones: '+missing.join('; '),true);
+  else showNotice(restored ? 'Resultados anteriores recuperados del historial.' : `Menú cargado: ${menu.label}`);
+  if(restored) calculate(false); else { $('out').classList.add('hidden'); $('err').classList.add('hidden'); }
+  renderCalendar();
+}
+
+function renderCalendar(keepScroll=true){
+  const host=$('menu-calendar'), select=$('week-select');
+  const prev=host.querySelector('#week-days');
+  const savedLeft=keepScroll && prev ? prev.scrollLeft : null;
+  select.innerHTML=availableWeeks.map((w,i)=>`<option value="${i}">${weekLabel(w)}</option>`).join('');
   select.value=String(currentWeekIndex);
   const week=availableWeeks[currentWeekIndex];
-  const oldScroll=host.dataset.week===String(currentWeekIndex)?(host.querySelector('.week-strip')?.scrollLeft||0):0;
-  const esc=v=>String(v||'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  host.innerHTML='<div class="week-strip">'+week.items.map(menu=>`<button type="button" class="menu-week-day" data-date="${menu.date}" aria-pressed="${currentSelectedDate===menu.date}"><span class="day-head">${esc(menu.label)}${hasHistory(menu.date)?'<span title="Cálculo guardado">✓</span>':''}</span>${[['Primer plato',menu.f],['Segundo plato',menu.s],['Guarnición',menu.g]].map(([label,dish])=>`<span class="course"><span class="course-label">${label}</span>${esc(dish)}</span>`).join('')}</button>`).join('')+'</div>';
-  host.dataset.week=String(currentWeekIndex);host.querySelector('.week-strip').scrollLeft=oldScroll;
-  $('prev-week').disabled=currentWeekIndex===0;$('next-week').disabled=currentWeekIndex===availableWeeks.length-1;
-  host.querySelectorAll('[data-date]').forEach(btn=>btn.addEventListener('click',()=>{
-    const menu=menuCalendar.find(x=>x.date===btn.dataset.date); if(!menu) return;
-    currentSelectedDate=menu.date;
-    loadMenu(menu);
-    const restored=restoreHistory(menu.date);
-    if(restored){
-      const notice=$('menu-load-notice');
-      if(notice){notice.querySelector('span').textContent='Resultados anteriores recuperados del historial.'; notice.classList.remove('hidden');}
-      // Mostrar directamente los resultados guardados al seleccionar un día ya calculado.
-      $('go').click();
-    } else {
-      $('out').classList.add('hidden');
+  let html='<div id="week-days" class="relative flex gap-2 overflow-x-auto snap-x snap-mandatory py-1 px-1 -mx-1">';
+  week.items.forEach(menu=>{
+    const selected=currentSelectedDate===menu.date;
+    const done=hasHistory(menu.date);
+    const dish=(tag,name)=>`<li class="line-clamp-2" title="${name||''}"><span class="font-semibold text-slate-400">${tag}</span> ${name||'—'}</li>`;
+    html+=`<button type="button" data-date="${menu.date}" class="shrink-0 snap-start w-[72%] sm:w-auto sm:flex-1 sm:min-w-[160px] text-left rounded-xl border p-3 transition ${selected?'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500':'border-slate-200 bg-white hover:border-brand-300 hover:bg-brand-50/50'}">
+      <div class="flex items-center justify-between gap-2 mb-1.5">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span class="text-xs font-bold uppercase ${selected?'text-emerald-700':'text-brand-700'}">${menu.label}</span>
+          ${menu.festivo?'<span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">Festivo</span>':''}
+        </div>
+        ${done?'<i class="fa-solid fa-check text-emerald-600 text-xs shrink-0" title="Cálculo guardado"></i>':''}
+      </div>
+      <ul class="space-y-0.5 text-xs leading-snug text-slate-600">${dish('1º',menu.f)}${dish('2º',menu.s)}${dish('G',menu.g)}</ul>
+    </button>`;
+  });
+  html+='</div>';
+  host.innerHTML=html;
+
+  // Posición de la tira: conservar al repintar; si no, centrar el día seleccionado u hoy.
+  const sc=host.querySelector('#week-days');
+  if(sc){
+    if(savedLeft!==null) sc.scrollLeft=savedLeft;
+    else{
+      const t=new Date(); const today=isoDate(new Date(Date.UTC(t.getFullYear(),t.getMonth(),t.getDate())));
+      const target=sc.querySelector(`[data-date="${currentSelectedDate||''}"]`)||sc.querySelector(`[data-date="${today}"]`);
+      sc.scrollLeft=target ? Math.max(0,target.offsetLeft-(sc.clientWidth-target.offsetWidth)/2) : 0;
     }
-    renderCalendar();
-    requestAnimationFrame(()=>$('comensales').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}));
+  }
+  host.querySelectorAll('[data-date]').forEach(btn=>btn.addEventListener('click',()=>{
+    const menu=menuCalendar.find(x=>x.date===btn.dataset.date);
+    if(menu) onDayClick(menu);
   }));
 }
-$('prev-week')?.addEventListener('click',()=>{ if(currentWeekIndex>0){currentWeekIndex--; renderCalendar();}});
-$('next-week')?.addEventListener('click',()=>{ if(currentWeekIndex<availableWeeks.length-1){currentWeekIndex++; renderCalendar();}});
-$('week-select')?.addEventListener('change',e=>{currentWeekIndex=Number(e.target.value);renderCalendar();});
-renderCalendar();
+$('prev-week').addEventListener('click',()=>{ if(currentWeekIndex>0){currentWeekIndex--; renderCalendar(false);}});
+$('next-week').addEventListener('click',()=>{ if(currentWeekIndex<availableWeeks.length-1){currentWeekIndex++; renderCalendar(false);}});
+$('week-select').addEventListener('change',e=>{currentWeekIndex=Number(e.target.value);renderCalendar(false);});
+renderCalendar(false);
 
-function escapeResultText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function buildCycleCardHtml(cycle, res, dishes, accent){
+// ---------- Cálculo y resultados ----------
+function calcDish(as,na,d){
+  const e=(as+na)*d.g/1000;
+  const ns=na*d.g/1000;
+  const sp=d.sp;
+  const servidos=e-ns;
+  const residuos=ns+sp;
+  const pct=servidos>0 ? residuos/servidos*100 : 0;
+  return {hasAsistentes:as>0,e,ns,sp,residuos,servidos,pct,info:catInfo(pct)};
+}
+function calcCycle(as,na,dishes){
+  return { hasAsistentes:as>0, totalRaciones:as+na, dishes:dishes.map(d=>calcDish(as,na,d)) };
+}
+
+function buildCycleCardHtml(cycle,res,dishes,accent){
   const icon = cycle === 'Infantil' ? 'fa-child' : 'fa-graduation-cap';
-  const dishCards = dishes.map((d, i) => {
-    const r = res.dishes[i];
-    if(!r) return '';
+  const dishCards = dishes.map((d,i)=>{
+    const r=res.dishes[i];
     return `
       <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-3">
         <div class="flex items-center justify-between gap-2">
           <div class="font-bold text-slate-800 flex items-center gap-2">
             <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white border border-slate-200 text-xs">${i+1}</span>
-            <span class="block min-w-0"><span class="block text-[10px] uppercase tracking-wide text-slate-500 font-semibold">${escapeResultText(d.title)}</span><span class="block text-sm sm:text-base font-extrabold text-slate-900">${escapeResultText(d.name || d.title)}</span></span>
+            <span class="block min-w-0"><span class="block text-[10px] uppercase tracking-wide text-slate-500 font-semibold">Plato</span><span class="block text-sm sm:text-base font-extrabold text-slate-900">${d.title}</span></span>
           </div>
-          <span class="text-xs font-semibold px-2.5 py-1 rounded-full ${r.info.badge}">${r.info.tag} — ${P(r.pct)}</span>
+          ${r.hasAsistentes ? `<span class="text-xs font-semibold px-2.5 py-1 rounded-full ${r.info.badge}">${r.info.tag} — ${P(r.pct)}</span>` : ''}
         </div>
-        ${r.hasComensales ? `
+        ${r.hasAsistentes ? `
         <div class="grid grid-cols-2 gap-2 text-xs">
           <div class="rounded-lg bg-white border border-slate-200 p-2.5"><span class="text-slate-500">Kg totales</span><strong class="block text-slate-900 mt-0.5">${K(r.e)}</strong></div>
           <div class="rounded-lg bg-white border border-slate-200 p-2.5"><span class="text-slate-500">Kg no servidos</span><strong class="block text-slate-900 mt-0.5">${K(r.ns)}</strong></div>
@@ -736,11 +689,7 @@ function buildCycleCardHtml(cycle, res, dishes, accent){
           <div class="rounded-lg ${r.info.bg} border ${r.info.border} p-2.5"><span class="${r.info.textCol}">% de residuo</span><strong class="block ${r.info.textCol} mt-0.5">${P(r.pct)}</strong></div>
         </div>
         <div class="rounded-lg ${r.info.bg} border ${r.info.border} p-2.5 text-center font-semibold text-xs ${r.info.textCol}">Clasificación: ${r.info.text}</div>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <div class="rounded-lg bg-white border border-brand-100 p-2.5 text-slate-600"><span class="font-semibold text-brand-800">Raciones por barqueta</span><strong class="block text-slate-900 mt-0.5">${d.rac}</strong></div>
-          <div class="rounded-lg bg-brand-50 border border-brand-100 p-2.5 text-brand-800"><span class="font-semibold">Raciones totales en barquetas</span><strong class="block mt-0.5">${(Number(d.barq)||0) * (Number(d.rac)||0)}</strong><span class="text-[10px] text-brand-700">${Number(d.barq)||0} barquetas × ${Number(d.rac)||0}</span></div>
-        </div>
-        ` : '<div class="text-sm text-slate-400 italic">No hay comensales registrados para este ciclo.</div>'}
+        ` : '<div class="text-sm text-slate-400 italic">No hay asistentes registrados para este ciclo.</div>'}
       </div>`;
   }).join('');
 
@@ -754,120 +703,95 @@ function buildCycleCardHtml(cycle, res, dishes, accent){
     </div>`;
 }
 
-function calcDish(as, na, d){
-  const e=(as+na)*d.g/1000;
-  const ns=na*d.g/1000;
-  const sp=d.sp;
-  const servidos=e-ns;
-  const residuos=ns+sp;
-  const pct=servidos>0 ? residuos/servidos*100 : 0;
-  return {hasComensales:(as+na)>0,e,ns,sp,residuos,servidos,pct,info:catInfo(pct)};
+const scrollToEl=(el,block)=>el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block});
+function buildBarquetasHtml(rows){
+  const items=rows.map(r=>`
+    <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-3 text-xs min-w-0">
+      <div class="text-[10px] uppercase tracking-wide text-slate-500 font-semibold">${r.title}</div>
+      <div class="font-bold text-slate-800 text-sm truncate" title="${r.name}">${r.name}</div>
+      <div class="mt-1 text-slate-600">${r.barq} barq. × ${fmtRac(r.mix)} rac. = <strong class="text-brand-800">${Math.round(r.barq*r.mix)} raciones</strong></div>
+    </div>`).join('');
+  return `<div class="flex flex-wrap items-center gap-x-2 font-bold text-brand-800"><i class="fa-solid fa-box"></i><span>Barquetas</span><span class="text-xs font-semibold text-slate-400">raciones por barqueta: media ponderada Infantil + Primaria</span></div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">${items}</div>`;
 }
-
-function calcCycle(as, na, dishes){
-  return {
-    hasComensales:(as+na)>0,
-    totalRaciones:as+na,
-    dishes:dishes.map(d=>calcDish(as,na,d))
-  };
-}
-
-$('go').onclick = () => {
-  let asInf = Z('as_i'), naInf = Z('na_i');
-  let asPrim = Z('as_p'), naPrim = Z('na_p');
-
-  // NS (kg no servidos) NO se introduce manualmente: se calcula con los faltantes y el gramaje.
-  let sInf = [ Z('s1_i'), Z('s2_i'), Z('s3_i') ];
-  let sPrim = [ Z('s1_p'), Z('s2_p'), Z('s3_p') ];
-  let b = [ Z('b1'), Z('b2'), Z('b3') ];
-  
-  const errContainer = $('err');
-  const errText = $('err-text');
-  errContainer.classList.add('hidden');
+function showError(msg){
+  $('err-text').textContent=msg;
+  $('err').classList.remove('hidden');
   $('out').classList.add('hidden');
-  
-  if (selectedDishes[0] === null || selectedDishes[1] === null) {
-    errText.textContent = 'Selecciona una fecha con menú en el calendario para cargar el Primer y Segundo plato.';
-    errContainer.classList.remove('hidden');
-    return;
+  scrollToEl($('err'),'center');
+  return false;
+}
+
+// save=false: solo muestra resultados (p. ej. al reabrir un día ya guardado).
+function calculate(save=true){
+  $('err').classList.add('hidden');
+  $('out').classList.add('hidden');
+
+  // Platos del menú que no están en la tabla de raciones
+  const missing=[0,1,2].filter(i=>selectedDishes[i]===null && $('q'+(i+1)).value.trim()).map(i=>$('q'+(i+1)).value.trim());
+  if(missing.length) return showError('Estos platos no están en la tabla de raciones: '+missing.join('; ')+'.');
+  if(selectedDishes[0]===null || selectedDishes[1]===null) return showError('Selecciona una fecha con menú en el calendario para cargar el Primer y Segundo plato.');
+
+  const asInf=Z('as_i'), naInf=Z('na_i'), asPrim=Z('as_p'), naPrim=Z('na_p');
+  const sInf=['s1_i','s2_i','s3_i'].map(Z), sPrim=['s1_p','s2_p','s3_p'].map(Z), b=['b1','b2','b3'].map(Z);
+
+  if([asInf,naInf,asPrim,naPrim,...sInf,...sPrim,...b].some(x=>!Number.isFinite(x)||x<0))
+    return showError('Introduce valores válidos (números sin signo negativo, con coma o punto para decimales).');
+  if(![asInf,naInf,asPrim,naPrim].every(Number.isInteger))
+    return showError('Asistentes y faltantes deben ser números enteros.');
+  if(asInf<=0 && asPrim<=0)
+    return showError('Debes introducir al menos los asistentes de Infantil o de Primaria.');
+
+  const slots=[
+    {title:'Primer plato',arr:first},{title:'Segundo plato',arr:second},{title:'Guarnición',arr:side}
+  ].map((s,i)=>({...s,idx:selectedDishes[i],spI:sInf[i],spP:sPrim[i],barq:b[i]})).filter(s=>s.idx!==null);
+
+  // Las sobras (kg) no pueden superar lo servido a cada grupo.
+  for(const s of slots){
+    const d=s.arr[s.idx];
+    if(s.spI>asInf*d[1]/1000+1e-9 || s.spP>asPrim*d[2]/1000+1e-9)
+      return showError('Revisa las sobras. No pueden superar los kg correspondientes a las raciones de los asistentes de Infantil o Primaria.');
   }
 
-  if ((asInf <= 0 && asPrim <= 0)) {
-    errText.textContent = 'Debes introducir al menos los asistentes de Infantil o de Primaria.';
-    errContainer.classList.remove('hidden');
-    return;
-  }
-
-  if ([asInf, naInf, asPrim, naPrim, ...sInf, ...sPrim, ...b].some(x => !Number.isFinite(x) || x < 0)) {
-    errText.textContent = 'Introduce valores válidos. Los valores no pueden ser negativos.';
-    errContainer.classList.remove('hidden');
-    return;
-  }
-
-  // Las sobras se registran en kg, pero no pueden superar lo servido a cada grupo.
-  const selected = [
-    [first, selectedDishes[0], sInf[0], sPrim[0]],
-    [second, selectedDishes[1], sInf[1], sPrim[1]],
-    [side, selectedDishes[2], sInf[2], sPrim[2]]
-  ];
-  for (const [arr, idx, spI, spP] of selected) {
-    if (idx === null || idx === undefined || !arr[idx]) continue;
-    const gI = arr[idx][1], gP = arr[idx][2];
-    const maxI = asInf * gI / 1000;
-    const maxP = asPrim * gP / 1000;
-    if (spI > maxI + 1e-9 || spP > maxP + 1e-9) {
-      errText.textContent = 'Revisa las sobras. No pueden superar los kg correspondientes a las raciones de los asistentes de Infantil o Primaria.';
-      errContainer.classList.remove('hidden');
-      return;
-    }
-  }
-  
-  const dishData = [
-    { title:'Primer plato', arr:first, idx:selectedDishes[0], spI:sInf[0], spP:sPrim[0], barq:b[0] },
-    { title:'Segundo plato', arr:second, idx:selectedDishes[1], spI:sInf[1], spP:sPrim[1], barq:b[1] },
-    { title:'Guarnición', arr:side, idx:selectedDishes[2], spI:sInf[2], spP:sPrim[2], barq:b[2] }
-  ];
-  const infDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,name:d.arr[d.idx][0],g:d.arr[d.idx][1],rac:d.arr[d.idx][3],sp:d.spI,barq:d.barq}));
-  const primDishes=dishData.filter(d=>d.idx!==null && d.arr[d.idx]).map(d=>({title:d.title,name:d.arr[d.idx][0],g:d.arr[d.idx][2],rac:d.arr[d.idx][3],sp:d.spP,barq:d.barq}));
+  const infDishes=slots.map(s=>{const d=s.arr[s.idx];return {title:s.title,g:d[1],sp:s.spI};});
+  const primDishes=slots.map(s=>{const d=s.arr[s.idx];return {title:s.title,g:d[2],sp:s.spP};});
   const resInf=calcCycle(asInf,naInf,infDishes);
   const resPrim=calcCycle(asPrim,naPrim,primDishes);
   $('c1').innerHTML=buildCycleCardHtml('Infantil',resInf,infDishes,{title:'text-sky-800'});
   $('c2').innerHTML=buildCycleCardHtml('Primaria',resPrim,primDishes,{title:'text-indigo-800'});
+  const barqRows=slots.filter(s=>s.barq>0).map(s=>({title:s.title,name:s.arr[s.idx][0],barq:s.barq,mix:racMix(s.arr[s.idx],asInf,asPrim)}));
+  $('c3').innerHTML=barqRows.length ? buildBarquetasHtml(barqRows) : '';
+  $('c3').classList.toggle('hidden',!barqRows.length);
+  $('out').classList.remove('hidden');
+  $('out').classList.add('grid');
+  if(save) scrollToEl($('out'),'start');   // solo si el usuario pulsa Calcular
 
-  if(currentSelectedDate){
+  if(save && currentSelectedDate){
     const saved=saveHistory(currentSelectedDate,{
       date:currentSelectedDate,
       menu:menuCalendar.find(x=>x.date===currentSelectedDate)||null,
       inputs:{asInf,naInf,asPrim,naPrim,sInf,sPrim,b},
       resultados:{inf:resInf,prim:resPrim}
     });
-    const notice=$('menu-load-notice');
-    if(notice){
-      notice.querySelector('span').textContent=saved ? 'Cálculo guardado en el historial de este navegador.' : 'ERROR: el navegador no permite guardar el historial. Abre la calculadora desde GitHub Pages y no en modo incógnito.';
-      notice.classList.remove('hidden');
-      notice.classList.toggle('bg-rose-50',!saved); notice.classList.toggle('border-rose-200',!saved); notice.classList.toggle('text-rose-700',!saved);
-    }
+    showNotice(saved ? 'Cálculo guardado en el historial de este navegador.' : 'ERROR: el navegador no permite guardar el historial. Abre la calculadora desde GitHub Pages y no en modo incógnito.', !saved);
     if(!saved) alert('No se ha podido guardar el historial en este navegador. Comprueba que no estás en modo incógnito y que has abierto la calculadora desde GitHub Pages.');
     renderCalendar();
-  } else {
-    alert('Selecciona primero un día del calendario. El historial se guarda asociado a una fecha.');
   }
-  
-  $('out').classList.remove('hidden');
-  $('out').classList.add('grid');
-};
+  return true;
+}
 
-$('clear').onclick = () => {
+$('go').onclick=()=>calculate(true);
+
+$('clear').onclick=()=>{
   if(!confirm('¿Seguro que quieres limpiar todos los datos introducidos? El historial guardado de los días no se borrará.')) return;
-  ['as_i','na_i','as_p','na_p','s1_i','s1_p','s2_i','s2_p','s3_i','s3_p','b1','b2','b3','q1','q2','q3'].forEach(x => {
-    let el = $(x);
-    if (el) el.value = '';
-  });
-  selectedDishes = [null, null, null];
-  [0, 1, 2].forEach(updateClearBtn);
-  $('out').classList.add('hidden');
-  $('err').classList.add('hidden');
+  resetInputs();
+  ['q1','q2','q3'].forEach(id=>{ $(id).value=''; });
+  selectedDishes=[null,null,null];
+  currentSelectedDate=null;
+  $('selected-date').textContent='Sin fecha seleccionada';
+  ['menu-load-notice','out','err'].forEach(id=>$(id).classList.add('hidden'));
   grams();
+  renderCalendar();
 };
 </script>
 
