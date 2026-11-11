@@ -72,18 +72,20 @@
   html.dark body .bg-slate-100 { background-color:#1e2a45; }
   html.dark body .bg-slate-200 { background-color:#2b3a5c; }
   html.dark body .bg-slate-50 { background-color:#18233b; }
-  html.dark body .bg-slate-50\/90 { background-color:rgba(11,18,32,0.9); }
   html.dark body .bg-white { background-color:#121b2e; }
+  html.dark body .bg-white\/90 { background-color:rgba(18,27,46,0.9); }
   html.dark body .border-amber-200 { border-color:rgba(245,158,11,0.3); }
   html.dark body .border-emerald-200 { border-color:rgba(16,185,129,0.3); }
   html.dark body .border-emerald-300 { border-color:rgba(16,185,129,0.4); }
   html.dark body .border-rose-200 { border-color:rgba(244,63,94,0.3); }
   html.dark body .border-sky-200 { border-color:rgba(14,165,233,0.3); }
+  html.dark body .border-slate-100 { border-color:#1f2b46; }
   html.dark body .border-slate-200 { border-color:#2a3858; }
   html.dark body .focus\:bg-white:focus { background-color:#121b2e; }
   html.dark body .hover\:bg-slate-100:hover { background-color:#1e2a45; }
   html.dark body .hover\:bg-slate-200:hover { background-color:#2b3a5c; }
   html.dark body .hover\:bg-slate-50\/80:hover { background-color:rgba(24,35,59,0.8); }
+  html.dark body .ring-slate-900\/10 { --tw-ring-color:rgba(255,255,255,.08); }
   html.dark body .ring-slate-900\/5 { --tw-ring-color:rgba(255,255,255,.08); }
   html.dark body .text-amber-700 { color:#fcd34d; }
   html.dark body .text-amber-800 { color:#fcd34d; }
@@ -123,7 +125,7 @@
     </div>
   </div>
 </header>
-<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-20 sm:py-8 flex-1 w-full space-y-4 sm:space-y-5">
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24 sm:pt-8 flex-1 w-full space-y-4 sm:space-y-5">
 
   <!-- Instrucciones -->
   <details class="group bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
@@ -139,7 +141,7 @@
         <li><strong>Comensales:</strong> anota los asistentes (y los faltantes, si los hay) de Infantil y Primaria.</li>
         <li><strong>Menú del día:</strong> pulsa un día del calendario (con las flechas cambias de semana). El primer plato, el segundo y la guarnición se cargan solos.</li>
         <li><strong>Barquetas y sobras:</strong> introduce las barquetas recibidas y las sobras (kg) de cada plato.</li>
-        <li><strong>Calcular:</strong> pulsa Calcular para ver el % de residuo y la clasificación de cada plato, por ciclo.</li>
+        <li><strong>Calcular:</strong> pulsa el botón de la calculadora (barra de abajo) para ver el % de residuo y la clasificación de cada plato, por ciclo.</li>
       </ol>
       <div class="rounded-xl bg-slate-50 p-4 text-xs text-slate-700 space-y-1.5">
         <p class="font-semibold flex items-center gap-2"><i class="fa-solid fa-calculator text-brand-500"></i> Cálculo automático</p>
@@ -165,7 +167,7 @@
   </details>
 
   <!-- Calendario del menú oficial -->
-  <section class="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-5 space-y-3">
+  <section id="sec-calendario" class="scroll-mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-5 space-y-3">
     <div class="flex items-center justify-between gap-2 flex-wrap">
       <div class="min-w-0">
         <p class="text-sm font-semibold text-slate-800 flex items-center gap-2">
@@ -186,7 +188,7 @@
   </section>
 
   <!-- Comensales -->
-  <section class="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-6 space-y-4">
+  <section id="sec-comensales" class="scroll-mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-6 space-y-4">
     <div class="flex items-center gap-3">
       <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 font-semibold flex items-center justify-center text-sm">1</div>
       <div>
@@ -228,165 +230,131 @@
     </div>
   </section>
 
-  <!-- Primer plato -->
-  <details open class="group bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
-    <summary class="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
-      <span class="flex items-center gap-3 min-w-0">
-        <span class="w-8 h-8 shrink-0 rounded-lg bg-brand-50 text-brand-700 font-semibold flex items-center justify-center text-sm">2</span>
-        <span class="min-w-0">
-          <span class="block text-base font-semibold text-slate-900">Primer plato</span>
-          <span id="sum1" class="block text-xs text-slate-500 truncate group-open:hidden">Selecciona un día del calendario</span>
-        </span>
-      </span>
-      <i class="fa-solid fa-chevron-down text-xs text-slate-400 shrink-0 transition group-open:rotate-180"></i>
-    </summary>
-    <div class="px-4 sm:px-5 pb-4 sm:pb-5 space-y-4">
-      <div class="flex items-center gap-2 flex-wrap">
+  <!-- Platos del día -->
+  <section id="sec-platos" class="scroll-mt-4 bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-6">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 font-semibold flex items-center justify-center text-sm">2</div>
+      <div>
+        <h2 class="text-base font-semibold text-slate-900">Platos del día</h2>
+        <p class="text-xs text-slate-500">Barquetas y sobras de cada plato</p>
+      </div>
+    </div>
+    <div id="platos-empty" class="rounded-xl bg-slate-50 p-4 text-sm text-slate-500 flex items-center gap-3">
+      <i class="fa-solid fa-hand-pointer text-brand-500"></i>
+      <span>Selecciona un día del calendario para cargar los platos.</span>
+    </div>
+    <div id="platos-rows" class="hidden">
+    <div id="row1" class="">
+      <input id="q1" type="hidden">
+      <p class="text-xs text-slate-500">Primer plato</p>
+      <p id="sum1" class="text-sm sm:text-base font-semibold text-slate-900 leading-snug"></p>
+      <div class="mt-2 flex items-center gap-2 flex-wrap">
         <span id="g1" class="text-xs font-medium px-3 py-1 rounded-full bg-brand-50 text-brand-700">Gramaje: —</span>
         <span id="bq-info1" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600">Barqueta: —</span>
       </div>
-      <div class="grid grid-cols-3 md:grid-cols-12 gap-3 items-end">
-        <div class="col-span-3 md:col-span-6">
-          <label for="q1" class="block text-xs font-medium text-slate-500 mb-1.5">Primer plato del día</label>
+      <div class="mt-3 grid grid-cols-3 gap-2 sm:gap-3">
+        <div class="min-w-0">
+          <label for="b1" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Nº barquetas</label>
           <div class="relative">
-            <input id="q1" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition p-3 pl-10 font-medium placeholder:font-normal placeholder:text-slate-400">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-calendar-check text-sm"></i></div>
+            <input id="b1" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">barq.</span>
           </div>
         </div>
-      <div class="md:col-span-2">
-        <label for="b1" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Nº barquetas</label>
-        <div class="relative">
-          <input id="b1" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">barq.</span>
+        <div class="min-w-0">
+          <label for="s1_i" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras infantil</label>
+          <div class="relative">
+            <input id="s1_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2">
-        <label for="s1_i" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras infantil</label>
-        <div class="relative">
-          <input id="s1_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+        <div class="min-w-0">
+          <label for="s1_p" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras primaria</label>
+          <div class="relative">
+            <input id="s1_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2">
-        <label for="s1_p" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras primaria</label>
-        <div class="relative">
-          <input id="s1_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
-        </div>
-      </div>
       </div>
     </div>
-  </details>
-
-  <!-- Segundo plato -->
-  <details open class="group bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
-    <summary class="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
-      <span class="flex items-center gap-3 min-w-0">
-        <span class="w-8 h-8 shrink-0 rounded-lg bg-brand-50 text-brand-700 font-semibold flex items-center justify-center text-sm">3</span>
-        <span class="min-w-0">
-          <span class="block text-base font-semibold text-slate-900">Segundo plato</span>
-          <span id="sum2" class="block text-xs text-slate-500 truncate group-open:hidden">Selecciona un día del calendario</span>
-        </span>
-      </span>
-      <i class="fa-solid fa-chevron-down text-xs text-slate-400 shrink-0 transition group-open:rotate-180"></i>
-    </summary>
-    <div class="px-4 sm:px-5 pb-4 sm:pb-5 space-y-4">
-      <div class="flex items-center gap-2 flex-wrap">
+    <div id="row2" class="mt-4 pt-4 border-t border-slate-100">
+      <input id="q2" type="hidden">
+      <p class="text-xs text-slate-500">Segundo plato</p>
+      <p id="sum2" class="text-sm sm:text-base font-semibold text-slate-900 leading-snug"></p>
+      <div class="mt-2 flex items-center gap-2 flex-wrap">
         <span id="g2" class="text-xs font-medium px-3 py-1 rounded-full bg-brand-50 text-brand-700">Gramaje: —</span>
         <span id="bq-info2" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600">Barqueta: —</span>
       </div>
-      <div class="grid grid-cols-3 md:grid-cols-12 gap-3 items-end">
-        <div class="col-span-3 md:col-span-6">
-          <label for="q2" class="block text-xs font-medium text-slate-500 mb-1.5">Segundo plato del día</label>
+      <div class="mt-3 grid grid-cols-3 gap-2 sm:gap-3">
+        <div class="min-w-0">
+          <label for="b2" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Nº barquetas</label>
           <div class="relative">
-            <input id="q2" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition p-3 pl-10 font-medium placeholder:font-normal placeholder:text-slate-400">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-calendar-check text-sm"></i></div>
+            <input id="b2" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">barq.</span>
           </div>
         </div>
-      <div class="md:col-span-2">
-        <label for="b2" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Nº barquetas</label>
-        <div class="relative">
-          <input id="b2" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">barq.</span>
+        <div class="min-w-0">
+          <label for="s2_i" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras infantil</label>
+          <div class="relative">
+            <input id="s2_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2">
-        <label for="s2_i" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras infantil</label>
-        <div class="relative">
-          <input id="s2_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+        <div class="min-w-0">
+          <label for="s2_p" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras primaria</label>
+          <div class="relative">
+            <input id="s2_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2">
-        <label for="s2_p" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras primaria</label>
-        <div class="relative">
-          <input id="s2_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
-        </div>
-      </div>
       </div>
     </div>
-  </details>
-
-  <!-- Guarnición o ensalada -->
-  <details open class="group bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
-    <summary class="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
-      <span class="flex items-center gap-3 min-w-0">
-        <span class="w-8 h-8 shrink-0 rounded-lg bg-brand-50 text-brand-700 font-semibold flex items-center justify-center text-sm">4</span>
-        <span class="min-w-0">
-          <span class="block text-base font-semibold text-slate-900">Guarnición o ensalada <span class="text-xs font-normal text-slate-400">(opcional)</span></span>
-          <span id="sum3" class="block text-xs text-slate-500 truncate group-open:hidden">Selecciona un día del calendario</span>
-        </span>
-      </span>
-      <i class="fa-solid fa-chevron-down text-xs text-slate-400 shrink-0 transition group-open:rotate-180"></i>
-    </summary>
-    <div class="px-4 sm:px-5 pb-4 sm:pb-5 space-y-4">
-      <div class="flex items-center gap-2 flex-wrap">
+    <div id="row3" class="mt-4 pt-4 border-t border-slate-100">
+      <input id="q3" type="hidden">
+      <p class="text-xs text-slate-500">Guarnición / ensalada <span class="text-slate-400">(opcional)</span></p>
+      <p id="sum3" class="text-sm sm:text-base font-semibold text-slate-900 leading-snug"></p>
+      <div class="mt-2 flex items-center gap-2 flex-wrap">
         <span id="g3" class="text-xs font-medium px-3 py-1 rounded-full bg-brand-50 text-brand-700">Gramaje: —</span>
         <span id="bq-info3" class="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 text-slate-600">Barqueta: —</span>
       </div>
-      <div class="grid grid-cols-3 md:grid-cols-12 gap-3 items-end">
-        <div class="col-span-3 md:col-span-6">
-          <label for="q3" class="block text-xs font-medium text-slate-500 mb-1.5">Guarnición / ensalada del día</label>
+      <div class="mt-3 grid grid-cols-3 gap-2 sm:gap-3">
+        <div class="min-w-0">
+          <label for="b3" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Nº barquetas</label>
           <div class="relative">
-            <input id="q3" type="text" readonly tabindex="-1" placeholder="Selecciona una fecha del calendario" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition p-3 pl-10 font-medium placeholder:font-normal placeholder:text-slate-400">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><i class="fa-solid fa-calendar-check text-sm"></i></div>
+            <input id="b3" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">barq.</span>
           </div>
         </div>
-      <div class="md:col-span-2">
-        <label for="b3" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Nº barquetas</label>
-        <div class="relative">
-          <input id="b3" type="text" inputmode="decimal" placeholder="5" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">barq.</span>
+        <div class="min-w-0">
+          <label for="s3_i" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras infantil</label>
+          <div class="relative">
+            <input id="s3_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2">
-        <label for="s3_i" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras infantil</label>
-        <div class="relative">
-          <input id="s3_i" type="text" inputmode="decimal" placeholder="0,4" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+        <div class="min-w-0">
+          <label for="s3_p" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras primaria</label>
+          <div class="relative">
+            <input id="s3_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
+            <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
+          </div>
         </div>
-      </div>
-      <div class="md:col-span-2">
-        <label for="s3_p" class="block text-[11px] sm:text-xs leading-tight font-medium text-slate-500 mb-1.5">Sobras primaria</label>
-        <div class="relative">
-          <input id="s3_p" type="text" inputmode="decimal" placeholder="0,8" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-base sm:text-sm rounded-xl focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 transition py-3 pl-2.5 pr-9 sm:pl-3 sm:pr-10">
-          <span class="absolute inset-y-0 right-0 pr-2 sm:pr-3.5 flex items-center pointer-events-none text-xs text-slate-400 font-medium">kg</span>
-        </div>
-      </div>
       </div>
     </div>
-  </details>
+    </div>
+  </section>
 
-  <div id="action-bar" class="sticky bottom-0 z-20 -mx-4 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex gap-3 bg-slate-50/90 backdrop-blur border-t border-slate-200 sm:static sm:mx-0 sm:px-0 sm:pt-2 sm:pb-0 sm:bg-transparent sm:backdrop-blur-none sm:border-0">
-    <button id="go" class="flex-1 min-w-0 bg-brand-700 hover:bg-brand-800 active:scale-[0.99] text-white font-semibold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-center gap-2">
-      <i class="fa-solid fa-calculator"></i>
-      <span class="sm:hidden">Calcular</span><span class="hidden sm:inline">Calcular y rellenar registros</span>
-    </button>
-    <button id="clear" class="flex-1 min-w-0 bg-red-600 hover:bg-red-700 active:scale-[0.99] text-white font-semibold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl shadow-sm hover:shadow-md transition flex items-center justify-center gap-2">
-      <i class="fa-solid fa-rotate-left"></i>
-      <span class="sm:hidden">Limpiar</span><span class="hidden sm:inline">Limpiar todo</span>
-    </button>
+  <div id="action-bar" class="fixed left-1/2 -translate-x-1/2 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-30 w-[calc(100%-1.5rem)] max-w-md sm:w-fit sm:max-w-none flex items-center gap-2 p-1.5 sm:gap-3 sm:px-3 sm:py-2.5 rounded-2xl bg-white/90 backdrop-blur-md ring-1 ring-slate-900/10 shadow-lg">
+    <nav id="nav-scroll" aria-label="Secciones de la página" class="flex flex-1 min-w-0 items-center gap-1 sm:flex-none sm:gap-1.5">
+      <a id="nav-sec-calendario" href="#sec-calendario" title="Calendario" aria-label="Calendario" class="flex-1 min-w-0 sm:flex-none sm:w-10 h-11 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition"><i class="fa-solid fa-calendar-days"></i></a>
+      <a id="nav-sec-comensales" href="#sec-comensales" title="Comensales" aria-label="Comensales" class="flex-1 min-w-0 sm:flex-none sm:w-10 h-11 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition"><i class="fa-solid fa-users"></i></a>
+      <a id="nav-sec-platos" href="#sec-platos" title="Platos" aria-label="Platos" class="flex-1 min-w-0 sm:flex-none sm:w-10 h-11 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition"><i class="fa-solid fa-utensils"></i></a>
+      <a id="nav-out" href="#out" title="Resultados" aria-label="Resultados" class="flex-1 min-w-0 sm:flex-none sm:w-10 h-11 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition hidden"><i class="fa-solid fa-chart-pie"></i></a>
+    </nav>
+    <span class="w-px h-7 bg-slate-200 shrink-0" aria-hidden="true"></span>
+    <div class="flex shrink-0 gap-1">
+      <button id="go" type="button" title="Calcular y rellenar registros" aria-label="Calcular y rellenar registros" class="w-11 h-11 sm:w-10 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-brand-700 hover:bg-brand-800 active:scale-[0.95] text-white shadow-sm transition"><i class="fa-solid fa-calculator"></i></button>
+      <button id="clear" type="button" title="Limpiar todo" aria-label="Limpiar todo" class="w-11 h-11 sm:w-10 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-red-600 hover:bg-red-700 active:scale-[0.95] text-white shadow-sm transition"><i class="fa-solid fa-rotate-left"></i></button>
+    </div>
   </div>
 
   <div id="err" class="hidden bg-rose-50 text-rose-700 px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-2">
@@ -408,7 +376,7 @@
 <footer class="bg-white border-t border-slate-200 mt-6 sm:mt-12 py-6 text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
     <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
-    <p class="mt-1 font-semibold text-slate-400">Versión 5.2</p>
+    <p class="mt-1 font-semibold text-slate-400">Versión 5.3</p>
   </div>
 </footer>
 
@@ -581,18 +549,24 @@ function showNotice(text,isError=false){
 }
 
 // Carga el menú del día en los campos; devuelve los platos que no están en la tabla de raciones.
-const NO_DISH='Selecciona un día del calendario';
+// Con un menú cargado se ven las filas de platos; sin él, un único aviso.
+function showPlatos(has){
+  $('platos-empty').classList.toggle('hidden',has);
+  $('platos-rows').classList.toggle('hidden',!has);
+}
 function loadMenu(menu){
   currentSelectedDate=menu.date;
   const missing=[];
   [menu.f,menu.s,menu.g].forEach((name,idx)=>{
-    const input=$('q'+(idx+1));
-    $('sum'+(idx+1)).textContent=name||'Sin plato este día';
+    const n=idx+1, input=$('q'+n);
+    $('row'+n).classList.toggle('hidden',!name);   // p. ej. un día sin guarnición
+    $('sum'+n).textContent=name||'';
     if(!name){ selectedDishes[idx]=null; input.value=''; return; }
     input.value=name;
     selectedDishes[idx]=findDishIndex(LISTS[idx],name);
     if(selectedDishes[idx]===null) missing.push(name);
   });
+  showPlatos(true);
   $('selected-date').textContent = menu.label + (menu.festivo ? ' • Festivo' : '');
   return missing;
 }
@@ -856,6 +830,49 @@ const themeMQ=matchMedia('(prefers-color-scheme: dark)');
 if(themeMQ.addEventListener) themeMQ.addEventListener('change',()=>{ if(getThemePref()==='auto') applyTheme('auto'); });
 applyTheme(getThemePref());
 
+// Barra de accesos directos a las secciones.
+const NAV_IDS=['sec-calendario','sec-comensales','sec-platos','out'];
+const NAV_ON=['bg-brand-700','text-white'], NAV_OFF=['bg-slate-100','text-slate-600','hover:bg-slate-200'];
+let navActive=null;
+function setActiveNav(id){
+  navActive=id;
+  NAV_IDS.forEach(k=>{
+    const chip=$('nav-'+k); if(!chip) return;
+    const on=k===id;
+    NAV_ON.forEach(c=>chip.classList.toggle(c,on));
+    NAV_OFF.forEach(c=>chip.classList.toggle(c,!on));
+    if(on) chip.setAttribute('aria-current','true'); else chip.removeAttribute('aria-current');
+  });
+}
+// "Resultados" solo aparece cuando hay resultados en pantalla.
+function syncNav(){
+  const hidden=$('out').classList.contains('hidden');
+  $('nav-out').classList.toggle('hidden',hidden);
+  if(hidden && navActive==='out') setActiveNav('sec-calendario');
+}
+if(typeof MutationObserver!=='undefined') new MutationObserver(syncNav).observe($('out'),{attributes:true,attributeFilter:['class']});
+NAV_IDS.forEach(id=>{
+  const chip=$('nav-'+id); if(!chip) return;
+  chip.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=$(id); if(!target) return;
+    scrollToEl(target,'start');
+    setActiveNav(id);
+  });
+});
+// Marca la sección que se está viendo.
+if('IntersectionObserver' in window){
+  const visible=new Set();
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting) visible.add(en.target.id); else visible.delete(en.target.id); });
+    const cur=NAV_IDS.find(id=>visible.has(id));
+    if(cur && cur!==navActive) setActiveNav(cur);
+  },{rootMargin:'0px 0px -55% 0px'});
+  NAV_IDS.forEach(id=>{ const el=$(id); if(el) io.observe(el); });
+}
+syncNav();
+setActiveNav('sec-calendario');
+
 $('go').onclick=()=>calculate(true);
 
 $('clear').onclick=()=>{
@@ -864,7 +881,8 @@ $('clear').onclick=()=>{
   ['q1','q2','q3'].forEach(id=>{ $(id).value=''; });
   selectedDishes=[null,null,null];
   currentSelectedDate=null;
-  [1,2,3].forEach(n=>{ $('sum'+n).textContent=NO_DISH; });
+  [1,2,3].forEach(n=>{ $('sum'+n).textContent=''; });
+  showPlatos(false);
   $('selected-date').textContent='Sin fecha seleccionada';
   ['menu-load-notice','out','err'].forEach(id=>$(id).classList.add('hidden'));
   grams();
