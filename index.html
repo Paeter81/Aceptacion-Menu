@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Calculadora de aceptación de menús</title>
 <link rel="manifest" href="./manifest.webmanifest">
+<meta id="app-build" name="app-build" content="6ae7fa8064">
 <meta name="theme-color" content="#0c4a6e">
 <meta name="color-scheme" content="light dark">
 <script>
@@ -60,6 +61,7 @@
   .anim-in { animation:rise .28s ease-out; }
   .bar-grow { animation:grow .7s cubic-bezier(.2,.8,.2,1); }
   @media (prefers-reduced-motion: reduce) { .anim-in, .bar-grow { animation:none; } * { transition:none !important; } }
+/*DARK-START*/
   html.dark { color-scheme:dark; }
   html.dark.bg-slate-50, html.dark body.bg-slate-50 { background-color:rgb(11,18,32); }
   html.dark body .bg-amber-100 { background-color:rgba(245,158,11,0.16); }
@@ -105,9 +107,16 @@
   html.dark body .text-slate-800 { color:#e8edf5; }
   html.dark body .text-slate-900 { color:#f1f5f9; }
   html.dark body input::placeholder { color:#64748b; }
+/*DARK-END*/
 </style>
 </head>
-<body class="font-sans text-slate-800 bg-slate-50 min-h-full flex flex-col antialiased selection:bg-brand-500 selection:text-white"><header class="bg-brand-800 text-white border-b border-brand-900/40 shadow-sm">
+<body class="font-sans text-slate-800 bg-slate-50 min-h-full flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+<div id="update-banner" role="status" class="hidden fixed top-3 inset-x-3 mx-auto max-w-md z-40 items-center gap-3 rounded-2xl bg-brand-800 text-white pl-4 pr-2 py-2.5 shadow-lg">
+  <i class="fa-solid fa-arrow-rotate-right"></i>
+  <span class="flex-1 text-sm font-medium">Hay una versión nueva disponible.</span>
+  <button id="update-reload" type="button" class="px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-sm font-semibold transition">Actualizar</button>
+  <button id="update-dismiss" type="button" aria-label="Cerrar aviso" class="w-8 h-8 rounded-lg hover:bg-white/15 transition"><i class="fa-solid fa-xmark"></i></button>
+</div><header class="bg-brand-800 text-white border-b border-brand-900/40 shadow-sm">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
     <div class="flex items-center gap-3">
       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAA+OUlEQVR4nMWdebxdVXn3v2utvc9455ubgZAESEIYBAEHqGADVHHWqm/iWFurrwNqfbX2tcNbb1I70EmrIpZqWy3WIXG2igoFAooMQkCSEMhEhpvp3tz5nmnvtZ73j7X2PucGsFqHbj6Hm3POPWfv/Qy/5/cMa13F/+yh1m0SvXkIxRUq7XxDA5fe8KMlR+OB1eVInduMexY7o1elNimXtJzdIsIpBYCIEGNxYh4WHdVFud1xc+6oaLe9ad2uA6887cjjznyrRIwirFcOkF/FzT7Rof4nTjo8PKw3crlm4xW50GMFr7v1wHnbaoVfm2pyyZxE5zklKyUq9kelEsoYFAoRh3I2XHqQm4AohTaR15wolDhsq45L7YQStccp95CGu4pJ44f7Xr74oXkSH741gtscGze6X6EYgF+xAoZF9MbNKNYrC1DU8Lpbjlzx0BwvGUujy1MdX9gs92CVQqUW0gbKJiilrM4uVikQp/3FK0QEcCg0SiuXKUXQiGCIYogLSGT8Dc/N4JxsBXtb1Gx+c+R/Lbk1v8BNYliHoNSvTBG/EgUMi+iNG4CNying4/fsP+Pro9GrH0ujV05TvKhR7MKmCTRraKVSELQSbUChldJof7HqiS5XwkOhlKDCLQkgohBxIogIXqhKqYhCGYmKuGYdktb9Jml9udSa+MKB163Z6z8smnC9v1zJ/JIVICJKbUazXtkI+KMfHrz4e8f1O0YavGK6MlBN0gTVqkustFXKaYXWKI0oQStBKeUf4oWfgY5SChGANnwr0SgFqMwDsmvoUEgOWeJExInDUKooFRdhZnLOCF+Jk/rHR1677G4g8wiHUr+0GPHLU8DwrREbr0gV8P9+uPfi/xwtvu+xpnnlZNyrkto0kdjUaLTWXugaITNwCf/QWuH/E1DZxap5ly20rV4FMSsUKEGcyv0j8xJB2qEjaFHEOXQU6UoP1KfFOPfluDb7dyNvOOPuznv5ZYjpF66A4WHRGwE2KvflBx899SMHuv5wd42rT0Q9Kq1NS4xzWmmtlFYoL3Qv6LaRZdaudBCsCvAj4p+g/W+LeOMUFRQ031C9fKXj3zoowCtURLxXiQq/IQ6UVl19irlpQbiuPLn3mpG3XHKIYfE4+AuGpV+oAtYO3xpt2XhFWgRe8M0973ywVvzTI1HfwtbclEQ4p8GIUmgFSmW4Ljl2ZxifWb022bMAOwSEUQqXA5LkN6FPtvAAOso/wUn4PgUo55US5JqpTgHirBWUVl39yjTmjket5gePv27ptQK/cG/4xShARLHhNsPGK9Lrvv/wmn85UvnIo/Q+b6ZWx7hWarSOwu+BVsGig6ADvGbC10rlr3sHUB0XqVA4RCkkCFvT+TsSLJ3smX+eQZuo4C0uSNrDmROZ70Hi2ZWIpCqKI1XqRjWmv1uZOfbuw29+6iNeCZfbPOD8HMfPrYDhYdEbA7t59dd2v/quZvm6A1Lpd7XZNMYaIeBJwPgcXpQGBEKwzSxTiUJp0ErQmWDnsR95gn+HuCB5mM3wHfChOleCy+Cq/WLmJ4oMksghDnEiKKu6ByLdbEzoZu3qiTcs/wJKwQc+oH/e3OHnUsCwiN6olBPZVrjq6+W/u6/R867xRoKxLYtSRuVC8DemVZvFZAohU0qmGDLv8JCSeUsO5/N0IeG59gIP70t4q/1+9uuZz2SBXZ2swuxyc8bk44TyuBQVjI6LxLXax5bs++H7dmxc30JE/zx5g/7vfnD41lujjUq5u/dtW3zJl7u/fmdr6F3jszVr0qaAMogjeyhxaHHgHMr5n/49QWexz6XgLBJeF+dfF7FI9hlceK39eXGCOBseDhceEh7OZg/rv9M5f57wPtb6axLBSfi8tD8vLrwOhlZD3Ny0TXr633V49bO+vuJvbl2MUs5n0v+947/lAes2idm8XtlPfHPr0k/U+m/eYXvOSuemE60kBjyyIChc+HeWxbYt0rMcD0N5PABQKvcAk/9ugCnJYZuMzGRQ4a1bBRKaUVF/MSIaD0QKLZCKa3ti2w3z+8vgS0nmNeFtyU4tiar2x1F9emf3iYnnHPr9C0fYJCbL8H+W42dWQCb8f7r7kQuuebT4+X1SPUvqM6lWRG2WIl7W0pkoEfztpKCr2wzIKyULqYJWuiMH6LjUjNZkvxmElDpoOUisQ6yAtXngR+ugMU2xoImV4EThE7/5iZ4gnbbSVjSCqACNLk2l0huptLWzMn7gNaPvueyB/44SfiYFDN96a7TxiivS6+98+LzrD3d/f+ts1KNaNStgcLl5BIELSlzgKhK8oI24KghR6ywGkLuKxme1WnlWpGkHbUGRCqROaKaW1LrAL4WycVQjw8Ky5rQuw2m9JVb2RqzuLVGMNCMzTW4ZmePru2aZsRHVcoR1gZmRR4Z5gsm9IXhU5megEOuslLtMlDSmK2MHLzv+h5c/9LPS1J9aAVnA/fNvbl16/Wj1loOq+0yd1FOFRC6EIG85gZfnCgAhw3CVe7oKJqaD8I1WKKUDA1KIUjjAOkisYJ1DnCVGqESa/qLilErMaV2aM3uLrBkssbw7ZmlXkaGyoRI9OSz/eHSW398yws2HhUpJY50D/Lk7OGvOiDLSIKqtjJxjOZuqUiXSafJo//TolYd+/1kjDIv+aRO2n0oBGdV89PCjQ+u2mNsfanSdpZozVtBGsP4iM4YS/FWF4OupocsTKJ+EZQxIg/KYbEOMzZiLMkJvrBmqRJzWpTmtu8iq3gJn9hVY2VtmqGpYWC6gn+gWBK+weXmEkJXlClFE01rWfXMf39zfoFQwAY4yTw2OnH0+x9b55/A/BJyzVHtNNDezs3tk+68f/atXjTLsfiol/NcKCEmWbLhcPfNzj35rqx14rq1NpxqJxAG4NkXMg5f42o7YLGjhBO/u1gYWFG4q0nTHwinVmBV9RVb2xqwZLLO6r8SKrphTu4v0FsyTXKr47ySUpVVGYzsDaltaPg557I+05kityTM+vYMjLU0UmZy1Pi73EE8CpDMMCbjsfCissynlvqg4c+KmNTvvedF9S86UnyZZ+y/p09rbbjN3bLwiff5Tdn5sBwufa+cmEq2IxQVogSzHxxfgvbDTVgJp2qacpPQUDUuqEWf0GlYNdnP2giKrByqs6C2xuMvQHRee8BpEwEqAsEwAOZSp9gsdAmy/nv3PK8sojVKK1ApLKkXeeG4vf37HMaiW2ixKMU8BCvICYfa9LqdkedCO3Ox4kvYOPnf3ynM/xPsve5ePB/zEePATPSBjPK/bvH39t+f6vjhRayZGuThLckTaClAIGkdatyAtzh2IOK23wMq+mHMWVFndX2R5b4GlPSXKT4LPnoO3r2yeIDuYSBZL2nJ6/G0kzjHRTBmrO6ZblpV9BYZKse+oKYV1nmXddWiSX//MNlyhGMiAzpPD/HtD0p4pQOV+HWpP2TWIw6GTqFiKi2P7XzX9gas2/VfM6EkV4IMu8qVHDpz+B3cmD+xrRFUjCS60mjKJKPFVLqUEO1fj2UsL/MmlS1m7opdS6EKdfIhA6my4bt0WZEfhRjoE7WPj4y9VEGqJY7xpOV5rcbzmODLX4njNcrzhGK8nzCWQiKa/IPyfiwZ46oIKLvB7ozUHphpc+In7GE8NkQHROqe9mTLy3CW/BjXvKtscT1DinItjitbOLZg6fMGBDS/ax4YN6slKFk8CQaJ2bEYVtHJ/c9fD/7Q/7etWdsZKKC+4wG5wPsBqDXauzrsu6uXvrzqDOFBGJ4Jz7URG58kRGK078NnDh84TI+i0jVQck42U8UbKsVrKkbmEY3OOY7WEqaZjOlE0rCN1bT7vg70hjqCiFNMpfHX3NOcNVjowXhiqxiwqGcbHW1CMUCK+2KcU0tEUEtVRllDtmlNuUW2FaN1o2lZXX/d4qe+flFLPkU2iYWMHSf8vFLBuE3rzemXf8M2db//aWM9vuOZMoJuSu35WZtCAnWvy2nOqfPR5q3BOSKxFa+U5fKjpS6iv6FBsyzGmzbipWcdUw3J8LuFYPeXoXMqRWspo3THZsMwk0PIOh1KKSEOkFEYripGhjEJwOXfPEigXqOuxujDRcgwWtDcOUZQjw/Juw8NHmiijcDoYgfZK8EytbRjzRB9E2umb4V3D7GTa6hr8je4PfPvt0+vVJ54Mih6ngOFh0RvX4fYdm138vBsP/8V0veE0zuQMwQXhh1qASx0LiinXXHlacEeIdJsn68cFQ5hNLCcaKcfrKSMzLY7OpRytOcbqCRMNRz2FNLiN0V7QRmniSChmCZG0M+as7GxPTqNOiiOTTcdEI2WwWAze673vjB4DSRqwUcD4iKaQDP9AKUS3SYCE5lBu1p11cKXAWWMbcy6Ju/9ixfs2fXX/Oo4xPPy46unjFLDjXJRSyr35szs27HeD/cpNpoKKVCiCOWlntEYp0maL9RcNsKy7RGrF46j47NUpeGSiztFaymjNMlZrBUE7ppqWhhOsQHAJIq0wSlMqqPy+M5SaJ+QAV5KrvIN2Mt8iM2EpBc3UcaLeYlVvEZT3JAOcuaAH7BGwaQhvBqUllC+cF3zoJUhH4z8rf4cUgrwSJSGLaDVtWunrn2xOb0Cpt+GhaN61zVPAuk2bzOb1uI/cs+/Cv37AvbnZmLFaYXJfFgnsJ4QcrUA5rjitL6jE4ZxGacVsy3LtA8e593jqKaTSGBVgSUGkNZXQ8crc2nYEYQsoJ3Ry+p8ma3wi4SOABiuK8UYbnrLfXTVUAUkRG3iNUjir/PmN9kE2q4lnis97DwFS57E0/1MJxjZmbFLuffOq/7f5+t3reYB1mwyb1+dQNE8Bm9etE42Sz23b9oFj9BulZlOcKG99oUDlMvZjcU6hteWUbpO7ugTn/equCX5wNGWwHAeL8I9cl3gLbN8GeYovInlAfnxIni/cJx5VacNCFuh9b0FxvOZpuer47uX9JUompWFt8Czrv1crrxQx7cK9yiXdZkLShrnORhCglLXSLHZFY2nhA6BezjnzfyHvB6zbtMmglGy4Y//THkuKL7WNWadEoraAXDuqYSFMqEnaRt6MNgrwyERCOdIocTgEK/5x8hygeoJ/647mzJMd7UDb8W2SOamgA0xpJeGnxjlhqGzavxxOsKi7wmA5hqSFcikqTcGGPkToSZD1B2x+kvyhfJrv+x0S4CjrVVgXufqMa5Z7Xnren371aWxUwrpNOT/PFbCZdSiQb+2ZfM8JXdXKfzxca2hmhCm0/MTikCTlyHSrQwheeP0lSJ3DBu95vLjnC75ddXxywedN+0ANdXhktDMQLlIn1FLHTNMy03TUk5SZZotnLY64Yll37jnZeQe7CizuLkIrQbkUcbbdPLIWUotzKRKU4Zs+WTNIsv5xeN5u5JA9T1uuVajqo2LeAwjr1uX3FAUrUkope+2WXcs+uCN5WZrMiBZnEE/rvLAlLyuo0J3SgLXCwckmAC4EO41iUSVG5KerykrA/kwwndCSty87SgQepnxZ2jrnPSsIomSgK/b1pcGiYUlXzLLuiFO6i5w1UCJSKlynTwBT64iMZkVvifv2TaNig8rYYohdogl01HWy5lC2yJhCx3WLgJbcyRQYW5uVOYlfdu57P79s+3p1EBGFUhIBqA23GSC94ZHGb02a/i7VnE4F55XjvDvnQUcCfbMOUQ5EcXR6LhdkhqwD5RhFHe3BC7K60Un23f5MW+jZQFYWJ6wobBC2x3MoaqGvoBkoRSyoGJZWDYuqMQsrvkraXdDE+qSOq/g6lVY6b+JkgLhyQRVaTaQS5wN3og1KOZTSiHV5fpCHAR1iTEeVLmNtnt7lryqsTVvlvq5pGr8F/CVB5j4Ib7jcygbRp3z4/tc0Ci0ULktT87ZcbhGZErIGDIr9kx6CtNJhzEQYLBsKOptb6wy1bRV4eetc0IkTUiehWCpESihHiv5YM1hULKwWWdodsbQasbAS01829BaiNi086cgy8c58oBPuOoP86YNlT0NTNy9GidZgUyAkZGGOyHP9IGzVvrtQMwy/G+iGKLSgXZownerXyPDwNWrj5RYgWrdJzGal7Ms+++Cz5wpd59Kqeb/LRRYaEa6N/bjQaAmVs0OTDZz47lbmdIvKUZ6kaCWI+GEqJ4J1GXQAOIyGilEMFhUDZcPCqmFZtZBb9GC5QFesn1DQgheyC57pjSDUcvCNnuzI4K39Yckz3FUL+0BHIfAyz1DC4B2Sw5AC7VAu643N76R5RGoPjIWqsXaNukvi0rnPjM67DNTtbNpkos3bb1MAu8ZbL68V+xVJYkXEX3Z2sXkAxrMBIUwSeEwcm55jupXSV4zyQteyniKXLCnynf01CpHBACUjdMWa3rJmQTliUbXAoqphcTVmYSVmoGgoP2EBry1k1/FalnUp2tN2Phjmud38b5nPAMkGfwFOW9hFtSjMpdaPRNqOooNSAW4l/DuXMt6DvdnLPPvwRpepRFAg1jVNNTo4Pf1y4Ha2D6mIDZdbOXeTGTigrrQm9fAzbxAne0CWDftme3ZBMFZLma4n9BVj/7tKYUS4+oIhnjo0y7FayuKumEVlzYJygd6iJtZPVin1gs4obXbY0CKMtH5S7u/EoQPuW+cw4d8nC/6JFLKop8TiimHPVIIuxF7RWa81KFOUQmmFiOmodlgPsNmoJRmhyOQXfFEsINolKbOJu3LTpk1m/brLbYRScvk//ODsNCo+RVo1ySYCs+RJXJsBZcmYiAu1FB8wJxrC6GyT5X0VsoFXJ0KkFJcv63miW59XKc0OEwp45iSocE6IjckVMT3T4NCJGfYdn2LvsRn2HB1n7+gcI+M1VvQW+aP1l3DJmiVkxcOTj04o8rYmdJUKnNpbYc+JCYgNngGGe8/SyxDzFA50u58taKyzbSgKVezMiDvmVTXNutio+pS/2Tp7NuvVtghgV1NdVu/p0ao+lYoQZZOXWWJDeC5ZE8aFhrVzaKWwKRyebvC0cM48ZuPhQIJCOq1Oa98WPBnWU+uIOnBbBIzRbL5rF5//wV4Ojk4ycmKWsekmSTPxAK2NHyLSigcbTbZsO8Dt17yW805bgHOSV2SfUPgCzgrGaJYPVeHRcZRYzxLR3uqVC3FVg7JopUkTsAk+KOsUijpk0NrDV1AWHYrwJ8XauBwda01eBngF1FN7sROb101y2wvjHpInXuT/zmssCFjLyFS9fbK8ju5LwQr1eEqIr/NPzSXsn6xzfLrGU07p49TeCtZajDE5jHz0m1t597/+EIoFcKHNagy6K8qrrRmtjCvdTI3P8c+3PMRH3nQlHXczzwBUB8w6EQxw2oIuSBooF7cb8SrEFJzvJ9cVLkmodCecfnrKmpUp3UXNF26u0pIiZDlEgP9sgYj2T3DKU+G6VRcD/xgJosrqrqdgW6hsRQNhMZwET3Auz+o6mw/glYKzHDhRy0+cNzHEsxKAXaOzHJis8+jRKfaMzrB3rMH+8RmOzFnGmpokTVlYifjYK85h/UXLSKwjNoojJ2b5sy/eiSpGREXdQca8EVgbRhXDPacCqhDz2LGptsUz39FOZkMZTJ0+1A1pC2f9IkBRbbhRTuPmhEVL6lx5aZ0Lz51jaKBFqWjBFrjlrlM5eKKAKlgPV5IlkvONWgnKpgm11DxFBBWt+OOvLHZm+UqXpmgnOktOVIYd0uEBnXgWZjc91ikOTtSCELzwXYgFx2YavP0LD/DdfVPUrIZ6E9Ik1A4MRBpiQ1QucryleNMXHuLCU/tYOdQFKEYmZpmsN6EUkSapF0oGi57jojHhOsJcKI4D4/Xcg9oBcb4X5AoIuciqRb3oOBQPw0gNRoHVuNRy1ZU1XvK8OSpdNZpNYa6pmW1ouivC4gUtDh5JUHGoHuSRO8gwM05Bk7bAJSuf/tY/X6xrcd9qpU0/aZKXp3J4yQdhs2Ag7UJTBlfOm9DhmUZuhZl1KqX4vS9u5av3jFAnQhtN1F3F9PUEGAFdKKCdwzWbxCphdnKG23cdy6FlqK9Cf3dXTum0hHUuVnBpimsk2LkW6WSNdKaJ6Ai04tDYJKMzHhZdB3l94sMbUqnbUDQGN2cD/KY+CCcJr1k/zbpXjmOZY3IKWq2Q04jDKsvQQAvSgBq2o3Tj/Gs6K9qJU9gUZ4r9x6LFq6Mkite4qASthhXE5JaVPzqsP68ABqW4EJQ1HJpKqKeWcmQ8pmrN0ak6t+ybxfR3g00QJ1igoi3Xvv6pfOXHx/iPnVOYWOFSEJeiFBye8sp0IgxUSwxWY8ZqdVRscPU6NJoUqkUGe7tY3ldk2cIezl+xkKMTdf7xtl1gNBMzcxwam2VxbzUw43Y+nsFQdg6tNdsmRvitu66jcomGRys0jnWjq2Vc3fGiF81xxdppxiaaREqjtef4qQsJpjh6uxOCEwa4DjNRIW/IB9e8vq2Nisa23JqoIdFymw3B5slFZtpZVthmP3mJQnW8rmF8qsbYbItlfWWydp0ximKlhJ1sYEL/WGxKf1HxOxefQSSabz54nJQIRNBxhMQlHhufBcBaS7UUs6CnwiPHakjSYs2iCh9604tYvaSP0xcPEJl2PrHn6BT/suVRWkphWy0OHJ/i6SsX+SqlebzwM0/VWvOpR+/mkcYUi5Z2U104SbSnzsz9/SxeDpddMc3oRBKSqbDgVQQTFGEtxAXnuX424aey5EvlBUQvXW8IToSGU8sjhJWSuYtSHl4y8/ejAIHYSBt66AjIQbOz9QajM/WgAP/WYLXIUBFG0hSKhjQFLByaqLHr+BRL+kowO86ppS7mVMyUi0DB7tEZspFerRSnLxngB7smECcs7u/lN566koOjU3xv62PsOzbNrqOz7D0yyoOHazSUIdYO10p47Oh428r9t/nAHTi7b+7DsfoM/3FkF6VSH/W6JrUWvaKFmhrl6RfFWJPSqIOJQUWa8SlFfzUN0GZInKKVZlXjMBQQakIKHUZdVAjGzsOpCOLcyshIUlQ2ZHO5gNvwo3B5fSSHoIBrWbDSKBqJMBbigLcun5UuKllIW0ixwtI+za+dOsjKXk21YHjGsgF2/MVvcvYpvdy7f5LL/vomWsowMtVirpVSCda9YqAC9Vmivm627J3g1Df/CzP1Os25VjsP0PgEKjY4baDYxaHxuZwvWCvEBlQI2gCZ74zUJnjs+ChRsUzTCi7R6EQjQ4L0W+q1hEaqqRhhz2HQqsBQj6OReCm3rOLEuPIVYucQG3IGwpSGyyEjlNQdSgxOqWIU2da52BY417FY1Fu2Ej+R3A687WwYlwcVX3JOvWUHYPKTZ1qzrLcISYqbnWPDS87hzZeeCUDLOowolNZ8/kcH+N62I1jrINaMT9U4Ot1g1YJuAJYPlsE2EXpQShhrtEAXML1FPwTsUi/orGNlFMRlHj0254NrwRd9662E/aMz7D8xx7GZGjP1hJIyPNIYQ6a7cEYgcjincFZDQ3jokTorl1lQjolZw4O7FFde1GSuaUHAkTLXNOzbG3kISsmLhr5SExYiZi1WjxjapSllY86NUhVLcIfAe1W+sKKTrrWZkbRjgbjgag4s7BudbntPuIgV/V6IulzmY3ce4Y7dUzz02Cj/68LFvP/FF7LuE7ey7UAdCjEUiyitmJqdZmRsJlfA6YsHoKvHZ5fOK1yUw1lyr9UiYWxEoayFRoOVQ1WS1PKtrQf47vYj/GD3UfYcnaaW4D0ndZBaqDrUsiGcsqgIlKS4VgtskxNETM45Bvrh3t3dDPSlRNEctVbk55FKcHikyP5dgopTxAZBkwk9rF8LC0SkQyG1Vksil+F7u+6QCzurZ3RCTycLmk9RU0ZO+ODpV+P57zp9YRcYT0F/PDLDj/edgNkaywZLGK1YvaiXh0caRBVD04IxPlbsH5vNlX/64j7iKMIFjyHEI6X9DTpROGehmSLGu74pOB4bm+WZH/gGDxyahdQrD50SFxz9XQUqlW60WGr1GSZnWzQKwHQCqUK7fkwsJKpO0x3l4PEWe3bBK5/TYLbuJ9JNJMSqypabeknSAjq2YLXnktr5MkWg44SGjuSJocZaR4R09D95/FL+LMHJcB/XHsryD5snx0cmPQQZpXLmffqCCjpS2KSBVkJUjkkpsuvYNEemajQTz6U9dw5K1wWmG57WNVoppy3q4aXnDfHlWx6BwX5/M81maJQAcYwqxCwfqjLbSDhRTzGVbr6x9TAkFqpFzl4+yFVnL2btWQtZubiHge4ylWKMVkIjcUzO1dkzPsGdew5y43272HpgDqIKLu3ntu84bGucFWdMY02NZiumUBacRHzrcwUevqcEFYNrWLymtY8wsUDsu4ZZq7I9te2NN1LOJ1vtDldHUyHzBifzLT7LgnNPENCKo9MNUueI8uwTFnaVKeuUujPghMQBxSKPzFjO/7MbmWo4op4uBMHYlKTWIFItLl290DuT9tXRT777xQz1lrnxR3soFguctmiQVYt7OWPJACsX9XH+6Qt59OgMb/7H24hci7TZhFaD515wKle/8CKuuuA0KqUnHn8HWNxb5axTFvCip6xm40su546dB7luyza+dPejHDsRQbyMRaecoNlo0mrByL4CD91a5fDOIt1rJli4xjGwQIiNpT4Hk0eKjB0oMjNXhSgm7w3mE+UWgxApZ+fXIzOePy/x8gLPlo6qfGqgg45qxfGZJtP1FgPVki/EibC0v8KagZj7H5sl7uvCobCApIqxmbovrtUTb82uRW/JcM1rL+bCFUM4JxQig4jQ31XiE+98EdO1BihNT3m+MO/edZQ3fPx2Rl0JbMLKhVX+4jVX8Kpnn5vdmF9PRnuqLje0jiRJ8D2HK85ZwRXnrOB7l67h/Z+9hQcO1Nn+wBKO7i2RjtaZOhpDSbPwZRMMrZyhrwKlGOIYBiNYfqGGpMIPvrCQsZFuVAnytQeAcoqyRkVKm+2g1/jCpTPt2kVH0LXzIShXTMaZnACaE3MtxmaaDFRL+evlSHPd6y7htz+5hUcmGxAXMVpYUIIlg90s74tZMVjhjAVdnDbYxfkrFnDGUE/eXMmIQDb10F0uPq4h86NHjvC8D2xmKu4G12D9xcu47s1rGewuY53FudBrCLEpK41n7p4rAR83/ToF33C/6vxVPOvPlvOez9zKp27Zw4lWD9SLqEqTnueOUTh9kmZDMec0NoJCrIiMQhshjlu0GkHNzvkCnZ8xdUYZU28k26PUuSYSgkRHsi7S0YwIldEs+OYr4DvzAoRmvcmxqTnOXNyLiK+xW+e4+Iwh7h5+Gf+58zCiNKsGu1jcXWSgq5g3WjpckGYrJY7bqyLaK+s9libOMT7TYGRshkMTc/zRv25hqiVQG+fql5zHx99yFQCptRit0SYsj3KOKDI/cXW6iMOG/oDC9ye6SgU++dbnMdR9O3/1pbuIegZQ1RZmwQytSUehoEgy7q8cThSFCMaPF5mdLICRfK7K34oCbSFtNSOn4j1ZoyVzSSV4Wkf7g52PLDPufK4VSJoyEsoIEhbJGa2xTugtxbzighXzBP24bkwwyWIhCorPSsfeIJyDP//iD/jSD3czWhdO1JrYloVKCdKUVz17JR9/y1U+n1C+4eNLMy4vWRw4NskdDx/mwX2jjMw0aImmqxTzlGUDPGvVQi46fQHFONtbRIiMxlpPNP7ytb/ObK3Jx767A6N7aO7pIV4+xtx0kbRs6ery500tqJLj2J4CrqZQFesnlXOT8oNdiN4TxWnrgLiEtBN2cuPuEHz4tISqXrtVKSjn0Mq3GA+P18Ip/GwSCEYrrLOYjj6wc8JUvcnx6QaHTkzz2PE5do/OcmB0itVD3Vz9/KewsLca2pa+uLfh89/ngzfcA71d/gxKE1Vj0nqLp61ZzKfe/WJcNjvUURKPtOG+3Uf42Le38aX7DjB3dAqSJpQjnz07wJRBCSsXFnjHc8/hf7/waVSKcagVqYDEjg+/6TnsOj7Nd+4fobl7Ec62iBe2iKuWlvUV2yiy2JkSR35cBe0gDS3NbLxdlB/rtMmBSDdnH9GRAZTx2a9qQ00H3czmJPPqqAQlhMAc0kL2j83lsJFhuK/LG7aNTLD57n3sPTrF3mMTHByvMVpzNFriEyIVygq1Bl+/dzff+dOXs6CrhNaK0ck5rv/ew5jBPr+QwtmQA0A1tnzync+lqxiRWkukNVYEoxQt69jwb7fyt1/bSjrTYuEZC3jNy89n7dlLWL24j65KgWYr5cB4jTt2HuHr9+zhjz9zGy945mpWL12AiCPSBqWyRX6Kf3zLc3na+z7N+DTo0R5Kyw7RSkBpQypCtaI5emcfzbESumRxokNnTbL6kIladUqu9UhUUmpX09kJZQr9WCvg1DzIySqjueAz9wgsqGNWFKV47JgvgGVMI1uL9c379/Haj9/ObDNMCGjtSwZRhCopv6jDWUgTzECRB3Ye49O37OD9L3864oS5RkIiYG3iSx+h2mpnGvzeKy/kwtMW+iKaUr4PrGCmmfD6D32bb9z8MNXBIhve/Cz+9wsuYmFf1+OA76KV8KKnncGqoW4uP+8lnLV0ILxjvPGFOdQktaxY0MP7f/MZ/N9PbsFO9tE6MYEsmIXEEceK41sHGN3agyqI98i8iaQ8dhuUThsTlebULj36D6846kT2oAqE7UbyFmT272zQNIMe/7oP2e0qqZ8ROnJimsS6fGsGpRTN1PGnm+5ltukodJeIuqtQiFFFz4hU2iSZnCSdHCdt1nFJgi5XeGhkMsCZcMqCbhYNdIWqrfgmTm2WoW7h3S+6ICha5XX/1Amv/9tv8o2bdnLu+adw+zWv4U9e8+ss7OsitY7UWj8cZi3Nlq8l/cGnt3D1h2/Mh7lu3PoYB8dmQp1JcmLhnOOtz38aq89YhJ0zpId7Sa2mOVZmYssCRm/vJ2vrIirvDyApPkAZnFN79n/nH45qhZLYJdu0zs/S5v35FjMBapxDSdgAg05IwhfBtObYRJ2pWsuXYcMCixPTNQ5NtVClIom1WJty4bIeSkawVuOmZ3nPC87k23/0EspasCrCFUocGJvBhhsvRIZTeyJIEpSO0LFBmpZXX3YWi3qrWOub4dY6jDF8+Bv3841bd3H2WYP8x5/8JhetXEIrtb5ZZLRnR1qjlKYQG0ZOzPIv336Ac1YNsmywmy07DvHC9/47X/7BDj9rZEBr7T0MoadU4I1rz4ZmDXusn8bNi5m+aYjazl6P9WH7nZy+BzQQRDSO2LW2KRUGHVWS3k2+ij2DnI56/0ksCNfRkuxUltaMzTQYn5lrR3wReitFBqsR4hKk1WRlD9y/4cV8793PZkmUsPa8U/jQ71xJb6WAS2w4d8L+kVEm5hr5WMnpi3r8/j4KnDKYSoFXXbom1P6U5/tG8+jhCa7ZdDddC7r4zO+/mNOGekmsJTZhtqeDRruwbvi6G3/MzFid373qqZQLER/6jwcp9Hfzwmespt5KueoPPsuHNv/Ae2SYmnvpM1dSKjhsLcVOVsAZVBz2PArogPgedSfLU2Ip0robQudYu9b3dX3WCRgJ4yn5iphwoTnWB9xXLmzG0TEfr5Wi1nQcPjGXnQsRqBRjlvYVIbFExSKHZ+CDX9vKZWuWsmX4xdzwjivZc3SS137kJloSodIExHF0JmF0ai6frFh9yiAo46vs9RYrF5S54IwhCOeWkCv8800PMrH/CG+56myesWoJaeraE3UyvyNmtGZkYpbrb7yPvqU9/PaV57HryAQ3/mAvz3nm6Zx5ygCfvW0Ht2zZQzObeBafZK45dZBzT+lFanX8rnhhhEWy7I68XK5smo1zGt2qu8i2vu8VIKJeeOTLD+u0sY2ooHxRvR1sXWjG5IlYrpCsJiShDReSjNRxKKuKShgpVLCkr4ofYjLUVcQHPncvr/jrb7B8qIdlQ33c9MBe9h+eRUpdOBVj4phWCvuPz+S2s2ywAmnD77LVbPLM0wepFgthbN3nHLVmi6/+6BCVZafw9hdd5A0pG1AIlp9n10EZ/77lEcaPJ6z/9TNZ0F3m7zb/kGT0CG+/8iysEz76jR/Rd/oC3vj8CwGIIu1zC605b8UQNNIwgJhNX3cs0Oh0OGudUlrpxsy2X6/sfhhEaTbcZjZv3myx6S3GRCgRlw/ehgan6mA6EmKAypZ5CrQ7ng5cyqHRiVxo2c0uW9gf2nIWbVuQ1BnoKlCIDEcmZnjb8y/iM++9koE4m/FxUJthz8hY/l0rFvaiSzFiU6jPsOaU/tytPQopth8cZ9f+cdaev5RVS/r9eCKPPwRfnhibqXPtjdsw3TFvu+p8xmcbfH7Lw6w5fwXPf9pKbrx3F9vu281LnrmcxX0+1rR37oXVS4c8LOZ5lM+LsmZWXsL31+E0ELnkls2bN1vWbjCaHaMCENeaX1XNmoiIhlAhlSeehvPeYfMcQLKkNqj74OhMEEu7/HrGgiq06mibYGemufQpi/jUO57PnY8c4eJ3f4brb9zKG9aezcZXPBWZmPDtQh1xYLzdF1jcX6Er1qQhTpyxuD9/L0zKs/3QFMw0+bVVQwQSPa92lK3GcYEg3HDbTg4+/BiXrOrhwtMX8ZlbdjAzbnn7i59OZDTXfvsBiA2/dcVTwufJlQ2wbEEXSEq+t10up4whZvvkWURER7YpfbH7KgALd4j2SyZFzS7b9X1dm9muooIW57cnz1qROSWlMw/QIUYHRpRlxibiQIAgoT2BtrS/DGFvIZKUZ56xiP3HJ/mtj36Pg/WYt11/Oy//q2/wyZu3QbmEJUKVujg87fsCSWpZMtDNOUv7cVZBVy+LBno67NmfZ+/hCUhmOWtZ/zzLnzeSiGdCs40W/3TTdnR3N//npc+k0Ur50Obv092vee3as9lxYIz/vP8gT71oFWufelpOQzu/rxJH5L2sTPgwz2B9P0Wc0kqr1tz2Nz2j9H0QxebN1n/b8G2GjRtdJO7z2kQowWVZbr5SEHLhSwjKKsP/wJqcdaAjRiZqpM6RrfoHWNzbRbFSJhUDfQN87NZdXPh/v8C+8Qa6UkT39vK1Hx3ixwenMcWICIfMTTNU9peYOEcpjtjw+mcTRz6zbBc22kFvanoGVEpvtRAE3s7Ks8OGBSabb3+Yndv20turedEla/j63bs5tOsIr7x0JUPdFT78tXtJx2u8/rLVFIzBuvYatvy7bMba2r3g+Yrw1ydKnAFKtv75jRs3OtZu8E4OwAa/XKbYat6gm7VZtDY4K25ey7FtaJlbSShXqGzFggho4fj4NOOzzcCz/UUtHahSjWK0QKwFZwpMuJi4FKOdBWfRlRLEEbZhaYxOMNQT8ebnXYCIoxAEePYpfVQLBhKoN5PcGrMSc29XBVCk6X81DQdf+uEeVKnMdAOe9yef4w8/eydqwRD/99WXc2K6xudv2kql1/Hii1cDIbsPgTszrNHJGiTtrS/nHRl79OukjGnOzA7q2RsA2LLBthWglLBpk5n49O8e1Mns11VcUIjYrOOVfVmegLXPgLSRNv8xPlPj+ES7JuScsLivwpsuW4E9MkJSq+NaFlpCMtMknZ7BTY0TtWZY2m24ePUAv/28s7jpmtdzzrIFiHh+L4DWhjIWmgkHx6ZzBWSKPmt5PxS7OXCilTOQbC/R7HcjY5iaa7LrwFGkVEIKRe7YfpTHjk1CJFz79bt560e+xdz4HC961lmctWzIe01oknfuJbR7ZDS4eefEeC6ebB2LNTpSJUm/vud7nzjo1wn74kR7pfxmLy9Tn/mwU6XXJBjdOR2h8rJ0+/vbK9tD1EfQUUy9VufE9CywABfWEDgn/OXrL2Owq8AX7ngYVSiyckk/q5b0csZQD6cNVFk82MUpA90MdhXzG7TWoo3JQJYFvVUWlVKOTB9jx+5DwIU+Qw3J2jNWLcb0Vblj5whve95TQomkDT/ZpuHab8UYMlaNqZSQNEWs5bov3eNLJT1d/O4Lnp4LU/ISeravNew8MAbFIn521YXxeU3nAkARdNSadb269eEpUJmwT1LAesuw6NpGdV/pTZ/+hu1a9JtSn0kFiVSw/MAfyOZ/c9iRrG/g0NqAi3hkZJy1553mC2PGu2ykNe9/5SW87+XPxDlH/GQ7G4pf5K2UT/+zqT1nhWJsWLmklwfuT3hg1yHvHSHYOBFWLu7notP7uPHOHYy+8dkMdpVy2Mi+3DrfWXv6maeya/92TGywNjQptaE01E9zYorzV/Ry+fmn4ZybBzvZOOPxiVnu23cCSgVvhA6/lixvriuAVEdxFNUmvnbg9r+/L+yYku8VMb85tGOzAlHFVu3PTDpnxeiwjXhHedprtD3K0j5RcDlfVt605eGOt8KaX2fzLlUcGVJraSWWJPWFMed8TyELkh4+vMCyNqFS8IJLzoE45sG9x3jsyHgeGLPVMG9cu4aJ3Qf495seRGsdBnA7hBJQ8/df/jS6euKwY6NglB+LadRaFAqaD139YkqxyVeAZh25jPLeeu8uRg+PY7Tx89VKoTA58xGxIuJUwdbsgor8GaDYsWNeWjJfAZvXW9Zt1lM3XL01rk99ysQl47OJNtFrI1C7XJFFes+vQZcM/3nvbm743gPEUUQaVlZmK8tdKLoSrEokw3EvKGM0xmii7GdkMMaQpCnHx2foq5YpLxxickZz89Z9AEH4YFPH6698Kmedfzp/+dktHJusEUcmT6AISmwlKU9bfQpXnH8qUmuhTYSdnsNOTXLBKVW+/Rev5coLT5+3xkBCZSCbs/63b/+IDJKy1ZY+ZAahOLHGxCZuzX5q/3c+tJV1mzSbN8/btOnxGHDOdkFEVdf/7YZUxeudKfVim+K3DslmQt08VRAEGzrangxVyrzz2hsZ7K3ywsAicu/J5vNQj9s+vN5MGJuc5fDYNHsPT7D/yAn2j9bYd3SSQ8dOcPTErK+2lioQR3z6xvt44/MvzIfIrAjdlQKffO9LefZ7P8ubP/JdvvaBl4WBrzRnZlHkW6WjJ6YhrREnCX/w6kt4/tPP4NfOOZVCHOGcBOFnnu+9LIoMd23bz0337EZ3VfyKmvYsGm2LiHXUnJgYYGzDDKLYvOEkmvTETVmyPW263nDt2xs9p15n63Mp4iKPIyH7zZKvLEmTLNtzKGtRyuFSR8EmvO35T+W3n3s+Zy4fpBTH1FspxydmGRmd5NDoLHuPTrL30HEeOzbBodFZxqbmmJhtQSPx54tiP5psCJjmew+mVMJOz/L5Det49XOeSpIkRJHn65Ex/PPN23jzxq/w0svXcMMfv4KechxW0Pi60ZaHDvCcP/4y6ewk/+eVT+fD73xJLmjr3LzR987XjTE8/53/yPfu2YfprngIyxZwt387jU0c9bTGrj6x5SOfYN06c7L1P7kCQLFuk1ab19vy7/zzzY3K4G9IfcoqUcaFgKzywCvgOsoSeR3E+SXMTmB6Bl00nLGol75Kicm5OkdOzDJXa4JV+Kq4H4DFGDAmTDG3vUXCxiF+uxgf6HQc4ZKE1UMV7vnk71EtRz7pMgoX+gL/dvMDvOmDX2LxQBc3/L91rL3oDJLUM6sX/NEN3Lz1CNWycO9H38SZywb9uGCkwyh7O/iKQJpa4jji+q/8gLd98EuYgf6845XtrBU0ZVVUMKXGif9s3PHh54g36JNhA3jyvx8gnLNdRER1TR94S1QbnxEdh79LdJLWMvcMwdYvRvCNDhegyfR24+Iiu4/X+NG+cXaP1pkjQnd1Y3qrRH0lTG8ZU61ginHYpcrDSer8DG0WpEVJ2MJeeYpaiHh09xH+8NqvBev3Wakxfs7/Dc+5gAdueDdnLe/nob3+LxoW4ojv3v0oN9/9CArLJWctZc3yBajwXrYzS7ts7Udc4jjiRw8f5A8++m10T4+f/CBMjSvlncA6hzKq0JqbGao33iKI4pzt88PnT+EB/ghQVF33ofWtwVO/mLSSRDkbS9iuJm9TZptz58W7kCk7m9NUFYJsdhmdNZOsoJeNukjItp/wirMRypBlKZwX9uQk1//hOt7y8ktI0pTIGPwOuXYelHgIUlzx+zdwx85j0Jjho+98Hu965aX51jUnL+JLUkshjnj0wChXveN69o830EUfI3xpQIV2L4hSSax03JWOvWri9o9tOnmLspOPn/wXNDavt6wdjuY2v3dTPDN6bVQox2IlydK7TIWKjqJPsBy/rD+sDNF+lYhD5yt4sinhbGtIpTWiDaIMSumwVYzJ31Nhy2Fl/HOMBu0/75ygu/t4x0dv5PM3eeZlnSNNLUZ7JVhrabUStNZ88ZYHueNHj6JUi0qUctXTQ6khY91Zv8D5ZbCFOOKBRw/xgndez/7RGqYU5buw5AsvUIhSSVQoxV3p1LUTt39sE2uHo58k/P9aAQBbNlrWDkdn7/yX98bTR27SpbLfiSlLv7P8UPmdZrNNT/2UmEZpk/NnpXW2o6oXqI4gCJts1bxRfsRca8RolDHh/fBQGrI908M5HP4ztljkdR/8Cn/1rzcTGUMUGVLrUPhinIkMzVbKNZ+7HRUbpJGy9sIzOXP5wtA38MJ0ebD1FPiGb93LlVdfz96xOlG1iEtdO9cKrUdJ09ToKC43xm665nVr3sva4YgtG3+i8H86BYBwOe6+++5Pesd3vi6uTexUhUqkRNpfnm1uk1ccVVaG9ArJBaxAeUFKeF+Z7HnklaUzC1ee+Ya9yPyukSpP83O3D9/h6begSgX++Lpv88Lfu54HHzlMHEUhHng+v/m2HTy0e5y4uwvSlJc9+1ycOJpJGnIFvPKM4eG9R3jVH93AG4Y3M9FSmFKMTS3ZdEleKxNnVRxF1WR656ULW69761vfmnD547bHe8LjJ8eAziNsOlq+8j1L3ZI1tzSjrjNJGylKRVmRLh+/znoDISP0spE8RmR6bf/IIC0r9Qam45OGjjHIzu+R/Lvnf7/DGEhnmpSqZd743PP5nRdcwNPPOZXECRe+6ePsHJlBaUt31OLhz/4BSwZ68+9ptlLu2XGAT3/rPr74nz9mbrqJ7qkGhpddsJCvOxVJJYqjUjr7aGXq+JXjD/7bCAxr+On+vNVPrwAguFV63u9cc94BFnx/mnIPad2K0iaLCapzgz8JRYhsojo7aShsZUs2O//cVd44CUHWC9c9blzeb9/mlZBPO4egjIA2GisKZhuoSLj07FPo6y7zH/fsxlQq2FqLi89eyD+99zc5NjHL7gPHuH/nCHc+fJgdByehmUC16Mcq0479H1B0DCpbTGSGKnr6aX36shs/94GH1q4djrZs2fiL/xMm+RGi+jm//TcX7LXdn28W+s6SpJYqdOQFmM3C0FGqeCIBi4eUTsVkrELmG0/nAvHOVfrKZQvIXV5iaOvC5yNGa1InfosEm6K7qmRd4ghH2mwhqYNW4sVRLKCKBYwJM1TBWLJlp3nZQVxKFEel1tzOy5ZXXnPT5zY+8GTJ1k86fnYFQK6EU698z9K55WffPG26z7LNeqKUxJJjI204IgOcrG4yv4yBuHmWnxf9sg2TaCvA/8w+k01s+J900NwM2iSsCc5ivHUZNOJpsvLDVkr7xerOZnM887chm0ePxSWmUI67qe/smj30nEN3/dvIf0f48NMF4ccfm9fbtWuHo0O3fHjkNStaV5yiZr5TLJVicdaqYIoSgmR7F/KO51oj2U+ALPAqH3Sd9mwqZz1ZQM+pagjAgVWJNv491WZZOVxogyiNFe03BM96GAoIDM2Jz5xTZ0PkbAs/P1SIUIKNCuW4K535zrOWxlccuuvfRtauHY7+O8IPX/tzHCEwi2wrnPP2H/7d/mb0rlrLopSzgvLZT0cAVRlvzty6830IA00dxb4s3nUGZWhP5gXPyMUVRmX8HxBqbxuWr8vKz9U+Z35k10CAziyzb8cdK0qbooZeVfvYtZdW3rd+48bWE+2I/rMcP58CIFeCAi59z6devWtOX3esFfeTNFOlxP8xzyCkrG5/cqaZHy7bozQE1nkB2c4TWr54EMjG40PhIF/Z344/WelcOiy7bRg5QJ70/WH/DBGwOoqjkm1M9NmZqw9v+egXQMHw//Af85z3PWuHDVs2pn/2qRvXbNp27CP7ps3z5poJ4FKlM6ra0UM4+cxZGcJlggjPw3ttzp01BgMmQ1ijFga6OhUcNs/QueAld4C2F3QwqHnlERBcilJRpGOqUvvu8mr67oe+8bePdCRZT2JJP4vgfpFHoKlFA895/7+/88cT6Z8ebUULk9qcKOPXoWRCg8zV25eQWbXOAnj2OxmESVb8CtDT7hEGxch8Qbpsl0fvDS6HrOxjLn+eQVrofVsBbeKCKiRzx3vi1gdHv/f317qOe/xFiewXqwBgeHhYb9wIsNF9+64HT/3rbzz8h7uOTV19JImVNJtCpJ32fx5BZQqYv0GIC3S0fYhrb5/WCWHtnS1Ue6q7k2U5T4s755nyfCJvTQZ66zXoBKWJYlW2s1KW9LpVPVxzz1f/5hAMa4bh54Wck49fuALyI1iKBv5+8+0X37jj+PseOTr9ykNzKNtogVGp9mPP2uUW3vFX+cLRXq3fsRVMeJ4HWDnpRlw76PrNRgKk5AqY9xkXnCPS2lCSppQjvry0In/30Jc/eLd03MsvQ0y/PAUAIqLU+s2azettQcG/b9l+8Q237XzHjiMTrzjWKlRn6gnYlmCMVWK1EtFysn3lccB5LO9I6vL8IQ+mHTeWxxSbj9Tke2aJciLWr4s2sYpMRNnOznUX+MoZvdHH7/zs8N0OQr6zzs03iV/s8UtVQHb4v0W5AdjoNPDw/qNnXH/Tjlf/aP/YKw+eqF90tCbUaw1IW6BNitZkm8aDqHyFPrQpbLbNJvPjgLdsl2WriIgoQUTE+f6Ei9ARJoqp6pQS6f29JfXl8xZUv/DVT7x3r5f0Lwdunuj4lSggO4ZF9Mb1m1VWI+8uF9h85yNXfOvePS/ZfujE5cenGxceq2sma5ak0fJLSf2YvM2SuLCxvSZ0o1C+V+Dblc75VT75Sh+/x7CO0FFMOdZUVZOislsX9VRvO3Pp4De/9FdvuLWVjTGu22Q4Z7v8KgSfHb9SBWTH8PCwvg30lo1tXO2pFnl0vHHe12574Ne27jl6yWNHp887MTW3crLW6p9NFHUrNBNHkqbYJAHC/s3Z7i3OouOYSCsKWlM2jpKylAwTlcjsWdBXeejURQN3nb9swQ//5Hef81Cj1QHpa4cjLsf9KgWfHf8jCmgfojZt2qw/vn276lQGQHc5ZrrWWnL7j/et3n1k8txj0/XF09Ozq/aNTZe7S+WzG82URst3uiIllEsRU3ONh08ZrNaLxeruUxd0HT21v7D9VVdetKurXDhSbyTzN69cOxytW3iubH6SZvmv6vj/ZJ+BH8bgveQAAAAASUVORK5CYII=" alt="" width="48" height="48" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-contain ring-2 ring-white/25">
@@ -125,7 +134,24 @@
     </div>
   </div>
 </header>
-<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-24 sm:pt-8 flex-1 w-full space-y-4 sm:space-y-5">
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-6 sm:pt-8 flex-1 w-full space-y-4 sm:space-y-5">
+
+  <!-- Estado de los datos (datos.js) -->
+  <div id="data-error" role="alert" class="hidden rounded-2xl bg-rose-50 text-rose-800 p-4 text-sm gap-3">
+    <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+    <div>
+      <p class="font-semibold">No se han podido cargar los datos del menú.</p>
+      <p class="text-xs mt-1">Comprueba que el archivo <strong>datos.js</strong> está en la misma carpeta que index.html y que no tiene errores.</p>
+    </div>
+  </div>
+  <div id="data-warning" role="status" class="hidden rounded-2xl bg-amber-50 text-amber-800 p-4 text-sm gap-3">
+    <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
+    <div>
+      <p id="data-warning-title" class="font-semibold"></p>
+      <ul id="data-warning-list" class="mt-1 text-xs list-disc list-inside space-y-0.5"></ul>
+    </div>
+  </div>
+
 
   <!-- Instrucciones -->
   <details class="group bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
@@ -343,7 +369,7 @@
     </div>
   </section>
 
-  <div id="action-bar" class="fixed left-1/2 -translate-x-1/2 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-30 w-[calc(100%-1.5rem)] max-w-md sm:w-fit sm:max-w-none flex items-center gap-2 p-1.5 sm:gap-3 sm:px-3 sm:py-2.5 rounded-2xl bg-white/90 backdrop-blur-md ring-1 ring-slate-900/10 shadow-lg">
+  <div id="action-bar" class="fixed left-1/2 -translate-x-1/2 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-30 w-[calc(100%-1.5rem)] max-w-md sm:w-fit sm:max-w-none flex items-center gap-2 p-1.5 sm:gap-3 sm:px-3 sm:py-2.5 rounded-2xl bg-white/90 backdrop-blur-md ring-1 ring-slate-900/10 shadow-lg transition duration-200">
     <nav id="nav-scroll" aria-label="Secciones de la página" class="flex flex-1 min-w-0 items-center gap-1 sm:flex-none sm:gap-1.5">
       <a id="nav-sec-calendario" href="#sec-calendario" title="Calendario" aria-label="Calendario" class="flex-1 min-w-0 sm:flex-none sm:w-10 h-11 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition"><i class="fa-solid fa-calendar-days"></i></a>
       <a id="nav-sec-comensales" href="#sec-comensales" title="Comensales" aria-label="Comensales" class="flex-1 min-w-0 sm:flex-none sm:w-10 h-11 sm:h-10 inline-flex items-center justify-center rounded-lg text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition"><i class="fa-solid fa-users"></i></a>
@@ -371,15 +397,36 @@
     <div id="c1" class="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-5 flex flex-col gap-4 md:flex"></div>
     <div id="c2" class="bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-5 flex flex-col gap-4 md:flex hidden"></div>
     <div id="c3" class="hidden md:col-span-2 bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 p-4 sm:p-5 space-y-3"></div>
+    <div id="out-actions" class="md:col-span-2 flex justify-end">
+      <button id="copy-summary" type="button" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 active:scale-[0.98] transition flex items-center gap-2"><i class="fa-solid fa-copy text-slate-400"></i><span>Copiar resumen</span></button>
+    </div>
   </section>
+
+  <!-- Copia de seguridad -->
+  <details id="sec-backup" class="group bg-white rounded-2xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden">
+    <summary class="flex items-center justify-between gap-3 p-4 sm:p-5 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden hover:bg-slate-50/80">
+      <span class="flex items-center gap-2.5 font-semibold text-slate-800 text-sm"><i class="fa-solid fa-database text-brand-500"></i><span>Copia de seguridad</span></span>
+      <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition group-open:rotate-180"></i>
+    </summary>
+    <div class="px-4 sm:px-5 pb-5 pt-1 space-y-3">
+      <p class="text-xs text-slate-500 leading-relaxed">El historial y los borradores se guardan solo en este navegador. Exporta una copia para no perderlos o para pasarlos a otro móvil; al importar, de cada día se conserva la versión más reciente.</p>
+      <div class="flex flex-wrap gap-2">
+        <button id="export-data" type="button" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 active:scale-[0.98] transition flex items-center gap-2"><i class="fa-solid fa-file-arrow-down text-slate-400"></i><span>Exportar</span></button>
+        <button id="import-data" type="button" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 active:scale-[0.98] transition flex items-center gap-2"><i class="fa-solid fa-file-arrow-up text-slate-400"></i><span>Importar</span></button>
+        <input id="import-file" type="file" accept="application/json,.json" class="hidden">
+      </div>
+      <p id="backup-msg" class="hidden text-xs font-medium text-brand-700"></p>
+    </div>
+  </details>
 </main>
-<footer class="bg-white border-t border-slate-200 mt-6 sm:mt-12 py-6 text-center text-xs text-slate-500">
+<footer class="bg-white border-t border-slate-200 mt-6 sm:mt-12 pt-6 pb-[calc(6rem+env(safe-area-inset-bottom))] text-center text-xs text-slate-500">
   <div class="max-w-5xl mx-auto px-4">
     <p>Calculadora de Aceptabilidad de Menús Escolares • Registro oficial unificado IT6.5-23</p>
-    <p class="mt-1 font-semibold text-slate-400">Versión 5.3</p>
+    <p class="mt-1 font-semibold text-slate-400">Versión 5.5</p>
   </div>
 </footer>
 
+<script src="./datos.js"></script>
 <script>
 const $=x=>document.getElementById(x);
 // Número estricto (coma o punto). Vacío = 0; texto no válido o negativo = NaN.
@@ -387,18 +434,13 @@ const Z=x=>{const v=$(x).value.trim().replace(',','.'); if(v==='') return 0; ret
 const K=x=>x.toLocaleString('es-ES',{maximumFractionDigits:3})+' kg';
 const P=x=>x.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1})+' %';
 
-// TABLA DE RACIONES (SDA · L. Fría · 3er periodo).
-// Formato: nombre;g Infantil;g Primaria;raciones/barqueta Infantil;raciones/barqueta Primaria
-// Los platos "A + B" suman el gramaje de ambos componentes (la barqueta los lleva juntos).
-// Ensaladas: el PDF no indica raciones/barqueta (se usa 15 como valor orientativo).
-const A=s=>s.split('|').map(x=>{const[n,gi,gp,ri,rp]=x.split(';');return[n,+gi,+gp,+ri,+rp];});
-
-const first=A('Arroz con Pisto ECO;173;207;13;11|Arroz Hervido con Tomate Frito;165;198;14;12|Arroz Integral a la Campesina ECO;179;214;13;11|Coditos con Tomate y Orégano;150;180;15;13|Crema de Calabacín ECO;210;210;10;10|Crema de Calabaza ECO;210;210;10;10|Crema de Verduras ECO;208;208;11;11|Crema de Zanahorias ECO;210;210;10;10|Crema Hortelana ECO;210;210;10;10|Ensalada de Lechuga, Tomate y Huevo cocido;140;140;15;15|Ensalada de Lechuga, Tomate y Maíz;125;125;15;15|Ensalada de Tomate y Queso Fresco;130;130;15;15|Ensalada de Tomate, Maíz y Queso Fresco;130;130;15;15|Espirales Integrales con Tomate ECO;155;186;15;12|Garbanzos Encebollados ECO;118;235;21;10|Lacitos con Tomate ECO;133;160;17;14|Lentejas con Verduras Cocidas ECO;125;231;20;10|Macarrones Integrales con Tomate ECO;155;186;15;12|Potaje de Alubias Blancas ECO;150;274;15;8|Potaje de Alubias Blancas con Calabacín ECO;163;299;13;7|Potaje de Lentejas con Calabaza ECO;158;289;14;8|Puchero ECO;154;283;14;8');
-
-const second=A('Abadejo al Horno a las Finas Hierbas;72;103;20;14|Albóndigas de Cerdo con Tomate + Patatas Panaderas al Vapor ECO;148;209;19;14|Albóndigas de Pollo a la Jardinera + Patatas Panaderas al Vapor ECO;128;188;22;15|Alubias Pintas Guisadas con Arroz ECO;177;354;14;10|Caballa al Vapor en Salsa;87;123;17;12|Chuleta de Pavo Adobada;62;119;29;15|Contramuslo de Pollo Asado;54;86;24;15|Estofado de Cerdo en Salsa con Verduras;125;162;19;15|Filete de Lomo de Cerdo + Patatas a la Provenzal ECO;111;175;23;15|Garbanzos Encebollados ECO;118;235;21;10|Guisadillo de Garbanzos ECO;128;256;20;10|Hamburguesa de Pavo con Salsa Rondeña;78;96;19;15|Huevo Cocido con Arroz Integral y Tomate;151;151;15;15|Huevo Cocido con Patatas a lo Pobre;123;141;17;15|Huevo Cocido con Pisto de Verduras;141;141;15;15|Jamoncito de Pollo al Horno en Salsa;81;130;23;15|Jamoncito de Pollo al Horno en Salsa + Patatas a la Provenzal ECO;144;228;19;12|Jureles al Horno Encebollados;88;126;21;15|Lentejas Guisadas con Arroz ECO;158;289;16;10|Lentejas con Verduras Cocidas ECO;125;231;20;10|Merluza a la Plancha al Ajo y Perejil;67;96;22;15|Merluza a la Plancha en Salsa Verde;72;103;21;15|Muslito de Pollo al Horno al Ajillo;52;83;37;23|Potaje de Alubias Blancas ECO;150;274;15;8|Potaje de Alubias Blancas con Calabacín ECO;163;299;13;7|Potaje de Lentejas con Calabaza ECO;158;289;14;8|Puchero ECO;154;283;14;8|Salmón al Vapor en Salsa de Cebolla y Eneldo;67;96;22;15|Solomillo de Pollo Rustido + Arroz Pilaf ECO;144;174;18;15|Tiras de Pollo al Horno Adobadas;62;119;23;12|Tortilla de Patatas con Calabacín;123;123;16;16|Tortilla de Patatas con Cebolla;113;113;12;12');
-
-// Guarniciones: las raciones/barqueta de patatas y arroz son las del plato combinado en el que aparecen en el PDF.
-const side=A('Patatas Panaderas al Vapor ECO;63;84;19;14|Patatas a la Provenzal ECO;63;98;23;15|Arroz Pilaf ECO;68;81;18;15|Ensalada 4 Estaciones;57;57;15;15|Ensalada Campestre;61;61;15;15|Ensalada de Lechuga y Maíz;65;65;15;15|Ensalada Mézclum;61;61;15;15|Ensalada de Lechuga;61;61;15;15|Ensalada Clásica;61;61;15;15|Tomate Natural;61;61;15;15|Ensalada de Lechuga, Tomate y Huevo cocido;140;140;15;15');
+// ---------- Datos del periodo (menú, tabla de raciones, equivalencias): están en datos.js ----------
+const DATA=window.DATOS;
+const DATA_OK=!!(DATA && Array.isArray(DATA.menu) && DATA.raciones && Array.isArray(DATA.raciones.primeros) && Array.isArray(DATA.raciones.segundos) && Array.isArray(DATA.raciones.guarniciones) && DATA.alias && typeof DATA.alias==='object');
+// Tabla de raciones: [nombre, g Infantil, g Primaria, raciones/barqueta Infantil, raciones/barqueta Primaria]
+const first=DATA_OK?DATA.raciones.primeros:[];
+const second=DATA_OK?DATA.raciones.segundos:[];
+const side=DATA_OK?DATA.raciones.guarniciones:[];
 
 const LISTS=[first,second,side];
 let selectedDishes=[null,null,null];
@@ -416,17 +458,7 @@ function catInfo(x){
 function norm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
 function menuNorm(s){ return norm(s).replace(/\(guarnicion\)/g,'').replace(/\beco\b/g,'').replace(/\s+/g,' ').trim(); }
 // Nombres del calendario que difieren del nombre de la tabla (coincidencia exacta, sin aproximaciones).
-const MENU_ALIASES=Object.fromEntries(Object.entries({
-  'Albóndigas de Pollo al Horno a la Jardinera':'Albóndigas de Pollo a la Jardinera + Patatas Panaderas al Vapor ECO',
-  'Albóndigas de Cerdo al Horno con Salsa de Tomate':'Albóndigas de Cerdo con Tomate + Patatas Panaderas al Vapor ECO',
-  'Filete de Lomo de Cerdo al Horno':'Filete de Lomo de Cerdo + Patatas a la Provenzal ECO',
-  'Solomillo de Pollo Rustido':'Solomillo de Pollo Rustido + Arroz Pilaf ECO',
-  'Hamburguesa de Pavo a la Plancha con Salsa Rondeña':'Hamburguesa de Pavo con Salsa Rondeña',
-  'Patatas Panaderas al Horno a la Provenzal':'Patatas a la Provenzal ECO',
-  'Arroz Pilaf Salteado ECO':'Arroz Pilaf ECO',
-  'Crema de Zanahoria ECO':'Crema de Zanahorias ECO',
-  'Jureles al Horno':'Jureles al Horno Encebollados'
-}).map(([k,v])=>[menuNorm(k),v]));
+const MENU_ALIASES=Object.fromEntries(Object.entries(DATA_OK?DATA.alias:{}).map(([k,v])=>[menuNorm(k),v]));
 function findDishIndex(arr,name){
   if(!name) return null;
   const target=menuNorm(MENU_ALIASES[menuNorm(name)]||name);
@@ -464,56 +496,7 @@ function grams(){
 ['b1','b2','b3','as_i','as_p'].forEach(id=>$(id).addEventListener('input',grams));
 
 // ---------- Calendario ----------
-const menuCalendar = [
-  // MENÚ ORIGINAL (Octubre/Noviembre 2026)
-  {date:'2026-10-05', label:'Lun 5 Oct', f:'Potaje de Lentejas con Calabaza ECO', s:'Jureles al Horno', g:'Ensalada de Lechuga y Maíz'},
-  {date:'2026-10-06', label:'Mar 6 Oct', f:'Coditos con Tomate y Orégano ECO', s:'Alubias Pintas Guisadas con Arroz ECO', g:null},
-  {date:'2026-10-07', label:'Mié 7 Oct', f:'Ensalada de Tomate y Queso Fresco', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas a la Provenzal ECO'},
-  {date:'2026-10-08', label:'Jue 8 Oct', f:'Puchero ECO', s:'Jamoncito de Pollo al Horno en Salsa', g:'Ensalada Campestre'},
-  {date:'2026-10-09', label:'Vie 9 Oct', f:'Crema de Verduras', s:'Huevo Cocido con Arroz Integral y Tomate', g:'Ensalada Mézclum'},
-  {date:'2026-10-12', label:'Lun 12 Oct', festivo:true, f:'Crema de Zanahoria ECO', s:'Contramuslo de Pollo Asado', g:'Ensalada de Lechuga, Tomate y Huevo cocido'},
-  {date:'2026-10-13', label:'Mar 13 Oct', f:'Potaje de Alubias Blancas con Calabacín', s:'Tortilla de Patatas con Cebolla', g:'Tomate Natural'},
-  {date:'2026-10-14', label:'Mié 14 Oct', f:'Ensalada de Lechuga, Tomate y Huevo cocido', s:'Albóndigas de Pollo al Horno a la Jardinera', g:'Patatas Panaderas al Vapor ECO'},
-  {date:'2026-10-15', label:'Jue 15 Oct', f:'Arroz con Pisto ECO', s:'Guisadillo de Garbanzos ECO', g:'Patatas Panaderas al Vapor ECO'},
-  {date:'2026-10-16', label:'Vie 16 Oct', f:'Macarrones Integrales con Tomate ECO', s:'Merluza a la Plancha en Salsa Verde', g:'Ensalada de Lechuga'},
-  {date:'2026-10-19', label:'Lun 19 Oct', f:'Crema Hortelana ECO', s:'Tortilla de Patatas con Calabacín', g:'Ensalada 4 Estaciones (guarnición)'},
-  {date:'2026-10-20', label:'Mar 20 Oct', f:'Coditos con Tomate y Orégano ECO', s:'Caballa al Vapor en Salsa', g:'Ensalada de Lechuga y Maíz (guarnición)'},
-  {date:'2026-10-21', label:'Mié 21 Oct', f:'Ensalada de Tomate y Queso Fresco', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
-  {date:'2026-10-22', label:'Jue 22 Oct', f:'Crema de Calabaza ECO', s:'Lentejas guisadas con Arroz ECO', g:null},
-  {date:'2026-10-23', label:'Vie 23 Oct', f:'Puchero ECO', s:'Tiras de Pollo al Horno Adobadas', g:'Ensalada Clásica'},
-  {date:'2026-10-26', label:'Lun 26 Oct', f:'Macarrones Integrales con Tomate ECO', s:'Muslito de Pollo al Horno al Ajillo', g:'Ensalada Clásica'},
-  {date:'2026-10-27', label:'Mar 27 Oct', f:'Potaje de Lentejas con Calabaza ECO', s:'Tortilla de Patatas con Cebolla', g:'Ensalada Mézclum'},
-  {date:'2026-10-28', label:'Mié 28 Oct', f:'Ensalada de Lechuga, Tomate y Huevo cocido', s:'Albóndigas de Cerdo al Horno con Salsa de Tomate', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
-  {date:'2026-10-29', label:'Jue 29 Oct', f:'Crema de Zanahoria ECO', s:'Alubias Pintas Guisadas con Arroz ECO', g:null},
-  {date:'2026-10-30', label:'Vie 30 Oct', f:'Arroz Integral a la Campesina ECO', s:'Abadejo al Horno a Las Finas Hierbas', g:'Ensalada Campestre'},
-  {date:'2026-11-02', label:'Lun 2 Nov', festivo:true, f:'Crema Hortelana ECO', s:'Estofado de Cerdo en Salsa con Verduras', g:'Tomate Natural'},
-  {date:'2026-11-03', label:'Mar 3 Nov', f:'Espirales Integrales con Tomate ECO', s:'Lentejas con Verduras Cocidas ECO', g:null},
-  {date:'2026-11-04', label:'Mié 4 Nov', f:'Ensalada de Tomate y Queso Fresco', s:'Jamoncito de Pollo al Horno en Salsa', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
-  {date:'2026-11-05', label:'Jue 5 Nov', f:'Puchero ECO', s:'Merluza a la Plancha al Ajo y Perejil', g:'Ensalada 4 Estaciones (guarnición)'},
-  {date:'2026-11-06', label:'Vie 6 Nov', f:'Arroz Hervido con Tomate Frito', s:'Tortilla de Patatas con Calabacín', g:'Ensalada de Lechuga y Maíz (guarnición)'},
-
-  // NUEVO MENÚ (Imagen 3er Periodo)
-  {date:'2026-11-09', label:'Lun 9 Nov', f:'Potaje de Alubias Blancas ECO', s:'Salmón al Vapor en Salsa de Cebolla y Eneldo', g:'Ensalada Clásica'},
-  {date:'2026-11-10', label:'Mar 10 Nov', f:'Crema de Calabacín ECO', s:'Hamburguesa de Pavo a la Plancha con Salsa Rondeña', g:'Ensalada Campestre'},
-  {date:'2026-11-11', label:'Mié 11 Nov', f:'Ensalada de Lechuga, Tomate y Maíz', s:'Solomillo de Pollo Rustido', g:'Arroz Pilaf Salteado ECO'},
-  {date:'2026-11-12', label:'Jue 12 Nov', f:'Arroz Integral a la Campesina ECO', s:'Garbanzos Encebollados ECO', g:null},
-  {date:'2026-11-13', label:'Vie 13 Nov', f:'Lacitos con Tomate ECO', s:'Tortilla de Patatas con Cebolla', g:'Ensalada de Lechuga'},
-  {date:'2026-11-16', label:'Lun 16 Nov', f:'Potaje de Lentejas con Calabaza ECO', s:'Merluza a la Plancha en Salsa Verde', g:'Ensalada de Lechuga y Maíz (guarnición)'},
-  {date:'2026-11-17', label:'Mar 17 Nov', f:'Espirales Integrales con Tomate ECO', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
-  {date:'2026-11-18', label:'Mié 18 Nov', f:'Ensalada de Tomate, Maíz y Queso Fresco', s:'Alubias Pintas Guisadas con Arroz ECO', g:null},
-  {date:'2026-11-19', label:'Jue 19 Nov', f:'Crema de Verduras ECO', s:'Jamoncito de Pollo al Horno en Salsa', g:'Ensalada Campestre'},
-  {date:'2026-11-20', label:'Vie 20 Nov', f:'Arroz Hervido con Tomate Frito', s:'Tortilla de Patatas con Calabacín', g:'Ensalada Mézclum'},
-  {date:'2026-11-23', label:'Lun 23 Nov', f:'Potaje de Alubias Blancas con Calabacín ECO', s:'Tortilla de Patatas con Cebolla', g:'Tomate Natural'},
-  {date:'2026-11-24', label:'Mar 24 Nov', f:'Crema de Zanahoria ECO', s:'Contramuslo de Pollo Asado', g:'Ensalada de Lechuga y Maíz (guarnición)'},
-  {date:'2026-11-25', label:'Mié 25 Nov', f:'Ensalada de Lechuga, Tomate y Huevo cocido', s:'Albóndigas de Pollo al Horno a la Jardinera', g:'Patatas Panaderas al Vapor ECO'},
-  {date:'2026-11-26', label:'Jue 26 Nov', f:'Arroz con Pisto ECO', s:'Guisadillo de Garbanzos ECO', g:null},
-  {date:'2026-11-27', label:'Vie 27 Nov', f:'Macarrones Integrales con Tomate ECO', s:'Jureles al Horno Encebollados', g:'Ensalada de Lechuga'},
-  {date:'2026-11-30', label:'Lun 30 Nov', f:'Puchero ECO', s:'Tortilla de Patatas con Calabacín', g:'Ensalada 4 Estaciones (guarnición)'},
-  {date:'2026-12-01', label:'Mar 1 Dic', f:'Espirales Integrales con Tomate ECO', s:'Merluza a la Plancha al Ajo y Perejil', g:'Ensalada Mézclum'},
-  {date:'2026-12-02', label:'Mié 2 Dic', f:'Ensalada de Tomate, Maíz y Queso Fresco', s:'Lentejas Guisadas con Arroz ECO', g:null},
-  {date:'2026-12-03', label:'Jue 3 Dic', f:'Crema de Calabaza ECO', s:'Filete de Lomo de Cerdo al Horno', g:'Patatas Panaderas al Horno a la Provenzal ECO'},
-  {date:'2026-12-04', label:'Vie 4 Dic', f:'Arroz Hervido con Tomate Frito', s:'Tiras de Pollo al Horno Adobadas', g:'Ensalada Clásica'}
-];
+const menuCalendar = DATA_OK ? DATA.menu : [];
 
 const monthNames=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 let currentSelectedDate=null;
@@ -529,6 +512,11 @@ function saveHistory(date,payload){
   }catch(e){ console.error('No se pudo guardar el historial:',e); return false; }
 }
 function hasHistory(date){ return !!getHistory()[date]; }
+const DRAFT_KEY='calculadoraMenusBorradoresV1';
+function getDrafts(){ try{ const p=JSON.parse(localStorage.getItem(DRAFT_KEY)||'{}'); return p && typeof p==='object' ? p : {}; }catch(e){ return {}; } }
+function setDrafts(o){ try{ if(Object.keys(o).length) localStorage.setItem(DRAFT_KEY,JSON.stringify(o)); else localStorage.removeItem(DRAFT_KEY); }catch(e){} }
+// Hay borrador pendiente si existe y es más reciente que el último cálculo guardado.
+function hasDraft(date){ const d=getDrafts()[date]; if(!d) return false; const e=getHistory()[date]; return !e || (d.at||'')>(e.guardadoEn||''); }
 function resetInputs(){ INPUT_IDS.forEach(id=>{ $(id).value=''; }); }
 function restoreHistory(date){
   const entry=getHistory()[date]; if(!entry || !entry.inputs) return false;
@@ -598,12 +586,14 @@ let currentWeekIndex=findInitialWeek();
 
 function onDayClick(menu){
   if(currentSelectedDate===menu.date) return;   // no pisar lo que se esté escribiendo
-  resetInputs();                                 // evita arrastrar datos del día anterior
+  flushDraft();                                  // guarda al instante lo que se estaba escribiendo
+  if(currentSelectedDate!==null) resetInputs();  // evita arrastrar datos del día anterior (si se escribió antes de elegir día, se conserva)
   const missing=loadMenu(menu);
-  const restored=restoreHistory(menu.date);
+  const drafted=hasDraft(menu.date) && restoreDraft(menu.date);   // borrador más reciente que el último cálculo
+  const restored=!drafted && restoreHistory(menu.date);
   grams();
   if(missing.length) showNotice('Falta en la tabla de raciones: '+missing.join('; '),true);
-  else showNotice(restored ? 'Resultados anteriores recuperados del historial.' : `Menú cargado: ${menu.label}`);
+  else showNotice(drafted ? 'Borrador recuperado: tienes datos sin calcular.' : restored ? 'Resultados anteriores recuperados del historial.' : `Menú cargado: ${menu.label}`);
   if(restored) calculate(false); else { $('out').classList.add('hidden'); $('err').classList.add('hidden'); }
   renderCalendar();
 }
@@ -615,6 +605,7 @@ function renderCalendar(keepScroll=true){
   select.innerHTML=availableWeeks.map((w,i)=>`<option value="${i}">${weekLabel(w)}</option>`).join('');
   select.value=String(currentWeekIndex);
   const week=availableWeeks[currentWeekIndex];
+  if(!week){ host.innerHTML='<p class="text-sm text-slate-400 italic px-1">Sin menú cargado.</p>'; return; }
   let html='<div id="week-days" class="relative flex gap-2 overflow-x-auto snap-x snap-mandatory py-1 px-1 -mx-1">';
   week.items.forEach(menu=>{
     const selected=currentSelectedDate===menu.date;
@@ -626,7 +617,7 @@ function renderCalendar(keepScroll=true){
           <span class="text-sm font-semibold ${selected?'text-brand-700':'text-slate-800'}">${menu.label}</span>
           ${menu.festivo?'<span class="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">Festivo</span>':''}
         </div>
-        ${done?'<i class="fa-solid fa-check text-brand-600 text-xs shrink-0" title="Cálculo guardado"></i>':''}
+        <span class="flex items-center gap-1.5 shrink-0">${done?'<i class="fa-solid fa-check text-brand-600 text-xs" title="Cálculo guardado"></i>':''}${hasDraft(menu.date)?'<i class="fa-solid fa-pen text-slate-400 text-xs" title="Borrador sin calcular"></i>':''}</span>
       </div>
       <ul class="space-y-0.5 text-xs leading-snug text-slate-600">${dish('1º',menu.f)}${dish('2º',menu.s)}${dish('G',menu.g)}</ul>
     </button>`;
@@ -769,6 +760,8 @@ function calculate(save=true){
   const barqRows=slots.filter(s=>s.barq>0).map(s=>({title:s.title,name:s.arr[s.idx][0],barq:s.barq,mix:racMix(s.arr[s.idx],asInf,asPrim)}));
   $('c3').innerHTML=barqRows.length ? buildBarquetasHtml(barqRows) : '';
   $('c3').classList.toggle('hidden',!barqRows.length);
+  const platosSummary=slots.map(s=>{ const mix=racMix(s.arr[s.idx],asInf,asPrim); return {title:s.title,name:s.arr[s.idx][0],barq:s.barq,mix,raciones:Math.round(s.barq*mix)}; });
+  lastResult={label:(menuCalendar.find(x=>x.date===currentSelectedDate)||{}).label||'',asInf,naInf,asPrim,naPrim,platos:platosSummary,resInf,resPrim};
   $('out').classList.remove('hidden');
   $('out').classList.add('grid');
   $('out').classList.remove('anim-in'); void $('out').offsetWidth; $('out').classList.add('anim-in');
@@ -779,8 +772,10 @@ function calculate(save=true){
       date:currentSelectedDate,
       menu:menuCalendar.find(x=>x.date===currentSelectedDate)||null,
       inputs:{asInf,naInf,asPrim,naPrim,sInf,sPrim,b},
-      resultados:{inf:resInf,prim:resPrim}
+      resultados:{inf:resInf,prim:resPrim},
+      platos:platosSummary
     });
+    if(saved) deleteDraft(currentSelectedDate);
     showNotice(saved ? 'Cálculo guardado en el historial de este navegador.' : 'ERROR: el navegador no permite guardar el historial. Abre la calculadora desde GitHub Pages y no en modo incógnito.', !saved);
     if(!saved) alert('No se ha podido guardar el historial en este navegador. Comprueba que no estás en modo incógnito y que has abierto la calculadora desde GitHub Pages.');
     renderCalendar();
@@ -873,12 +868,192 @@ if('IntersectionObserver' in window){
 syncNav();
 setActiveNav('sec-calendario');
 
+// ---------- Borrador automático ----------
+// Lo que se escribe en un día se guarda al momento y se recupera al volver a ese día.
+let draftTimer=null;
+function collectInputs(){ const v={}; INPUT_IDS.forEach(id=>{ const x=$(id).value.trim(); if(x!=='') v[id]=x; }); return v; }
+function saveDraft(){
+  const date=currentSelectedDate; if(!date) return;
+  const v=collectInputs(), d=getDrafts(), had=!!d[date];
+  if(!Object.keys(v).length){ if(had){ delete d[date]; setDrafts(d); renderCalendar(); } return; }
+  d[date]={v,at:new Date().toISOString()}; setDrafts(d);
+  if(!had) renderCalendar();   // aparece el icono de borrador en el calendario
+}
+function scheduleDraft(){ clearTimeout(draftTimer); draftTimer=setTimeout(()=>{ draftTimer=null; saveDraft(); },400); }
+function flushDraft(){ if(draftTimer){ clearTimeout(draftTimer); draftTimer=null; saveDraft(); } }
+function restoreDraft(date){
+  const d=getDrafts()[date]; if(!d || typeof d.v!=='object' || d.v===null) return false;
+  Object.entries(d.v).forEach(([id,val])=>{ if(INPUT_IDS.includes(id)) $(id).value=String(val); });
+  return true;
+}
+function deleteDraft(date){
+  clearTimeout(draftTimer); draftTimer=null;
+  const d=getDrafts();
+  if(d[date]){ delete d[date]; setDrafts(d); renderCalendar(); }
+}
+INPUT_IDS.forEach(id=>$(id).addEventListener('input',scheduleDraft));
+
+// ---------- Resumen para copiar ----------
+let lastResult=null;
+function buildSummaryText(r){
+  const L=[`Menú ${r.label}`];
+  const rec=r.platos.filter(p=>p.barq>0);
+  if(rec.length){ L.push('','Raciones recibidas:'); rec.forEach(p=>L.push(`- ${p.title}: ${p.name} — ${p.barq} barq. = ${p.raciones} raciones`)); }
+  [['Infantil',r.asInf,r.naInf,r.resInf],['Primaria',r.asPrim,r.naPrim,r.resPrim]].forEach(([nom,as,na,res])=>{
+    if(!(as>0)) return;
+    L.push('',`Residuo ${nom} (${as} asistentes${na>0?`, ${na} faltantes`:''}):`);
+    res.dishes.forEach((d,i)=>L.push(`- ${r.platos[i].title}: ${P(d.pct)} (${d.info.tag})`));
+  });
+  return L.join('\n');
+}
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); return true; }
+  catch(e){
+    try{
+      const ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); const ok=document.execCommand('copy'); ta.remove(); return !!ok;
+    }catch(e2){ return false; }
+  }
+}
+$('copy-summary').onclick=async()=>{
+  if(!lastResult) return;
+  const ok=await copyText(buildSummaryText(lastResult));
+  const sp=$('copy-summary').querySelector('span');
+  sp.textContent=ok?'Copiado':'No se pudo copiar';
+  setTimeout(()=>{ sp.textContent='Copiar resumen'; },1800);
+};
+
+// ---------- Copia de seguridad ----------
+const BACKUP_APP='calculadora-menus';
+function backupMsg(text,isError=false){
+  const m=$('backup-msg'); m.textContent=text; m.classList.remove('hidden');
+  m.classList.toggle('text-brand-700',!isError); m.classList.toggle('text-rose-700',isError);
+}
+function buildBackup(){ return {app:BACKUP_APP,version:1,exportadoEn:new Date().toISOString(),historial:getHistory(),borradores:getDrafts()}; }
+function exportData(){
+  const n=Object.keys(getHistory()).length;
+  const blob=new Blob([JSON.stringify(buildBackup(),null,1)],{type:'application/json'});
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=`calculadora-menus-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+  backupMsg(`Copia exportada: ${n} ${n===1?'día calculado':'días calculados'}.`);
+}
+// Mezcla sin borrar nada: de cada día se queda con la versión más reciente.
+function mergeBackup(data){
+  if(!data || data.app!==BACKUP_APP || typeof data.historial!=='object' || data.historial===null) throw new Error('formato');
+  const isDate=s=>/^\d{4}-\d{2}-\d{2}$/.test(s);
+  const h=getHistory(); let added=0, updated=0, kept=0;
+  Object.entries(data.historial).forEach(([date,e])=>{
+    if(!isDate(date) || !e || typeof e!=='object' || typeof e.inputs!=='object' || e.inputs===null) return;
+    const cur=h[date];
+    if(!cur){ h[date]=e; added++; }
+    else if((e.guardadoEn||'')>(cur.guardadoEn||'')){ h[date]=e; updated++; }
+    else kept++;
+  });
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(h));
+  const d=getDrafts();
+  Object.entries(data.borradores||{}).forEach(([date,x])=>{
+    if(isDate(date) && x && typeof x==='object' && x.v && typeof x.v==='object' && (!d[date] || (x.at||'')>(d[date].at||''))) d[date]={v:x.v,at:x.at||''};
+  });
+  setDrafts(d);
+  return {added,updated,kept};
+}
+async function importFile(file){
+  try{
+    const r=mergeBackup(JSON.parse(await file.text()));
+    renderCalendar();
+    backupMsg(`Copia importada: ${r.added} días nuevos, ${r.updated} actualizados, ${r.kept} sin cambios.`);
+  }catch(e){ backupMsg('El archivo no es una copia válida de esta aplicación.',true); }
+}
+$('export-data').onclick=exportData;
+$('import-data').onclick=()=>$('import-file').click();
+$('import-file').addEventListener('change',async e=>{ const f=e.target.files && e.target.files[0]; if(f) await importFile(f); e.target.value=''; });
+
+// ---------- Aviso de nueva versión ----------
+// Cada versión lleva un identificador propio (meta app-build). Se compara con el de la página publicada.
+const APP_BUILD=($('app-build')||{}).content||'';
+const dataHash=o=>{ const s=JSON.stringify(o); let x=5381; for(let i=0;i<s.length;i++) x=((x<<5)+x+s.charCodeAt(i))|0; return (x>>>0).toString(16); };
+const DATA_HASH=DATA_OK?dataHash(DATA):'';
+let updateShown=false;
+function showUpdateBanner(){ updateShown=true; const b=$('update-banner'); b.classList.remove('hidden'); b.classList.add('flex'); }
+async function checkForUpdate(){
+  if(updateShown || !APP_BUILD || navigator.onLine===false) return false;
+  try{
+    const res=await fetch('./index.html',{cache:'no-store'});
+    if(!res.ok) return false;
+    const m=(await res.text()).match(/<meta id="app-build" name="app-build" content="([^"]*)"/);
+    let changed=!!(m && m[1] && m[1]!==APP_BUILD);
+    if(!changed && DATA_HASH){   // datos.js puede cambiar sin que cambie index.html
+      const rd=await fetch('./datos.js',{cache:'no-store'});
+      if(rd.ok){ const w={}; new Function('window',await rd.text())(w); changed=!!(w.DATOS && dataHash(w.DATOS)!==DATA_HASH); }
+    }
+    if(changed){ showUpdateBanner(); return true; }
+  }catch(e){}
+  return false;
+}
+$('update-reload').onclick=()=>location.reload();
+$('update-dismiss').onclick=()=>$('update-banner').classList.add('hidden');
+if(location.protocol==='https:' || location.hostname==='localhost'){
+  setTimeout(checkForUpdate,4000);
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) checkForUpdate(); });
+  setInterval(checkForUpdate,30*60*1000);
+}
+
+// ---------- La barra flotante se oculta mientras está el teclado ----------
+const BAR_HIDE=['translate-y-[200%]','opacity-0','pointer-events-none'];
+function setBarHidden(h){ const b=$('action-bar'); BAR_HIDE.forEach(c=>b.classList.toggle(c,h)); }
+const isField=el=>!!el && ['INPUT','SELECT','TEXTAREA'].includes(el.tagName);
+function updateBarForKeyboard(){
+  if(!matchMedia('(hover: none)').matches){ setBarHidden(false); return; }   // solo móviles y tablets
+  const vv=window.visualViewport;
+  const open = vv ? (window.innerHeight-vv.height>120 && vv.scale<=1.01) : isField(document.activeElement);
+  setBarHidden(!!open);
+}
+if(window.visualViewport) window.visualViewport.addEventListener('resize',updateBarForKeyboard);
+document.addEventListener('focusin',()=>setTimeout(updateBarForKeyboard,100));
+document.addEventListener('focusout',()=>setTimeout(updateBarForKeyboard,150));
+// En iOS el teclado numérico no tiene "Listo": tocar fuera de un campo lo cierra.
+document.addEventListener('pointerdown',e=>{ if(isField(document.activeElement) && !isField(e.target)) document.activeElement.blur(); });
+
+// ---------- Comprobación de los datos ----------
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function validateData(){
+  const problems=[], seen=new Set(), isDate=/^\d{4}-\d{2}-\d{2}$/;
+  menuCalendar.forEach((m,i)=>{
+    const dia=(m && (m.label||m.date)) || `día ${i+1}`;
+    if(!m || !isDate.test(m.date||'')){ problems.push(`${dia}: fecha no válida`); return; }
+    if(seen.has(m.date)) problems.push(`${dia}: fecha repetida (${m.date})`);
+    seen.add(m.date);
+    if(!m.label) problems.push(`${m.date}: falta la etiqueta (label)`);
+    if(!m.f || !m.s) problems.push(`${dia}: falta el primer o el segundo plato`);
+    [[m.f,0,'primeros'],[m.s,1,'segundos'],[m.g,2,'guarniciones']].forEach(([n,idx,t])=>{
+      if(n && findDishIndex(LISTS[idx],n)===null) problems.push(`${dia}: «${n}» no está en la tabla de ${t}`);
+    });
+  });
+  LISTS.forEach((list,idx)=>list.forEach(r=>{
+    const ok=Array.isArray(r) && typeof r[0]==='string' && r.length>=5 && r.slice(1,5).every(x=>Number.isFinite(x) && x>0);
+    if(!ok) problems.push(`Tabla de ${['primeros','segundos','guarniciones'][idx]}: fila no válida (${Array.isArray(r)?r[0]:r})`);
+  }));
+  return problems;
+}
+function showDataStatus(){
+  const err=$('data-error'), warn=$('data-warning');
+  if(!DATA_OK){ err.classList.remove('hidden'); err.classList.add('flex'); return; }
+  const p=validateData(); if(!p.length) return;
+  $('data-warning-title').textContent=`Hay ${p.length} ${p.length===1?'problema':'problemas'} en datos.js`;
+  $('data-warning-list').innerHTML=p.slice(0,6).map(x=>`<li>${esc(x)}</li>`).join('')+(p.length>6?`<li>… y ${p.length-6} más</li>`:'');
+  warn.classList.remove('hidden'); warn.classList.add('flex');
+}
+showDataStatus();
+
 $('go').onclick=()=>calculate(true);
 
 $('clear').onclick=()=>{
   if(!confirm('¿Seguro que quieres limpiar todos los datos introducidos? El historial guardado de los días no se borrará.')) return;
   resetInputs();
   ['q1','q2','q3'].forEach(id=>{ $(id).value=''; });
+  if(currentSelectedDate) deleteDraft(currentSelectedDate);
   selectedDishes=[null,null,null];
   currentSelectedDate=null;
   [1,2,3].forEach(n=>{ $('sum'+n).textContent=''; });
